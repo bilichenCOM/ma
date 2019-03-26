@@ -1,41 +1,33 @@
+package hw1;
 
 public class Recursion {
-	private static int x = 0;
-	private static int y = 1;
-	private static int z = 1;
-	private static boolean flag = true;
 
 	public static long factorial(int number) {
-		return (number==1||number<=0)?1:number*factorial(number-1);
+		return (number == 1 || number <= 0) ? 1 : number * factorial(number - 1);
 	}
-	
+
 	public static int fibonacciOnPos(int position) {
-		if(position<=1) {
-			reset();
-			return z;
+		if (position <= 0) {
+			return 0;
 		}
-		z=x+y;
-		x=y;
-		y=z;
-		return fibonacciOnPos(position-1);
+
+		if (position == 1) {
+			return 1;
+		}
+
+		return fibonacciOnPos(position - 1) + fibonacciOnPos(position - 2);
 	}
-	
+
 	public static double taylorSequenceOf(int arg) {
-		if(flag) {
-			z=arg;
-			flag=false;
-		}
-		if(arg==0) {
-			reset();
-			return z;
-		}
-		return Math.pow(z, arg)/factorial(arg)+taylorSequenceOf(arg-1);
+		return taylorSequence(arg, arg);
 	}
-	
-	private static void reset() {
-		x=0;
-		y=1;
-		flag=true;
+
+	private static double taylorSequence(int arg, int index) {
+		if (index <= 0) {
+			return arg;
+		}
+		
+		return Math.pow(arg, index) / factorial(index) + taylorSequence(arg, index - 1);
 	}
-	
+
 }

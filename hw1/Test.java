@@ -1,4 +1,12 @@
+package hw1;
 import java.util.Arrays;
+
+import hw1.AsteriskDiamond;
+import hw1.MatchResultChecker;
+import hw1.Matrix;
+import hw1.ChildOfFather;
+import hw1.Power;
+import hw1.Recursion;
 
 public class Test {
 
@@ -26,8 +34,7 @@ public class Test {
 		System.out.println(Matrix.minIn(matrix));
 		System.out.println(Arrays.deepToString(Matrix.revert(matrix)));
 		
-		System.out.println(new OMethodsRealization("Example",5).clone().equals(new OMethodsRealization("Example", 6)));
-		
+		System.out.println(new ChildOfFather("Example").clone().equals(new ChildOfFather("Example")));		
 	}
 
 }

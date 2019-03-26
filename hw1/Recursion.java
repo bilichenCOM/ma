@@ -14,6 +14,7 @@ public class Recursion {
 		if (position == 1) {
 			return 1;
 		}
+<<<<<<< HEAD
 
 		return fibonacciOnPos(position - 1) + fibonacciOnPos(position - 2);
 	}
@@ -30,4 +31,15 @@ public class Recursion {
 		return Math.pow(arg, index) / factorial(index) + taylorSequence(arg, index - 1);
 	}
 
+=======
+		return fibonacciOnPos(position - 1) + fibonacciOnPos(position - 2);
+	}
+
+	public static double taylorSequence(int arg, int index) {
+		if (index <= 0) {
+			return 1;
+		}
+		return Math.pow(arg, index) / factorial(index) + taylorSequence(arg, index - 1);
+	}
+>>>>>>> 0e9ea38... corrections2
 }

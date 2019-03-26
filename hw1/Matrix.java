@@ -1,6 +1,9 @@
 package hw1;
+<<<<<<< HEAD
 
 import java.util.Arrays;
+=======
+>>>>>>> 0e9ea38... corrections2
 
 public class Matrix {
 
@@ -8,8 +11,14 @@ public class Matrix {
 		double max = matrix[0][0];
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[i].length; j++) {
+<<<<<<< HEAD
 				if (matrix[i][j] > max)
 					max = matrix[i][j];
+=======
+				if (matrix[i][j] > max) {
+					max = matrix[i][j];
+				}
+>>>>>>> 0e9ea38... corrections2
 			}
 		}
 		return max;
@@ -19,12 +28,19 @@ public class Matrix {
 		double min = matrix[0][0];
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[i].length; j++) {
+<<<<<<< HEAD
 				if (matrix[i][j] < min)
 					min = matrix[i][j];
+=======
+				if (matrix[i][j] < min) {
+					min = matrix[i][j];
+				}
+>>>>>>> 0e9ea38... corrections2
 			}
 		}
 		return min;
 	}
+<<<<<<< HEAD
 
 	public static double[] getMainDiagonalOf(double[][] matrix) {
 		double[] diagonal = new double[matrix.length];
@@ -64,4 +80,6 @@ public class Matrix {
 		}
 		return reverted;
 	}
+=======
+>>>>>>> 0e9ea38... corrections2
 }

@@ -7,18 +7,6 @@ public class ChildOfFather implements Cloneable {
 		this.title = title;
 	}
 
-<<<<<<< HEAD
-	public ChildOfFather clone() {
-		ChildOfFather omr = null;
-		try {
-			omr = (ChildOfFather) super.clone();
-			omr.setTitle(this.getTitle());
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		
-		return omr;
-=======
 	public ChildOfFather clone() throws CloneNotSupportedException {
 		ChildOfFather cloned = (ChildOfFather) super.clone();
 		cloned.setTitle(this.getTitle());
@@ -31,7 +19,6 @@ public class ChildOfFather implements Cloneable {
 
 	public void setTitle(String title) {
 		this.title = title;
->>>>>>> 0e9ea38... corrections2
 	}
 
 	public String toString() {
@@ -68,16 +55,4 @@ public class ChildOfFather implements Cloneable {
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
-<<<<<<< HEAD
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-=======
->>>>>>> 0e9ea38... corrections2
 }

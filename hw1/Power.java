@@ -14,8 +14,4 @@ public class Power {
 		power--;
 		return number * numberToPower(number, power);
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> 0e9ea38... corrections2
 }

@@ -1,15 +1,4 @@
 package hw1;
-<<<<<<< HEAD
-import java.util.Arrays;
-=======
-
-import hw1.AsteriskDiamond;
-import hw1.MatchResultChecker;
-import hw1.Matrix;
-import hw1.ChildOfFather;
-import hw1.Power;
-import hw1.Recursion;
->>>>>>> 0e9ea38... corrections2
 
 import hw1.AsteriskDiamond;
 import hw1.MatchResultChecker;
@@ -43,15 +32,7 @@ public class Test {
 		double[][] matrix = new double[][] { { 1, 33, 55 }, { 3.3, 54.4, 53 }, { -2, 3.2, -10 }, { 2, 0.2, 11 } };
 		System.out.println(Matrix.maxIn(matrix));
 		System.out.println(Matrix.minIn(matrix));
-<<<<<<< HEAD
-		System.out.println(Arrays.deepToString(Matrix.revert(matrix)));
-		
-		System.out.println(new ChildOfFather("Example").clone().equals(new ChildOfFather("Example")));		
-	}
-
-=======
 
 		System.out.println(new ChildOfFather("Example").clone().equals(new ChildOfFather("Example")));
 	}
->>>>>>> 0e9ea38... corrections2
 }

@@ -6,19 +6,19 @@ public class ChildOfFather implements Cloneable {
 	public ChildOfFather(String title) {
 		this.title = title;
 	}
-
-	public ChildOfFather clone() throws CloneNotSupportedException {
-		ChildOfFather cloned = (ChildOfFather) super.clone();
-		cloned.setTitle(this.getTitle());
-		return cloned;
-	}
-
+	
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public ChildOfFather clone() throws CloneNotSupportedException {
+		ChildOfFather cloned = (ChildOfFather) super.clone();
+		cloned.setTitle(this.getTitle());
+		return cloned;
 	}
 
 	public String toString() {

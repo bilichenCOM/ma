@@ -29,7 +29,7 @@ public class Test {
 		System.out.println(Recursion.fibonacciOnPos(5));
 		System.out.println(Recursion.taylorSequence(10, 10));
 
-		double[][] matrix = new double[][] { { 1, 33, 55 }, { 3.3, 54.4, 53 }, { -2, 3.2, -10 }, { 2, 0.2, 11 } };
+		double[][] matrix = new double[][] {{1,33,55},{3.3,54.4,53},{-2,3.2,-10},{2,0.2,11}};
 		System.out.println(Matrix.maxIn(matrix));
 		System.out.println(Matrix.minIn(matrix));
 

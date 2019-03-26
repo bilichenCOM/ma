@@ -10,7 +10,7 @@ public final class ImmutableRock {
 	private double height;
 	private double width;
 	private boolean heavy;
-	
+
 	public ImmutableRock(String material, Color color, double weight, double height, double width) {
 		super();
 		this.material = material;
@@ -18,7 +18,9 @@ public final class ImmutableRock {
 		this.weight = weight;
 		this.height = height;
 		this.width = width;
-		if(weight>10000) this.heavy=true;
+		if (weight > 10000) {
+			this.heavy = true;
+		}
 	}
 
 	public String getMaterial() {
@@ -44,5 +46,5 @@ public final class ImmutableRock {
 	public boolean isHeavy() {
 		return heavy;
 	}
-	
+
 }

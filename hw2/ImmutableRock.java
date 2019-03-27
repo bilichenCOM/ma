@@ -6,10 +6,10 @@ public final class ImmutableRock {
 
 	private final String material;
 	private final Color color;
-	private double weight;
-	private double height;
-	private double width;
-	private boolean heavy;
+	private final double weight;
+	private final double height;
+	private final double width;
+	private final boolean heavy;
 
 	public ImmutableRock(String material, Color color, double weight, double height, double width) {
 		this.material = material;
@@ -19,6 +19,8 @@ public final class ImmutableRock {
 		this.width = width;
 		if (weight > 10000) {
 			this.heavy = true;
+		} else {
+			this.heavy = false;
 		}
 	}
 

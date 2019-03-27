@@ -109,6 +109,9 @@ public class BookItem {
 
 	@Override
 	public String toString() {
-		return this.title + ", " + this.author + ", " + this.year + ", " + this.section;
+		return "BookItem [title=" + title + ", author=" + author + ", year=" + year + ", pageNumber=" + pageNumber
+				+ ", section=" + section + ", price=" + price + ", stock=" + stock + "]";
 	}
+
+	
 }

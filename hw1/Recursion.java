@@ -17,10 +17,10 @@ public class Recursion {
 		return fibonacciOnPos(position - 1) + fibonacciOnPos(position - 2);
 	}
 
-	public static double taylorSequence(int arg, int index) {
-		if (index <= 0) {
+	public static double taylorSequence(int argument, int toIndex) {
+		if (toIndex <= 0) {
 			return 1;
 		}
-		return Math.pow(arg, index) / factorial(index) + taylorSequence(arg, index - 1);
+		return Math.pow(argument, toIndex) / factorial(toIndex) + taylorSequence(argument, toIndex - 1);
 	}
 }

@@ -18,5 +18,4 @@ public class Football {
 		}
 		System.out.println("Game over!");
 	}
-
 }

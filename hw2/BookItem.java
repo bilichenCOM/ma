@@ -10,8 +10,7 @@ public class BookItem {
 	private int price;
 	private int stock;
 
-	public BookItem(BookItemBuilder builder) {
-		super();
+	private BookItem(BookItemBuilder builder) {
 		this.title = builder.title;
 		this.author = builder.author;
 		this.year = builder.year;
@@ -21,7 +20,7 @@ public class BookItem {
 		this.price = builder.price;
 	}
 
-//	start of inner class
+// start of inner class
 	public static class BookItemBuilder {
 		private String title;
 		private String author;
@@ -112,5 +111,4 @@ public class BookItem {
 	public String toString() {
 		return this.title + ", " + this.author + ", " + this.year + ", " + this.section;
 	}
-
 }

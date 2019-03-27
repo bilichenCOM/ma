@@ -17,9 +17,7 @@ public class Group implements Serializable {
 		this.square = square;
 	}
 
-	public Group() {
-
-	}
+	public Group() {}
 
 //	instances declaration
 	public static class Triangle implements Serializable {
@@ -75,7 +73,6 @@ public class Group implements Serializable {
 		private String name;
 
 		public Square(String name) {
-			super();
 			this.name = name;
 		}
 

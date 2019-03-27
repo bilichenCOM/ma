@@ -24,7 +24,11 @@ public class Service {
 		} else {
 			output.append("null\r\n");
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> c77268321dad0543219877de7b60fd293a93fa30
 		output.append("variable: circle=");
 		if (group.getCircle() != null) {
 			output.append(group.getCircle() + "{\r\n");
@@ -32,7 +36,11 @@ public class Service {
 		} else {
 			output.append("null\r\n");
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> c77268321dad0543219877de7b60fd293a93fa30
 		output.append("variable: square=");
 		if (group.getSquare() != null) {
 			output.append(group.getSquare() + "{\r\n");
@@ -40,7 +48,11 @@ public class Service {
 		} else {
 			output.append("null\r\n");
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> c77268321dad0543219877de7b60fd293a93fa30
 		output.append("variable: group=");
 		if (group.getChild() != null) {
 			output.append(group.getChild() + "\r\n]\r\n");

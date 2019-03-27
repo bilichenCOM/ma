@@ -12,6 +12,10 @@ public final class ImmutableRock {
 	private boolean heavy;
 
 	public ImmutableRock(String material, Color color, double weight, double height, double width) {
+<<<<<<< HEAD
+=======
+		super();
+>>>>>>> c77268321dad0543219877de7b60fd293a93fa30
 		this.material = material;
 		this.color = color;
 		this.weight = weight;
@@ -45,4 +49,8 @@ public final class ImmutableRock {
 	public boolean isHeavy() {
 		return heavy;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> c77268321dad0543219877de7b60fd293a93fa30
 }

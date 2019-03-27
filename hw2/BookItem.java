@@ -10,7 +10,12 @@ public class BookItem {
 	private int price;
 	private int stock;
 
+<<<<<<< HEAD
 	private BookItem(BookItemBuilder builder) {
+=======
+	public BookItem(BookItemBuilder builder) {
+		super();
+>>>>>>> c77268321dad0543219877de7b60fd293a93fa30
 		this.title = builder.title;
 		this.author = builder.author;
 		this.year = builder.year;
@@ -20,7 +25,11 @@ public class BookItem {
 		this.price = builder.price;
 	}
 
+<<<<<<< HEAD
 // start of inner class
+=======
+//	start of inner class
+>>>>>>> c77268321dad0543219877de7b60fd293a93fa30
 	public static class BookItemBuilder {
 		private String title;
 		private String author;
@@ -111,4 +120,8 @@ public class BookItem {
 	public String toString() {
 		return this.title + ", " + this.author + ", " + this.year + ", " + this.section;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> c77268321dad0543219877de7b60fd293a93fa30
 }

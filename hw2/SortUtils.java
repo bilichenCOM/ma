@@ -21,10 +21,12 @@ public class SortUtils {
 	}
 
 	public static double[] sortMerge(double[] arr) {
-		if (arr.length == 1)
+		if (arr.length == 1) {
 			return arr;
+		}
 		double[] buf1 = Arrays.copyOfRange(arr, 0, arr.length / 2);
 		double[] buf2 = Arrays.copyOfRange(arr, arr.length / 2, arr.length);
+		
 		return mergeArrays(sortMerge(buf1), sortMerge(buf2));
 	}
 
@@ -32,22 +34,22 @@ public class SortUtils {
 
 	private static double[] mergeArrays(double[] array1, double[] array2) {
 		double[] merged = new double[array1.length + array2.length];
-		int i = 0;
-		int j = 0;
+		int firstArrayIndex = 0;
+		int secondArrayIndex = 0;
 		int n = 0;
-		while (i < array1.length || j < array2.length) {
-			if (i < array1.length && j < array2.length) {
-				merged = mergeWithElements(array1, array2, i, j, merged, n);
-				i++;
-				j++;
-			} else if (i < array1.length) {
-				merged[n] = array1[i];
-				i++;
-			} else if (j < array2.length) {
-				merged[n] = array2[j];
-				j++;
+		while (firstArrayIndex < array1.length || secondArrayIndex < array2.length) {
+			if (firstArrayIndex < array1.length && secondArrayIndex < array2.length) {
+				merged[n++] = mergeWithElements(array1, array2, firstArrayIndex, secondArrayIndex);
+				if(array1[firstArrayIndex]<=array2[secondArrayIndex]) {
+					firstArrayIndex++;
+				} else {
+					secondArrayIndex++;
+				}
+			} else if (firstArrayIndex < array1.length) {
+				merged[n++] = array1[firstArrayIndex++];
+			} else if (secondArrayIndex < array2.length) {
+				merged[n++] = array2[secondArrayIndex++];
 			}
-			n++;
 		}
 		return merged;
 	}
@@ -59,12 +61,11 @@ public class SortUtils {
 		return array;
 	}
 	
-	private static double[] mergeWithElements(double[] array1,double[] array2, int index1, int index2, double[] output, int index) {
-		if (array1[index1] <= array2[index2]) {
-			output[index] = array1[index1];
+	private static double mergeWithElements(double[] array1,double[] array2, int firstArrayIndex, int secondArrayIndex) {
+		if (array1[firstArrayIndex] <= array2[secondArrayIndex]) {
+			return array1[firstArrayIndex];
 		} else {
-			output[index] = array2[index2];
+			return  array2[secondArrayIndex];
 		}
-		return output;
 	}
 }

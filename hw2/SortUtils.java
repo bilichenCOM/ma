@@ -4,61 +4,68 @@ import java.util.Arrays;
 
 public class SortUtils {
 
-	public static final double COMB_IND = 1.2473309;
-
-	public static double[] sortBuble(double[] arr) {
-		int len = arr.length;
+	public static double[] sortBuble(double[] array) {
+		int len = array.length;
 		boolean sorted = false;
 
 		while (!sorted) {
 			sorted = true;
 			for (int i = 0; i < len - 1; i++) {
-				if (arr[i] > arr[i + 1]) {
-					double next = arr[i + 1];
-					arr[i + 1] = arr[i];
-					arr[i] = next;
+				if (array[i] > array[i + 1]) {
+					array = swap(array, i, i+1);
 					sorted = false;
 				}
 			}
 		}
-		return arr;
+		return array;
 	}
 
 	public static double[] sortMerge(double[] arr) {
-		if (arr.length == 1)
+		if (arr.length == 1) {
 			return arr;
+		}
 		double[] buf1 = Arrays.copyOfRange(arr, 0, arr.length / 2);
 		double[] buf2 = Arrays.copyOfRange(arr, arr.length / 2, arr.length);
+		
 		return mergeArrays(sortMerge(buf1), sortMerge(buf2));
 	}
 
 // +++++++++++++++++private methods
 
-	private static double[] mergeArrays(double[] arr1, double[] arr2) {
-		final int k = arr1.length;
-		final int l = arr2.length;
-		double[] merged = new double[k + l];
-		int i = 0;
-		int j = 0;
+	private static double[] mergeArrays(double[] array1, double[] array2) {
+		double[] merged = new double[array1.length + array2.length];
+		int firstArrayIndex = 0;
+		int secondArrayIndex = 0;
 		int n = 0;
-		while (i < k || j < l) {
-			if (i < k && j < l) {
-				if (arr1[i] <= arr2[j]) {
-					merged[n] = arr1[i];
-					i++;
+		while (firstArrayIndex < array1.length || secondArrayIndex < array2.length) {
+			if (firstArrayIndex < array1.length && secondArrayIndex < array2.length) {
+				merged[n++] = mergeWithElements(array1, array2, firstArrayIndex, secondArrayIndex);
+				if(array1[firstArrayIndex]<=array2[secondArrayIndex]) {
+					firstArrayIndex++;
 				} else {
-					merged[n] = arr2[j];
-					j++;
+					secondArrayIndex++;
 				}
-			} else if (i < k) {
-				merged[n] = arr1[i];
-				i++;
-			} else if (j < l) {
-				merged[n] = arr2[j];
-				j++;
+			} else if (firstArrayIndex < array1.length) {
+				merged[n++] = array1[firstArrayIndex++];
+			} else if (secondArrayIndex < array2.length) {
+				merged[n++] = array2[secondArrayIndex++];
 			}
-			n++;
 		}
 		return merged;
+	}
+	
+	private static double[] swap(double[] array, int index1, int index2) {
+		double temp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = temp;
+		return array;
+	}
+	
+	private static double mergeWithElements(double[] array1,double[] array2, int firstArrayIndex, int secondArrayIndex) {
+		if (array1[firstArrayIndex] <= array2[secondArrayIndex]) {
+			return array1[firstArrayIndex];
+		} else {
+			return  array2[secondArrayIndex];
+		}
 	}
 }

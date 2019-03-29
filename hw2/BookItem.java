@@ -19,7 +19,6 @@ public class BookItem {
 		this.stock = builder.stock;
 		this.price = builder.price;
 	}
-
 // start of inner class
 	public static class BookItemBuilder {
 		private String title;
@@ -70,48 +69,9 @@ public class BookItem {
 		}
 	}
 //	end of inner class
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public int getYear() {
-		return year;
-	}
-
-	public int getPageNumber() {
-		return pageNumber;
-	}
-
-	public String getSection() {
-		return section;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getStock() {
-		return stock;
-	}
-
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-
 	@Override
 	public String toString() {
 		return "BookItem [title=" + title + ", author=" + author + ", year=" + year + ", pageNumber=" + pageNumber
 				+ ", section=" + section + ", price=" + price + ", stock=" + stock + "]";
 	}
-
-	
 }

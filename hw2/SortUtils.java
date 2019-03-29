@@ -24,34 +24,34 @@ public class SortUtils {
 		if (array.length == 1) {
 			return array;
 		}
-		double[] buf1 = Arrays.copyOfRange(array, 0, array.length / 2);
-		double[] buf2 = Arrays.copyOfRange(array, array.length / 2, array.length);
+		double[] leftArray = Arrays.copyOfRange(array, 0, array.length / 2);
+		double[] rightArray = Arrays.copyOfRange(array, array.length / 2, array.length);
 		
-		return mergeArrays(sortMerge(buf1), sortMerge(buf2));
+		return mergeArrays(sortMerge(leftArray), sortMerge(rightArray));
 	}
 
 // +++++++++++++++++private methods
 
-	private static double[] mergeArrays(double[] array1, double[] array2) {
-		double[] merged = new double[array1.length + array2.length];
-		int firstArrayIndex = 0;
-		int secondArrayIndex = 0;
-		int n = 0;
-		while (firstArrayIndex < array1.length || secondArrayIndex < array2.length) {
-			if (firstArrayIndex < array1.length && secondArrayIndex < array2.length) {
-				merged[n++] = mergeWithElements(array1, array2, firstArrayIndex, secondArrayIndex);
-				if(array1[firstArrayIndex]<=array2[secondArrayIndex]) {
-					firstArrayIndex++;
+	private static double[] mergeArrays(double[] leftArray, double[] rightArray) {
+		double[] outputArray = new double[leftArray.length + rightArray.length];
+		int leftArrayIndex = 0;
+		int rightArrayIndex = 0;
+		int outputArrayIndex = 0;
+		while (leftArrayIndex < leftArray.length || rightArrayIndex < rightArray.length) {
+			if (leftArrayIndex < leftArray.length && rightArrayIndex < rightArray.length) {
+				outputArray[outputArrayIndex++] = mergeWithElements(leftArray, rightArray, leftArrayIndex, rightArrayIndex);
+				if(leftArray[leftArrayIndex]<=rightArray[rightArrayIndex]) {
+					leftArrayIndex++;
 				} else {
-					secondArrayIndex++;
+					rightArrayIndex++;
 				}
-			} else if (firstArrayIndex < array1.length) {
-				merged[n++] = array1[firstArrayIndex++];
-			} else if (secondArrayIndex < array2.length) {
-				merged[n++] = array2[secondArrayIndex++];
+			} else if (leftArrayIndex < leftArray.length) {
+				outputArray[outputArrayIndex++] = leftArray[leftArrayIndex++];
+			} else if (rightArrayIndex < rightArray.length) {
+				outputArray[outputArrayIndex++] = rightArray[rightArrayIndex++];
 			}
 		}
-		return merged;
+		return outputArray;
 	}
 	
 	private static double[] swap(double[] array, int index1, int index2) {
@@ -61,11 +61,11 @@ public class SortUtils {
 		return array;
 	}
 	
-	private static double mergeWithElements(double[] array1,double[] array2, int firstArrayIndex, int secondArrayIndex) {
-		if (array1[firstArrayIndex] <= array2[secondArrayIndex]) {
-			return array1[firstArrayIndex];
+	private static double mergeWithElements(double[] leftArray, double[] rightArray, int firstArrayIndex, int secondArrayIndex) {
+		if (leftArray[firstArrayIndex] <= rightArray[secondArrayIndex]) {
+			return leftArray[firstArrayIndex];
 		} else {
-			return  array2[secondArrayIndex];
+			return  rightArray[secondArrayIndex];
 		}
 	}
 }

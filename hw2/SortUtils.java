@@ -20,12 +20,12 @@ public class SortUtils {
 		return array;
 	}
 
-	public static double[] sortMerge(double[] arr) {
-		if (arr.length == 1) {
-			return arr;
+	public static double[] sortMerge(double[] array) {
+		if (array.length == 1) {
+			return array;
 		}
-		double[] buf1 = Arrays.copyOfRange(arr, 0, arr.length / 2);
-		double[] buf2 = Arrays.copyOfRange(arr, arr.length / 2, arr.length);
+		double[] buf1 = Arrays.copyOfRange(array, 0, array.length / 2);
+		double[] buf2 = Arrays.copyOfRange(array, array.length / 2, array.length);
 		
 		return mergeArrays(sortMerge(buf1), sortMerge(buf2));
 	}

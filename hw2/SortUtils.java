@@ -4,24 +4,20 @@ import java.util.Arrays;
 
 public class SortUtils {
 
-	public static final double COMB_IND = 1.2473309;
-
-	public static double[] sortBuble(double[] arr) {
-		int len = arr.length;
+	public static double[] sortBuble(double[] array) {
+		int len = array.length;
 		boolean sorted = false;
 
 		while (!sorted) {
 			sorted = true;
 			for (int i = 0; i < len - 1; i++) {
-				if (arr[i] > arr[i + 1]) {
-					double next = arr[i + 1];
-					arr[i + 1] = arr[i];
-					arr[i] = next;
+				if (array[i] > array[i + 1]) {
+					array = swap(array, i, i+1);
 					sorted = false;
 				}
 			}
 		}
-		return arr;
+		return array;
 	}
 
 	public static double[] sortMerge(double[] arr) {
@@ -34,31 +30,41 @@ public class SortUtils {
 
 // +++++++++++++++++private methods
 
-	private static double[] mergeArrays(double[] arr1, double[] arr2) {
-		final int k = arr1.length;
-		final int l = arr2.length;
-		double[] merged = new double[k + l];
+	private static double[] mergeArrays(double[] array1, double[] array2) {
+		double[] merged = new double[array1.length + array2.length];
 		int i = 0;
 		int j = 0;
 		int n = 0;
-		while (i < k || j < l) {
-			if (i < k && j < l) {
-				if (arr1[i] <= arr2[j]) {
-					merged[n] = arr1[i];
-					i++;
-				} else {
-					merged[n] = arr2[j];
-					j++;
-				}
-			} else if (i < k) {
-				merged[n] = arr1[i];
+		while (i < array1.length || j < array2.length) {
+			if (i < array1.length && j < array2.length) {
+				merged = mergeWithElements(array1, array2, i, j, merged, n);
 				i++;
-			} else if (j < l) {
-				merged[n] = arr2[j];
+				j++;
+			} else if (i < array1.length) {
+				merged[n] = array1[i];
+				i++;
+			} else if (j < array2.length) {
+				merged[n] = array2[j];
 				j++;
 			}
 			n++;
 		}
 		return merged;
+	}
+	
+	private static double[] swap(double[] array, int index1, int index2) {
+		double temp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = temp;
+		return array;
+	}
+	
+	private static double[] mergeWithElements(double[] array1,double[] array2, int index1, int index2, double[] output, int index) {
+		if (array1[index1] <= array2[index2]) {
+			output[index] = array1[index1];
+		} else {
+			output[index] = array2[index2];
+		}
+		return output;
 	}
 }

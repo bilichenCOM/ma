@@ -6,7 +6,7 @@ public class DistributedRoles {
 		for (int i = 0; i < roles.length; i++) {
 			text.append(roles[i] + ":\n");
 			for (int j = 0; j < textLines.length; j++) {
-				text.append(checkAndWrite(roles[i], textLines[j], j, ":"));
+				text.append(checkAndWrite(roles[i], textLines[j], j+1, ":"));
 			}
 			text.append("\n");
 		}

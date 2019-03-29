@@ -1,29 +1,24 @@
 package hw3;
 
 public class MergeUtils {
-	public static int[] mergeArrays(int[] a1, int[] a2) {
-		int[] merged = new int[a1.length + a2.length];
-		int i = 0;
-		int j = 0;
+	public static int[] mergeArrays(int[] firstArray, int[] secondArray) {
+		int[] outputArray = new int[firstArray.length + secondArray.length];
+		int firstArrayIndex = 0;
+		int secondArrayIndex = 0;
 		int n = 0;
-		while (i < a1.length || j < a2.length) {
-			if (i < a1.length && j < a2.length) {
-				if (a1[i] <= a2[j]) {
-					merged[n] = a1[i];
-					i++;
+		while (firstArrayIndex < firstArray.length || secondArrayIndex < secondArray.length) {
+			if (firstArrayIndex < firstArray.length && secondArrayIndex < secondArray.length) {
+				if (firstArray[firstArrayIndex] <= secondArray[secondArrayIndex]) {
+					outputArray[n++] = firstArray[firstArrayIndex++];
 				} else {
-					merged[n] = a2[j];
-					j++;
+					outputArray[n++] = secondArray[secondArrayIndex++];
 				}
-			} else if (i < a1.length) {
-				merged[n] = a1[i];
-				i++;
-			} else if (j < a2.length) {
-				merged[n] = a2[j];
-				j++;
+			} else if (firstArrayIndex < firstArray.length) {
+				outputArray[n++] = firstArray[firstArrayIndex++];
+			} else if (secondArrayIndex < secondArray.length) {
+				outputArray[n++] = secondArray[secondArrayIndex++];
 			}
-			n++;
 		}
-		return merged;
+		return outputArray;
 	}
 }

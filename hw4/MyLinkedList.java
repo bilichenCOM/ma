@@ -7,15 +7,14 @@ public class MyLinkedList<E> implements List<E> {
 	private int size;
 
 	public MyLinkedList() {
-		lastNode = new Node<E>(null);
 	}
 
 // start of inner class Node	
 
 	private class Node<T> {
-		Node<T> previous;
-		Node<T> next;
-		T value;
+		private Node<T> previous;
+		private Node<T> next;
+		private T value;
 
 		public Node(T value) {
 			this.value = value;
@@ -60,8 +59,8 @@ public class MyLinkedList<E> implements List<E> {
 			size++;
 			return;
 		}
-		
-		if(index == 0) {
+
+		if (index == 0) {
 			bind(currentNode, firstNode);
 			firstNode = currentNode;
 			size++;
@@ -126,35 +125,38 @@ public class MyLinkedList<E> implements List<E> {
 	}
 
 	private int indexOf(E value) {
-		int index;
-		for (index = 0; index < size; index++) {
+		for (int index = 0; index < size; index++) {
 			if (getNode(index).getValue().equals(value)) {
-				break;
+				return index;
 			}
 		}
-		return index;
+		return -1;
 	}
 
 	private Node<E> getNode(int index) {
 		checkIndex(index);
 		if (index <= size / 2) {
-			return stepNext(firstNode, index);
+			return stepToNode(firstNode, index);
 		} else {
-			return stepPrevious(lastNode, (size - 1) - index);
+			return stepToNode(lastNode, index - size + 1);
 		}
 	}
 
-	private Node<E> stepNext(Node<E> startNode, int steps) {
-		return (steps == 0) ? startNode : stepNext(startNode.getNext(), --steps);
-	}
-
-	private Node<E> stepPrevious(Node<E> startNode, int steps) {
-		return (steps == 0) ? startNode : stepPrevious(startNode.getPrevious(), --steps);
+	private Node<E> stepToNode(Node<E> startNode, int steps) {
+		if (steps == 0) {
+			return startNode;
+		} else if (steps < 0) {
+			steps++;
+			return stepToNode(startNode.getPrevious(), steps);
+		} else {
+			steps--;
+			return stepToNode(startNode.getNext(), steps);
+		}
 	}
 
 	private void checkIndex(int index) {
 		if (index < 0 || index > size - 1) {
-			throw new IllegalArgumentException("not valid index: " + index);
+			throw new IllegalArgumentException("not valid index: " + index + " for list size:" + size);
 		}
 	}
 

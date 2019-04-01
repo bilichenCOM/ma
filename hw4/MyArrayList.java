@@ -1,18 +1,20 @@
 package hw4;
 
-import java.util.NoSuchElementException;
+import java.util.Arrays;
 
 public class MyArrayList<T> implements List<T> {
 
 	private Object[] array;
-	private int size;
+	private int size = 0;
+
+	private static final int DEFAULT_CAPACITY = 21;
 
 	public MyArrayList(int capacity) {
 		array = new Object[capacity];
 	}
 
 	public MyArrayList() {
-		this(21);
+		this(DEFAULT_CAPACITY);
 	}
 
 	public void add(T value) {
@@ -29,12 +31,9 @@ public class MyArrayList<T> implements List<T> {
 
 	private void insertElementInArray(T value, int validIndex) {
 		if (validIndex == size) {
-			array[validIndex] = value;
+			array[size] = value;
 		} else {
-			Object[] lastElements = new Object[size - validIndex];
-			for (int i = validIndex; i < size; i++) {
-				lastElements[i - validIndex] = array[i];
-			}
+			Object[] lastElements = Arrays.copyOfRange(array, validIndex, size);
 			array[validIndex++] = value;
 			for (int i = 0; i < lastElements.length; i++) {
 				array[i + validIndex] = lastElements[i];
@@ -44,12 +43,8 @@ public class MyArrayList<T> implements List<T> {
 	}
 
 	private void expandArray() {
-		Object[] temp = array;
 		int newLength = array.length + (array.length >> 1);
-		array = new Object[newLength];
-		for (int i = 0; i < temp.length; i++) {
-			array[i] = temp[i];
-		}
+		array = Arrays.copyOf(array, newLength);
 	}
 
 	public void addAll(List<T> list) {
@@ -82,12 +77,7 @@ public class MyArrayList<T> implements List<T> {
 	}
 
 	public T remove(T t) {
-		int index = indexOf(t);
-		if(index<0) {
-			throw new NoSuchElementException(t.toString());
-		}
-		shiftLeft(index);
-		return null;
+		return remove(indexOf(t));
 	}
 
 	private void shiftLeft(int validIndex) {
@@ -108,7 +98,7 @@ public class MyArrayList<T> implements List<T> {
 
 	private void checkIndex(int index) {
 		if (index < 0 || index > size) {
-			throw new ArrayIndexOutOfBoundsException();
+			throw new ArrayIndexOutOfBoundsException("Size" + size + " but index: " + index);
 		}
 	}
 

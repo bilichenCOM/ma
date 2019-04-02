@@ -1,16 +1,41 @@
-import java.util.Arrays;
-
-import hw3.DistributedRoles;
-import hw3.MergeUtils;
+import hw4.List;
+import hw4.MyArrayList;
+import hw4.MyLinkedList;
 
 public class Test {
 	public static void main(String[] args) {
-		String[] roles = new String[] { "Johny", "fooBar", "pipka", "cat" };
-		String[] textLines = new String[] {"Johny: hello cat: im Johny","cat: who you are?", "djlaj8wiwjf", "fooBar: hello im foobar", "pipka: what is going on?"};
-		System.out.println(DistributedRoles.printTextPerRole(roles, textLines));
-		int[] array1 = new int[] {3,249,443,2341,23243};
-		int[] array2 = new int[] {3,4,42114,4424242};
-		int[] merged = MergeUtils.mergeArrays(array1, array2);
-		System.out.println(Arrays.toString(array1)+"\n"+Arrays.toString(array2)+"\n"+Arrays.toString(merged));
+		List<String> linkedList = new MyLinkedList<String>();
+		addTestValues(linkedList, 21);
+		printValues(linkedList);
+
+		List<String> arrayList = new MyArrayList<String>();
+		addTestValues(arrayList, 34);
+		printValues(arrayList);
+
+		linkedList.addAll(arrayList);
+		printValues(linkedList);
+		arrayList.addAll(linkedList);
+		printValues(arrayList);
+	}
+
+	private static void addTestValues(List<String> list, int valuesNumber) {
+		for (int index = 0; index < valuesNumber; index++) {
+			list.add("value number" + index);
+		}
+
+		list.add("begin", 0);
+		list.add("end", list.size());
+		list.add("random", (int) (Math.random() * list.size()));
+		list.add("center", list.size() / 2);
+
+	}
+
+	private static void printValues(List<?> list) {
+		System.out.println("Values in list:");
+		for (int index = 0; index < list.size(); index++) {
+			System.out.println(list.get(index));
+		}
+
+		System.out.println("/////////////////////////");
 	}
 }

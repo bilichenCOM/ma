@@ -1,6 +1,7 @@
 package hw5;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class MyHashMap<K, V> implements Map<K, V> {
 
@@ -73,11 +74,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
 	public V remove(K key) {
 		Node<K, V> indexEntry = table[index(key)];
-		Node<K, V> matchedEntry = findMatches(indexEntry, key);
-		if (matchedEntry == null) {
-			throw new NoSuchElementException("Key not found: " + key);
-		}
-
+		Node<K, V> matchedEntry = optionalMatches(indexEntry, key);
 		Node<K, V> beforeMatchedEntry = findBeforeMatches(indexEntry, key);
 		if (beforeMatchedEntry == null) {
 			table[index(key)] = null;
@@ -99,13 +96,15 @@ public class MyHashMap<K, V> implements Map<K, V> {
 	}
 
 	public V get(K key) {
-		if (findMatches(table[index(key)], key) == null) {
-			throw new NoSuchElementException("Key not found: " + key);
-		}
-		return findMatches(table[index(key)], key).getValue();
+		return optionalMatches(table[index(key)], key).getValue();
 	}
 
 // +++++++++++++private methods
+	private Node<K, V> optionalMatches(Node<K, V> indexEntry, K key) {
+		return Optional.ofNullable(findMatches(indexEntry, key))
+				.orElseThrow(() -> new NoSuchElementException("Key not found:" + key));
+	}
+
 	private Node<K, V> findBeforeMatches(Node<K, V> indexEntry, K key) {
 		if (!indexEntry.hasNext()) {
 			return null;

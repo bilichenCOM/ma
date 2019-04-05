@@ -1,41 +1,26 @@
-import hw4.List;
-import hw4.MyArrayList;
-import hw4.MyLinkedList;
+import hw5.MyHashMap;
 
 public class Test {
 	public static void main(String[] args) {
-		List<String> linkedList = new MyLinkedList<String>();
-		addTestValues(linkedList, 21);
-		printValues(linkedList);
-
-		List<String> arrayList = new MyArrayList<String>();
-		addTestValues(arrayList, 34);
-		printValues(arrayList);
-
-		linkedList.addAll(arrayList);
-		printValues(linkedList);
-		arrayList.addAll(linkedList);
-		printValues(arrayList);
-	}
-
-	private static void addTestValues(List<String> list, int valuesNumber) {
-		for (int index = 0; index < valuesNumber; index++) {
-			list.add("value number" + index);
+		MyHashMap<String, String> map = new MyHashMap<String, String>();
+		for (int i = 0; i < 100; i++) {
+			map.put("k" + i, "added by iteration number:" + (i + 1));
 		}
 
-		list.add("begin", 0);
-		list.add("end", list.size());
-		list.add("random", (int) (Math.random() * list.size()));
-		list.add("center", list.size() / 2);
+		System.out.println("map size: " + map.size());
+		System.out.println("value for key 'k34' " + map.get("k34"));
+		System.out.println("value for key 'k55' " + map.get("k55"));
 
-	}
+		map.remove("k34");
+		System.out.println("pare with key 'k34' removed");
+		map.remove("k55");
+		System.out.println("pare with key 'k55' removed");
+		System.out.println("map size: " + map.size());
 
-	private static void printValues(List<?> list) {
-		System.out.println("Values in list:");
-		for (int index = 0; index < list.size(); index++) {
-			System.out.println(list.get(index));
-		}
+		map.put(null, "just no key");
+		System.out.println("value for null key: " + map.get(null));
 
-		System.out.println("/////////////////////////");
+		map.put(null, "looks like colision");
+		System.out.println("value for null key: " + map.get(null));
 	}
 }

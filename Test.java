@@ -36,6 +36,7 @@ public class Test {
 	}
 
 	private static void salaryTest() {
+		// Некоторая случайная строка. Можете выбрать ее самостоятельно.
 		String randomFrom = "...";
 		String randomTo = "...";
 		int randomSalary = 100;
@@ -102,6 +103,7 @@ public class Test {
 		num1.add(3);
 		num1.add(7);
 		num1.add(9);
+		num1.add(23);
 		System.out.println(num1);
 
 		HashSet<Integer> num2 = new HashSet<>();
@@ -109,7 +111,13 @@ public class Test {
 		num2.add(7);
 		num2.add(12);
 		num2.add(9);
+		num2.add(23);
 		System.out.println(num2);
+
+		HashSet<String> str = new HashSet<>();
+		str.add("jsklf");
+		str.add("hello@)");
+		System.out.println(SetOperations.symmetricDifference(str, num1));
 
 		Set<Integer> result = SetOperations.symmetricDifference(num1, num2);
 		System.out.println(result);

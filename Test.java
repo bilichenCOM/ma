@@ -36,7 +36,7 @@ public class Test {
 	}
 
 	private static void salaryTest() {
-		// Некоторая случайная строка. Можете выбрать ее самостоятельно.
+		// РќРµРєРѕС‚РѕСЂР°СЏ СЃР»СѓС‡Р°Р№РЅР°СЏ СЃС‚СЂРѕРєР°. РњРѕР¶РµС‚Рµ РІС‹Р±СЂР°С‚СЊ РµРµ СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅРѕ.
 		String randomFrom = "...";
 		String randomTo = "...";
 		int randomSalary = 100;
@@ -69,10 +69,10 @@ public class Test {
 		assert firstMessage.getContent().endsWith("Howard!") : "Wrong firstMessage content ending";
 
 		MailMessage secondMessage = new MailMessage("Jonathan Nolan", "Christopher Nolan",
-				"Брат, почему все так хвалят только тебя, когда практически все сценарии написал я. Так не честно!");
+				"Р‘СЂР°С‚, РїРѕС‡РµРјСѓ РІСЃРµ С‚Р°Рє С…РІР°Р»СЏС‚ С‚РѕР»СЊРєРѕ С‚РµР±СЏ, РєРѕРіРґР° РїСЂР°РєС‚РёС‡РµСЃРєРё РІСЃРµ СЃС†РµРЅР°СЂРёРё РЅР°РїРёСЃР°Р» СЏ. РўР°Рє РЅРµ С‡РµСЃС‚РЅРѕ!");
 
 		MailMessage thirdMessage = new MailMessage("Stephen Hawking", "Christopher Nolan",
-				"Я так и не понял Интерстеллар.");
+				"РЇ С‚Р°Рє Рё РЅРµ РїРѕРЅСЏР» РРЅС‚РµСЂСЃС‚РµР»Р»Р°СЂ.");
 
 		List<MailMessage> messages = Arrays.asList(firstMessage, secondMessage, thirdMessage);
 
@@ -86,8 +86,8 @@ public class Test {
 				"This \"The Shadow over Innsmouth\" story is real masterpiece, Howard!")) : "wrong mailService mailbox content (1)";
 
 		assert mailBox.get("Christopher Nolan").equals(Arrays.asList(
-				"Брат, почему все так хвалят только тебя, когда практически все сценарии написал я. Так не честно!",
-				"Я так и не понял Интерстеллар.")) : "wrong mailService mailbox content (2)";
+				"Р‘СЂР°С‚, РїРѕС‡РµРјСѓ РІСЃРµ С‚Р°Рє С…РІР°Р»СЏС‚ С‚РѕР»СЊРєРѕ С‚РµР±СЏ, РєРѕРіРґР° РїСЂР°РєС‚РёС‡РµСЃРєРё РІСЃРµ СЃС†РµРЅР°СЂРёРё РЅР°РїРёСЃР°Р» СЏ. РўР°Рє РЅРµ С‡РµСЃС‚РЅРѕ!",
+				"РЇ С‚Р°Рє Рё РЅРµ РїРѕРЅСЏР» РРЅС‚РµСЂСЃС‚РµР»Р»Р°СЂ.")) : "wrong mailService mailbox content (2)";
 
 		assert mailBox.get(randomTo).equals(Collections.<String>emptyList()) : "wrong mailService mailbox content (3)";
 

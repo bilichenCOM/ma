@@ -1,7 +1,12 @@
 package hw6;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import java.util.function.Consumer;
 
 public class AccountantOffice {
 
@@ -11,7 +16,6 @@ public class AccountantOffice {
 		private final T content;
 
 		public Sendable(String from, String to, T content) {
-			super();
 			this.from = from;
 			this.to = to;
 			this.content = content;

@@ -31,13 +31,35 @@ public class Test {
 	 * 
 	 */
 	private static void accountantOfficeTest() {
-		// Random variables
-		String randomFrom = "..."; // Ќекотора€ случайна€ строка. ћожете выбрать ее самосто€тельно.
-		String randomTo = "..."; // Ќекотора€ случайна€ строка. ћожете выбрать ее самосто€тельно.
-		int randomSalary = 100; // Ќекоторое случайное целое положительное число. ћожете выбрать его
-								// самосто€тельно.
+		messageTest();
+		salaryTest();
+	}
 
-		// —оздание списка из трех почтовых сообщений.
+	private static void salaryTest() {
+		String randomFrom = "...";
+		String randomTo = "...";
+		int randomSalary = 100;
+
+		Salary salary1 = new Salary("Facebook", "Mark Zuckerberg", 1);
+		Salary salary2 = new Salary("FC Barcelona", "Lionel Messi", Integer.MAX_VALUE);
+		Salary salary3 = new Salary(randomFrom, randomTo, randomSalary);
+
+		MailService<Integer> salaryService = new MailService<>();
+
+		Arrays.asList(salary1, salary2, salary3).forEach(salaryService);
+
+		Map<String, List<Integer>> salaries = salaryService.getMailBox();
+		assert salaries.get(salary1.getTo()).equals(Arrays.asList(1)) : "wrong salaries mailbox content (1)";
+		assert salaries.get(salary2.getTo())
+				.equals(Arrays.asList(Integer.MAX_VALUE)) : "wrong salaries mailbox content (2)";
+		assert salaries.get(randomTo).equals(Arrays.asList(randomSalary)) : "wrong salaries mailbox content (3)";
+
+	}
+
+	private static void messageTest() {
+		// Random variables
+		String randomTo = "...";
+
 		MailMessage firstMessage = new MailMessage("Robert Howard", "H.P. Lovecraft",
 				"This \"The Shadow over Innsmouth\" story is real masterpiece, Howard!");
 
@@ -53,15 +75,10 @@ public class Test {
 
 		List<MailMessage> messages = Arrays.asList(firstMessage, secondMessage, thirdMessage);
 
-		// —оздание почтового сервиса.
 		MailService<String> mailService = new MailService<>();
 
-		// ќбработка списка писем почтовым сервисом
 		messages.stream().forEachOrdered(mailService);
 
-		// ѕолучение и проверка словар€ "почтового €щика",
-		// где по получателю можно получить список сообщений, которые были ему
-		// отправлены
 		Map<String, List<String>> mailBox = mailService.getMailBox();
 
 		assert mailBox.get("H.P. Lovecraft").equals(Arrays.asList(
@@ -73,26 +90,12 @@ public class Test {
 
 		assert mailBox.get(randomTo).equals(Collections.<String>emptyList()) : "wrong mailService mailbox content (3)";
 
-		// —оздание списка из трех зарплат.
-		Salary salary1 = new Salary("Facebook", "Mark Zuckerberg", 1);
-		Salary salary2 = new Salary("FC Barcelona", "Lionel Messi", Integer.MAX_VALUE);
-		Salary salary3 = new Salary(randomFrom, randomTo, randomSalary);
+	}// end of AccountantOffice test series
 
-		// —оздание почтового сервиса, обрабатывающего зарплаты.
-		MailService<Integer> salaryService = new MailService<>();
-
-		// ќбработка списка зарплат почтовым сервисом
-		Arrays.asList(salary1, salary2, salary3).forEach(salaryService);
-
-		// ѕолучение и проверка словар€ "почтового €щика",
-		// где по получателю можно получить список зарплат, которые были ему отправлены.
-		Map<String, List<Integer>> salaries = salaryService.getMailBox();
-		assert salaries.get(salary1.getTo()).equals(Arrays.asList(1)) : "wrong salaries mailbox content (1)";
-		assert salaries.get(salary2.getTo())
-				.equals(Arrays.asList(Integer.MAX_VALUE)) : "wrong salaries mailbox content (2)";
-		assert salaries.get(randomTo).equals(Arrays.asList(randomSalary)) : "wrong salaries mailbox content (3)";
-	}
-
+	/*
+	 *
+	 * 
+	 */
 	private static void setOpsTest() {
 		System.out.println("This is SetOperations test:");
 		Set<Integer> num1 = new HashSet<>();

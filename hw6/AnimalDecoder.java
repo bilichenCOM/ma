@@ -15,8 +15,7 @@ public class AnimalDecoder {
 				objDeserial[objNumber] = (Animal) ois.readObject();
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Something went wrong during the deserialization");
 		}
 
 		return objDeserial;

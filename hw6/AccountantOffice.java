@@ -5,20 +5,13 @@ import java.util.function.*;
 
 public class AccountantOffice {
 
-	public interface Sendable<T> {
-		String getFrom();
-
-		String getTo();
-
-		T getContent();
-	}
-
-	public static class MailMessage implements Sendable<String> {
+	public static abstract class Sendable<T> {
 		private final String from;
 		private final String to;
-		private final String content;
+		private final T content;
 
-		public MailMessage(String from, String to, String content) {
+		public Sendable(String from, String to, T content) {
+			super();
 			this.from = from;
 			this.to = to;
 			this.content = content;
@@ -32,38 +25,21 @@ public class AccountantOffice {
 			return to;
 		}
 
-		public String getContent() {
+		public T getContent() {
 			return content;
 		}
-
 	}
 
-	public static class Salary implements Sendable<Integer> {
-		private String from;
-		private String to;
-		private Integer content;
+	public static class MailMessage extends Sendable<String> {
+		public MailMessage(String from, String to, String content) {
+			super(from, to, content);
+		}
+	}
 
+	public static class Salary extends Sendable<Integer> {
 		public Salary(String from, String to, Integer content) {
-			this.from = from;
-			this.to = to;
-			this.content = content;
+			super(from, to, content);
 		}
-
-		@Override
-		public String getFrom() {
-			return from;
-		}
-
-		@Override
-		public String getTo() {
-			return to;
-		}
-
-		@Override
-		public Integer getContent() {
-			return content;
-		}
-
 	}
 
 	public static class MailService<T> implements Consumer<Sendable<T>> {
@@ -84,7 +60,7 @@ public class AccountantOffice {
 		private void addToMailBox(Sendable<T> message) {
 			String to = message.getTo();
 			T content = message.getContent();
-			List<T> contentList = Optional.ofNullable(mailBox.get(to)).orElse(new LinkedList<>());
+			List<T> contentList = mailBox.get(to);
 			contentList.add(content);
 			mailBox.put(to, contentList);
 		}

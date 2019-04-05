@@ -13,8 +13,8 @@ public class SetOperations {
 		mutableSet1.removeAll(set2);
 		temp.remove(set1);
 		mutableSet2.removeAll(temp);
-		result.addAll(set1);
-		result.addAll(set2);
+		result.addAll(mutableSet1);
+		result.addAll(mutableSet2);
 		return result;
 	}
 }

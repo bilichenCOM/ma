@@ -34,16 +34,13 @@ public class ConsoleHandler {
 			addClientInfo();
 			break;
 		case "2":
-			getClientInfo();
+			getCreatureInfo();
 			break;
 		case "3":
 			exit();
 			return;
 		case "4":
 			addHumanInfo();
-			break;
-		case "5":
-			getHumanInfo();
 			break;
 		default:
 			System.out.println(ConsoleExpressions.MISMATCH);
@@ -62,15 +59,6 @@ public class ConsoleHandler {
 		creatureDao.save(client);
 	}
 
-	private static void getClientInfo() {
-		if (!(creatureDao.get() instanceof Client)) {
-			System.out.println(ConsoleExpressions.CLIENT_NO);
-			return;
-		}
-		System.out.println(ConsoleExpressions.CLIENT_INFO);
-		System.out.println(creatureDao.get());
-	}
-
 	private static void addHumanInfo() {
 		try {
 			System.out.println(ConsoleExpressions.HUMAN_START);
@@ -82,19 +70,19 @@ public class ConsoleHandler {
 			String country = scanner.nextLine();
 			Creature human = new Human(name, age, country);
 			creatureDao.save(human);
-		} catch (InputMismatchException ex) {
+		} catch (InputMismatchException | NumberFormatException ex) {
 			System.out.println(ConsoleExpressions.MISMATCH);
 		}
 
 	}
 
-	private static void getHumanInfo() {
-		if (!(creatureDao.get() instanceof Human)) {
-			System.out.println(ConsoleExpressions.HUMAN_NO);
-			return;
+	private static void getCreatureInfo() {
+		try {
+			System.out.println(ConsoleExpressions.INFO);
+			creatureDao.get().forEach(System.out::println);
+		} catch (Exception e) {
+			System.out.println(ConsoleExpressions.ERROR);
 		}
-		System.out.println(ConsoleExpressions.HUMAN_INFO);
-		System.out.println(creatureDao.get());
 	}
 
 	private static void exit() {

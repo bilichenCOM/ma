@@ -7,10 +7,10 @@ import java.nio.file.Paths;
 
 public class PropertyLoader {
 
-    public static String getProperty(String name) throws IOException {
-        Path property = Paths.get("application.properties");
-        String propertyFileString = new String(Files.readAllBytes(property));
-        String result = propertyFileString.split("=")[1];
-        return result;
-    }
+	public static String getProperty() throws IOException {
+		Path property = Paths.get("application.properties");
+		String propertyFileString = new String(Files.readAllBytes(property));
+		String result = propertyFileString.split("=")[1];
+		return result;
+	}
 }

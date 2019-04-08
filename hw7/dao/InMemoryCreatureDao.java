@@ -17,7 +17,7 @@ public class InMemoryCreatureDao implements CreatureDao {
 	}
 
 	@Override
-	public Creature get() {
-		return inMemoryStorage.get(0);
+	public List<Creature> get() {
+		return inMemoryStorage;
 	}
 }

@@ -2,7 +2,7 @@ package hw7.model;
 
 public class Client extends Creature {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String name;
 	private String phoneNumber;
 
@@ -12,7 +12,7 @@ public class Client extends Creature {
 	}
 
 	@Override
-	String getName() {
+	public String getName() {
 		return name;
 	}
 

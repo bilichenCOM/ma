@@ -14,15 +14,12 @@ public class Human extends Creature {
 	}
 
 	@Override
-	String getName() {
-		return null;
+	public String getName() {
+		return name;
 	}
 
 	@Override
 	public String toString() {
 		return "Human [name=" + name + ", age=" + age + ", country=" + country + "]";
 	}
-
-	
-
 }

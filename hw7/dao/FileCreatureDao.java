@@ -54,7 +54,7 @@ public class FileCreatureDao implements CreatureDao {
 		try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(""), "*" + DB_TYPE)) {
 			dirStream.forEach(f -> dbFileNames.add(f.getFileName().toString()));
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.printf("Error during retrieving file list!");
 		}
 		return dbFileNames;
 	}

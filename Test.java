@@ -1,22 +1,10 @@
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import hw6.AccountantOffice.MailMessage;
-import hw6.AccountantOffice.MailService;
-import hw6.AccountantOffice.Salary;
-import hw6.Animal;
-import hw6.AnimalDecoder;
-import hw6.Pair;
-import hw6.SetOperations;
+import hw7.Dao;
 
 public class Test {
+<<<<<<< HEAD
+	public static void main(String[] args) throws IllegalAccessException {
+		Dao.run();
+=======
 	public static void main(String[] args) throws IOException {
 		animalTest();
 		pairTest();
@@ -160,5 +148,6 @@ public class Test {
 	private static Animal[] getTestAnimalArray() {
 		return new Animal[] { new Animal("Cat"), new Animal("Dog"), new Animal("Elephant"), new Animal("Cock"),
 				new Animal("Bull"), new Animal("Ant"), new Animal("Tentecles"), new Animal("Worm") };
+>>>>>>> hw6
 	}
 }

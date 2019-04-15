@@ -6,21 +6,17 @@ public class RobotConnectionControl {
 	}
 
 	public static void moveRobotAttempts(RobotConnectionManager rcm, int toX, int toY, int attempts) {
+		boolean moved = false;
 		if (attempts == 0) {
 			throw new RobotConnectionException("failed connection!");
 		}
 
-		RobotConnection rc = null;
-		try {
-			rc = rcm.getConnection();
+		try (RobotConnection rc = rcm.getConnection()) {
 			rc.moveRobotTo(toX, toY);
+			moved = true;
 		} catch (RobotConnectionException ex) {
-			moveRobotAttempts(rcm, toX, toY, --attempts);
-		} finally {
-			try {
-				rc.close();
-			} catch (Exception ex) {
-				System.err.println("error by closing connection!");
+			if (!moved) {
+				moveRobotAttempts(rcm, toX, toY, --attempts);
 			}
 		}
 	}

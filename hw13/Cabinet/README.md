@@ -1,1 +1,1 @@
-to deploy project into tomcat copy Web-Content folder to your Tomcat deploy path (%TOMCAT_DIR%/webapps)
+to deploy project into tomcat copy WebContent folder to your Tomcat deploy path (%TOMCAT_DIR%/webapps)

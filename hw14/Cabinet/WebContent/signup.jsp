@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +10,10 @@
 <body style="background-color: grey">
 <form action="signup" method="POST">
 <div align="center"><h2>Register new user</h2></div>
-<table title="" align="center">
+<div align="center" style="color:red"><c:out value="${errSignupMessage}" /></div>
+<div align="center" style="color:green"><c:out value="${successSignupMessage}" /></div>
+<div align="center">
+<table title="">
 <tbody>
 <tr>
 <td>
@@ -65,7 +71,10 @@ Password:
 </tr>
 </tbody>
 </table>
+</div>
 </form>
 <hr>
+<c:set var="errSignupMessage" value="" scope="session" />
+<c:set var="successSignupMessage" value="" scope="session" />
 </body>
 </html>

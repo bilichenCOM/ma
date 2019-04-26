@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.User;
 
@@ -15,16 +16,18 @@ import model.User;
 public class CabinetServletUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		if (!request.getSession().getAttribute("logged").equals("true")) {
-			response.sendRedirect("login.html");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
+		if (!session.getAttribute("logged").equals("true")) {
+			response.sendRedirect("login.jsp");
 			return;
 		}
 
 		Map<String, String> userInfo = ParametersValidator.formatParamMap(request.getParameterMap());
 		if (!ParametersValidator.checkSignUpInfo(userInfo)) {
-			response.sendRedirect("wrong_credentials.html");
+			session.setAttribute("errUpdateMessage", "please check validation of input data");
+			response.sendRedirect("update_panel.jsp");
 			return;
 		}
 
@@ -32,14 +35,13 @@ public class CabinetServletUpdate extends HttpServlet {
 		try {
 			DBConnector.connect();
 			DBConnector.updateUser(updatedUser);
-			response.sendRedirect("panel.jsp");
+			session.setAttribute("errUpdateMessage", "");
+			session.setAttribute("successUpdateMessage", "user data has been successfully updated!");
 		} catch (ConnectionException e) {
-			System.err.println("connection failed!");
+			session.setAttribute("errUpdateMessage", "failed connection to DB! Please try again...");
+		}  finally {
+			DBConnector.disconnect();
 			response.sendRedirect("update_panel.jsp");
-		} catch (WrongCredentialsException e) {
-			System.err.println("wrong credentials!");
-			response.sendRedirect("wrong_credentials.html");
 		}
-
 	}
 }

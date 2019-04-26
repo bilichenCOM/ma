@@ -14,27 +14,11 @@ public class CabinetServletLogin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String passwd = request.getParameter("passwd");
+		response.sendRedirect("login.jsp");
+	}
 
-		if (!ParametersValidator.checkEmailValidity(email) || !ParametersValidator.checkTextValidity(passwd)) {
-			response.sendRedirect("wrong_credentials.html");
-			return;
-		}
-
-		try {
-			DBConnector.connect();
-			DBConnector.getUser(email, passwd);
-			request.getSession().setMaxInactiveInterval(3000);
-			request.getSession().setAttribute("logged", "true");
-			request.getRequestDispatcher("panel.jsp").forward(request, response);
-		} catch (ConnectionException e) {
-			System.err.println("no connection to database!");
-			response.sendRedirect("login.html");
-		} catch (WrongCredentialsException e) {
-			response.sendRedirect("wrong_credentials.html");
-		} finally {
-			DBConnector.disconnect();
-		}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
 	}
 }

@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.User;
 
@@ -16,9 +17,11 @@ public class CabinetServletSignup extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> signupInfo = ParametersValidator.formatParamMap(request.getParameterMap());
+		HttpSession session = request.getSession();
 
 		if (!ParametersValidator.checkSignUpInfo(signupInfo)) {
-			response.sendRedirect("wrong_credentials.html");
+			session.setAttribute("errSignupMessage", "please validate input data");
+			response.sendRedirect("signup.jsp");
 			return;
 		}
 
@@ -27,13 +30,15 @@ public class CabinetServletSignup extends HttpServlet {
 		try {
 			DBConnector.connect();
 			DBConnector.addUser(user);
-			response.sendRedirect("registered.html");
+			session.setAttribute("errSignupMessage", "");
+			session.setAttribute("successSignupMessage", "Congratulations! You are now registered user!");
 		} catch (ExistingUserException e) {
-			response.sendRedirect("existing_user.html");
+			session.setAttribute("errSignupMessage", "user with the same email is registered, please login");
 		} catch (ConnectionException e) {
-			System.err.println("failed connection to database!");
+			session.setAttribute("errSignupMessage", "connection to DB failed!");
 		} finally {
 			DBConnector.disconnect();
+			response.sendRedirect("signup.jsp");
 		}
 	}
 }

@@ -6,15 +6,18 @@
 <head>
 <!-- login check expressions -->
 <c:set var="log_value" value="true"/>
-<c:if test="${sessionScope.logged != log_value}"><c:redirect url="login.html"/></c:if>
+<c:if test="${sessionScope.logged != log_value}"><c:redirect url="login.jsp"/></c:if>
 <!-- end of login check -->
 <meta charset="ISO-8859-1">
 <title>Update user</title>
 </head>
 <body>
-<center><h2>Update user <c:out value="${param.email}" /> data</h2></center>
+<div align="center"><h2>Update user <c:out value="${param.email}" /> data</h2><br></div>
+<div align="center" style="color:red"><c:out value="${sessionScope.errUpdateMessage}" /></div>
+<div align="center" style="color:green"><c:out value="${sessionScope.successUpdateMessage}" /></div>
 <form action="update" method="POST">
 <input type="hidden" name="email" value="<c:out value="${param.email}" />">
+<div align="center">
 <table>
 <tr>
 <td>
@@ -55,6 +58,9 @@ Password:
 	</td>
 </tr>
 </table>
+</div>
 </form>
+<c:set var="errUpdateMessage" value="" scope="session" />
+<c:set var="successUpdateMessage" value="" scope="session" />
 </body>
 </html>

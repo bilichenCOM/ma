@@ -63,7 +63,7 @@ public class DBConnector {
 		return new User(getUserInfo(email, passwd));
 	}
 
-	public static void updateUser(User user) throws WrongCredentialsException{
+	public static void updateUser(User user) {
 		System.out.println("updating user...");
 		System.out.println("deleting old user....");
 		deleteUser(user.getEmail());

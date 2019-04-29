@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- login check expressions -->
-<c:set var="log_value" value="yes" />
-<c:if test="${sessionScope.attemptLogin != log_value}">
+
+<c:if
+	test="${(empty param.email or empty param.passwd) and sessionScope.auth != 'authorized'}">
+	<c:set var="errMessage" value="please enter email and password"
+		scope="session" />
 	<c:redirect url="login.jsp" />
 </c:if>
-<!-- end of login check -->
 
 <c:if test="${param.action == 'logout'}">
 	<c:set var="auth" value="" scope="session" />
@@ -21,39 +21,24 @@
 <title>Panel</title>
 </head>
 <body style="background-color: grey">
-	<c:if
-		test="${(empty param.email or empty param.passwd) and sessionScope.auth != 'authorized'}">
-		<c:set var="errMessage" value="please enter email and password"
-			scope="session" />
-		<c:redirect url="login.jsp" />
-	</c:if>
 	<sql:setDataSource var="cabinet_db" driver="org.postgresql.Driver"
 		url="jdbc:postgresql://localhost:5432/cabinet_db" user="postgres"
 		password="admin" />
 
-	<sql:query dataSource="${cabinet_db}" var="user">
-	SELECT count(*) as cnt FROM public.users
+	<!-- check login and password query -->
+	<sql:query dataSource="${cabinet_db}" var="result">
+	SELECT *, COUNT(*) as cnt FROM public.users
 	WHERE email='${param.email}'
 	AND passwd='${param.passwd}'
+	GROUP BY email
 	</sql:query>
 
-	<c:forEach items="${user.rows}" var="row">
-		<c:choose>
-			<c:when test="${row.cnt eq 0 and sessionScope.auth != 'authorized'}">
-				<c:set var="errMessage"
-					value="wrong email or password, please try again..."
-					scope="session" />
-				<c:redirect url="login.jsp" />
-			</c:when>
-			<c:otherwise>
+	<c:forEach items="${result.rows}" var="row">
 				<c:set var="auth" value="authorized" scope="session" />
 				<h1 align="center">
 					Hello
-					<c:out value="${param.email}" />
+					<c:out value="${row.user_name}" />
 				</h1>
-				<sql:query dataSource="${cabinet_db}" var="rs">
-				SELECT * FROM public.users;
-				</sql:query>
 				<table border="1">
 					<tr>
 						<th>Email</th>
@@ -63,28 +48,35 @@
 						<th>Password</th>
 						<th>Action</th>
 					</tr>
+					<sql:query dataSource="${cabinet_db}" var="result">
+					SELECT * FROM public.users;
+					</sql:query>
 					<tr>
-						<c:forEach var="user" items="${rs.rows}">
+						<c:forEach var="row" items="${result.rows}">
 							<tr>
-								<td><c:out value="${user.email}" /></td>
-								<td><c:out value="${user.user_name}" /></td>
-								<td><c:out value="${user.user_surname}" /></td>
-								<td><c:out value="${user.user_age}" /></td>
-								<td><c:out value="${user.passwd}" /></td>
-								<td><a
-									href="update_panel.jsp?email=<c:out value="${user.email}"/>"><input
+								<td><c:out value="${row.email}" /></td>
+								<td><c:out value="${row.user_name}" /></td>
+								<td><c:out value="${row.user_surname}" /></td>
+								<td><c:out value="${row.user_age}" /></td>
+								<td><c:out value="${row.passwd}" /></td>
+								<td><a href="update?email=<c:out value="${row.email}"/>"><input
 										type="button" name="" value="update"></a> <a
-									href="delete?email=<c:out value="${user.email}"/>"><input
+									href="delete?email=<c:out value="${row.email}"/>"><input
 										type="button" name="" value="delete"></a></td>
 							</tr>
 						</c:forEach>
 					</tr>
 				</table>
-				<a href="signup.html"><input type="button" value="Add user"></a>
-			</c:otherwise>
-		</c:choose>
+				<a href="signup.jsp"><input type="button" value="Add user"></a>
+				<div align="right">
+					<a href="panel.jsp?action=logout"><input type="button"
+						value="LogOut"></a>
+				</div>
+				<hr>
 	</c:forEach>
-	<div align="right"><a href="panel.jsp?action=logout"><input type="button" value="LogOut"></a></div>
-	<hr>
+	<c:if test="${sessionScope.auth != 'authorized'}" >
+		<c:set var="errMessage" value= "wrong email or password, please try again..." scope="session" />
+		<c:redirect url="login.jsp" />
+	</c:if>
 </body>
 </html>

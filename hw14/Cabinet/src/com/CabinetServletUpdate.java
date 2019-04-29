@@ -16,14 +16,10 @@ import model.User;
 public class CabinetServletUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("update_panel.jsp").forward(request, response);
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
-		if (!session.getAttribute("auth").equals("authorized")) {
+		if (!session.getAttribute("logged").equals("true")) {
 			response.sendRedirect("login.jsp");
 			return;
 		}

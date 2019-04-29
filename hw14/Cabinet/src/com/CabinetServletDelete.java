@@ -14,7 +14,7 @@ public class CabinetServletDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("auth").equals("authorized")) {
+		if(request.getSession().getAttribute("logged").equals("true")) {
 			try {
 				DBConnector.connect();
 				DBConnector.deleteUser(request.getParameter("email"));
@@ -26,7 +26,7 @@ public class CabinetServletDelete extends HttpServlet {
 				DBConnector.disconnect();
 			}
 		} else {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("login.html");
 		}
 	}
 }

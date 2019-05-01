@@ -43,14 +43,15 @@ public class DBConnector {
 		}
 
 		try {
-			PreparedStatement preparedSql = connection.prepareStatement("INSERT INTO public.users(email, user_name, user_surname, user_age, passwd, user_gender)"
-										+ "VALUES (?, ?, ?, ?, ?, ?);");
+			PreparedStatement preparedSql = connection.prepareStatement("INSERT INTO public.users(email, user_name, user_surname, user_age, passwd, user_gender, role_id)"
+										+ "VALUES (?, ?, ?, ?, ?, ?, ?);");
 			preparedSql.setString(1, user.getEmail());
 			preparedSql.setString(2, user.getName());
 			preparedSql.setString(3, user.getSurname());
 			preparedSql.setInt(4, user.getAge());
 			preparedSql.setString(5, user.getPasswd());
 			preparedSql.setString(6, user.getGender());
+			preparedSql.setInt(7, 2);
 			preparedSql.executeUpdate();
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());

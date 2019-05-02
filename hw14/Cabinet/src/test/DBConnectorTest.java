@@ -7,11 +7,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ConnectionException;
-import com.DBConnector;
-import com.ExistingUserException;
-import com.WrongEmailException;
-
+import db.ConnectionException;
+import db.DBConnector;
+import db.ExistingUserException;
+import db.WrongEmailException;
 import model.User;
 
 class DBConnectorTest {

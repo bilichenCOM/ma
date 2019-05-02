@@ -10,13 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import db.ConnectionException;
+import db.ExistingUserException;
+import db.UserCRUD;
 import model.Role;
 import model.User;
+import utils.ParametersValidator;
 
 @WebServlet("/signup")
 public class CabinetServletSignup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CabinetServletSignup.class);
+	private static final UserCRUD crud = UserCRUD.getInstance();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,22 +33,19 @@ public class CabinetServletSignup extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		if (
-			!ParametersValidator.checkTextValidity(name) || !ParametersValidator.checkTextValidity(surname)
-			|| !ParametersValidator.checkNumberValidity(age) || !ParametersValidator.checkTextValidity(gender)
-			|| !ParametersValidator.checkEmailValidity(email) || !ParametersValidator.checkTextValidity(password)
+			!ParametersValidator.checkEmailValidity(email)
+			|| !ParametersValidator.checkTextValidity(password)
 			) {
-			request.setAttribute("errMessage", "please check validity of input data...");
+			request.setAttribute("errMessage", "please check validity of login and password...");
 			request.getRequestDispatcher("signup.jsp").forward(request, response);
 			return;
 		}
 		
 		User user = new User(name, surname, gender, Integer.parseInt(age), email, password, Role.USER.getId());
-		user.setRoleId(Role.USER.getId());
-		
+
 		try {
-			DBConnector.connect();
-			DBConnector.addUser(user);
-			DBConnector.disconnect();
+			crud.create(user);
+
 			request.setAttribute("successMessage", "Successfully registered!");
 			request.getRequestDispatcher("signup.jsp").forward(request, response);
 		} catch (ExistingUserException e) {

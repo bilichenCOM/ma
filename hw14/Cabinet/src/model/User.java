@@ -12,7 +12,6 @@ public class User {
 
 	public User(Long id, String name, String surname, String gender, int age, String email, String password,
 			int roleId) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;

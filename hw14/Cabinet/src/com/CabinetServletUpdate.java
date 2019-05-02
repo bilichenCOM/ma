@@ -10,19 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import db.ConnectionException;
+import db.UserCRUD;
+import db.WrongEmailException;
 import model.User;
 
 @WebServlet("/update")
 public class CabinetServletUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CabinetServletUpdate.class);
+	private static final UserCRUD crud = UserCRUD.getInstance();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
+
 		try {
-			DBConnector.connect();
-			User user = DBConnector.getUser(email).get();
-			DBConnector.disconnect();
+			User user = crud.read(email).get();
+
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("update_panel.jsp").forward(request, response);
 		} catch (WrongEmailException e) {
@@ -46,10 +50,10 @@ public class CabinetServletUpdate extends HttpServlet {
 		String roleId = request.getParameter("roleId");
 		
 		User user = new User(name, surname, gender, Integer.parseInt(age), email, password, Integer.parseInt(roleId));
-		System.out.println(user);
+
 		try {
-			DBConnector.connect();
-			DBConnector.updateUser(user);
+			crud.update(user);
+
 			request.setAttribute("successMessage", "user successfully updated");
 			request.getRequestDispatcher("update_panel.jsp").forward(request, response);
 		} catch (ConnectionException e) {

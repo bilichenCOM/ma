@@ -1,4 +1,4 @@
-package com;
+package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -57,10 +57,13 @@ public class DBConnector {
 	public static Optional<User> getUser(String email) throws WrongEmailException {
 		System.out.println("getting user from database....");
 		String sql = "SELECT * FROM users WHERE email=?";
+
 		try {
 			PreparedStatement getUserQuery = connection.prepareStatement(sql);
+
 			getUserQuery.setString(1, email);
 			ResultSet getUserResultSet = getUserQuery.executeQuery();
+
 			if (getUserResultSet.next()) {
 				Long id = getUserResultSet.getLong("id");
 				String name = getUserResultSet.getString("name");
@@ -73,6 +76,7 @@ public class DBConnector {
 			} else {
 				throw new WrongEmailException();
 			}
+
 		} catch (SQLException e) {
 			logger.debug("sql exception", e);
 		}
@@ -80,12 +84,23 @@ public class DBConnector {
 	}
 
 	public static void updateUser(User user) {
-		System.out.println("updating user...");
-		System.out.println("deleting old user....");
-		deleteUser(user.getEmail());
+		String sql = "UPDATE users "
+				+ "SET name = ?, surname = ?, age = ?, gender = ?, password = ?, role_id = ? "
+				+ "WHERE email ='" + user.getEmail() + "'";
+
 		try {
-			addUser(user);
-		} catch (ExistingUserException e) {}
+			PreparedStatement updateQuery = connection.prepareStatement(sql);
+
+			updateQuery.setString(1, user.getName());
+			updateQuery.setString(2, user.getSurname());
+			updateQuery.setInt(3, user.getAge());
+			updateQuery.setString(4, user.getGender());
+			updateQuery.setString(5, user.getPassword());
+			updateQuery.setInt(6, user.getRoleId());
+			updateQuery.execute();
+		} catch (SQLException e) {
+			logger.debug("problems by updating user", e);
+		}
 	}
 
 	public static void deleteUser(String email) {

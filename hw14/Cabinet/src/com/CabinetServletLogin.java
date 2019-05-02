@@ -1,4 +1,5 @@
 package com;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import db.ConnectionException;
+import db.UserCRUD;
+import db.WrongEmailException;
 import model.Role;
 import model.User;
 
@@ -16,6 +20,7 @@ import model.User;
 public class CabinetServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CabinetServletLogin.class);
+	private static final UserCRUD crud = UserCRUD.getInstance();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
@@ -30,9 +35,7 @@ public class CabinetServletLogin extends HttpServlet {
 		}
 
 		try {
-			DBConnector.connect();
-			User user = DBConnector.getUser(email).get();
-			DBConnector.disconnect();
+			User user = crud.read(email).get();
 
 			if (!user.getPassword().equals(password)) {
 				logger.debug("wrong credentials for " + email);

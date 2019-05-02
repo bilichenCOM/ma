@@ -5,11 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- login check expressions -->
-<c:if test="${sessionScope.auth != 'authorized'}">
-	<c:redirect url="login.jsp" />
+<c:if test="${logged != 'true'}">
+<c:redirect url="login.jsp" />
 </c:if>
-<!-- end of login check -->
 <meta charset="ISO-8859-1">
 <title>Update user</title>
 </head>
@@ -23,34 +21,44 @@
 		<br>
 	</div>
 	<div align="center" style="color: red">
-		<c:out value="${sessionScope.errUpdateMessage}" />
+		<c:out value="${errMessage}" />
 	</div>
 	<div align="center" style="color: green">
-		<c:out value="${sessionScope.successUpdateMessage}" />
+		<c:out value="${successMessage}" />
 	</div>
 	<form action="update" method="POST">
-		<input type="hidden" name="email"
-			value="<c:out value="${param.email}" />">
+		<input type="hidden" name="email" value="${param.email}" />
 		<div align="center">
 			<table>
 				<tr>
 					<td>Name:</td>
-					<td><input type="text" maxlength="20" name="user_name">
+					<td><input type="text" maxlength="20" name="name" value="${user.name}">
 					</td>
 				</tr>
 				<tr>
 					<td>Surname:</td>
-					<td><input type="text" name="user_surname" maxlength="20">
+					<td><input type="text" name="surname" maxlength="20" value="${user.surname}">
 					</td>
 				</tr>
 				<tr>
 					<td>Age:</td>
-					<td><input type="text" maxlength="3" name="user_age">
+					<td><input type="text" maxlength="3" name="age" value="${user.age}">
+					</td>
+				</tr>
+				<tr>
+					<td>Gender:</td>
+					<td><input type="text" name="gender" value="${user.gender}">
 					</td>
 				</tr>
 				<tr>
 					<td>Password:</td>
-					<td><input type="password" name="passwd"></td>
+					<td><input type="password" name="password" value="${user.password}">
+					</td>
+				</tr>
+				<tr>
+					<td>RoleId:</td>
+					<td><input type="text" name="roleId" value="${user.roleId}">
+					</td>
 				</tr>
 				<tr>
 					<td></td>
@@ -59,7 +67,5 @@
 			</table>
 		</div>
 	</form>
-	<c:set var="errUpdateMessage" value="" scope="session" />
-	<c:set var="successUpdateMessage" value="" scope="session" />
 </body>
 </html>

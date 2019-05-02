@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
+import org.apache.log4j.Logger;
 
 import model.User;
 
@@ -16,6 +19,8 @@ public class DBConnector {
 	private static final String DB_URL = "jdbc:postgresql://localhost:5432/cabinet_db";
 	private static final String DB_USER = "postgres";
 	private static final String DB_PASSWORD = "admin";
+	
+	private static final Logger logger = Logger.getLogger(DBConnector.class);
 
 	private static Connection connection;
 
@@ -23,7 +28,7 @@ public class DBConnector {
 		try {
 			Class.forName(DRIVER_NAME);
 		} catch (ClassNotFoundException e) {
-			System.err.println("#ERROR: Driver to database not found");
+			logger.error("driver to db not found");
 		}
 	}
 
@@ -31,37 +36,47 @@ public class DBConnector {
 	}
 
 	public static void addUser(User user) throws ExistingUserException {
-		System.out.println("adding new user...");
+		String sql = "INSERT INTO users(name, surname, age, gender, email, password, role_id) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
-			Statement checkSql = connection.createStatement();
-			ResultSet res = checkSql.executeQuery("SELECT * FROM public.users WHERE email='" + user.getEmail() + "';");
-			if (res.next() && res.getString(1).equals(user.getEmail())) {
-				throw new ExistingUserException();
-			}
-		} catch (SQLException e1) {
-			System.err.println(e1.getMessage());
-		}
-
-		try {
-			PreparedStatement preparedSql = connection.prepareStatement("INSERT INTO public.users(email, user_name, user_surname, user_age, passwd, user_gender, role_id)"
-										+ "VALUES (?, ?, ?, ?, ?, ?, ?);");
-			preparedSql.setString(1, user.getEmail());
-			preparedSql.setString(2, user.getName());
-			preparedSql.setString(3, user.getSurname());
-			preparedSql.setInt(4, user.getAge());
-			preparedSql.setString(5, user.getPasswd());
-			preparedSql.setString(6, user.getGender());
-			preparedSql.setInt(7, 2);
-			preparedSql.executeUpdate();
+			PreparedStatement addingQuery = connection.prepareStatement(sql);
+			addingQuery.setString(1, user.getName());
+			addingQuery.setString(2, user.getSurname());
+			addingQuery.setInt(3, user.getAge());
+			addingQuery.setString(4, user.getGender());
+			addingQuery.setString(5, user.getEmail());
+			addingQuery.setString(6, user.getPassword());
+			addingQuery.setInt(7, user.getRoleId());
+			addingQuery.execute();
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+			logger.debug("sql exception", e);
+			throw new ExistingUserException();
 		}
-		System.out.println("done!");
 	}
 
-	public static User getUser(String email, String passwd) throws WrongCredentialsException {
+	public static Optional<User> getUser(String email) throws WrongEmailException {
 		System.out.println("getting user from database....");
-		return new User(getUserInfo(email, passwd));
+		String sql = "SELECT * FROM users WHERE email=?";
+		try {
+			PreparedStatement getUserQuery = connection.prepareStatement(sql);
+			getUserQuery.setString(1, email);
+			ResultSet getUserResultSet = getUserQuery.executeQuery();
+			if (getUserResultSet.next()) {
+				Long id = getUserResultSet.getLong("id");
+				String name = getUserResultSet.getString("name");
+				String surname = getUserResultSet.getString("surname");
+				int age = getUserResultSet.getInt("age");
+				String gender = getUserResultSet.getString("gender");
+				String password = getUserResultSet.getString("password");
+				int roleId = getUserResultSet.getInt("role_id");
+				return Optional.of(new User(id, name, surname, gender, age, email, password, roleId));
+			} else {
+				throw new WrongEmailException();
+			}
+		} catch (SQLException e) {
+			logger.debug("sql exception", e);
+		}
+		return Optional.empty();
 	}
 
 	public static void updateUser(User user) {
@@ -73,22 +88,18 @@ public class DBConnector {
 		} catch (ExistingUserException e) {}
 	}
 
-	public static void deleteUser(User user) {
+	public static void deleteUser(String email) {
 		System.out.println("deleting users....");
 		 try {
 			Statement deleteSql = connection.createStatement();
 			deleteSql.execute("DELETE FROM public.users "
-							+ "WHERE email='" + user.getEmail() + "';");
+							+ "WHERE email='" + email + "';");
 		} catch (SQLException e) {
-			System.err.println(user.getEmail() + " user not deleted!");
+			logger.debug("problems by deleting users");
 		}
 	}
 
-	public static void deleteUser(String email) {
-		deleteUser(new User(email, null));
-	}
-
-	public static Map<String, String> getUserInfo(String email, String passwd) throws WrongCredentialsException {
+	public static Map<String, String> getUserInfo(String email, String passwd) throws WrongEmailException {
 		Map<String, String> userInfo = new HashMap<>();
 		try {
 			Statement selectSql = connection.createStatement();
@@ -96,10 +107,11 @@ public class DBConnector {
 					+ "WHERE email='" + email + "' AND passwd='" + passwd + "';");
 			userInfo = makeUserInfoMap(rs);
 			if (userInfo.get("email") == null) {
-				throw new WrongCredentialsException();
+				logger.debug("wrong credentials! " + email + " " + passwd);
+				throw new WrongEmailException();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.debug("problems by getting user info");
 		}
 		return userInfo;
 	}
@@ -116,7 +128,7 @@ public class DBConnector {
 				userInfo.put("user_gender", rs.getString("user_gender"));
 			}
 		} catch (SQLException e) {
-			System.err.println("error by retrieving user info!");
+			logger.debug("crashed by parsing user data");
 		}
 		return userInfo;
 	}
@@ -125,6 +137,7 @@ public class DBConnector {
 		try {
 			connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 		} catch (SQLException e) {
+			logger.error("connection to database failed");
 			throw new ConnectionException();
 		}
 	}
@@ -133,7 +146,7 @@ public class DBConnector {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-			System.err.println("Error by closing connection");
+			logger.debug("connection closing failed");
 		}
 	}
 }

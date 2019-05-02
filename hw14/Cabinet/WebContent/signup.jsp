@@ -13,33 +13,33 @@
 			<h2>Register new user</h2>
 		</div>
 		<div align="center" style="color: red">
-			<c:out value="${errSignupMessage}" />
+			<c:out value="${errMessage}" />
 		</div>
 		<div align="center" style="color: green">
-			<c:out value="${successSignupMessage}" />
+			<c:out value="${successMessage}" />
 		</div>
 		<div align="center">
 			<table title="">
 				<tbody>
 					<tr>
 						<td>Name:</td>
-						<td><input type="text" maxlength="20" name="user_name">
+						<td><input type="text" name="name" maxlength="20">
 						</td>
 					</tr>
 					<tr>
 						<td>Surname:</td>
-						<td><input type="text" name="user_surname" maxlength="20">
+						<td><input type="text" name="surname" maxlength="20">
 						</td>
 					</tr>
 					<tr>
 						<td>Age:</td>
-						<td><input type="text" maxlength="3" name="user_age">
+						<td><input type="text" maxlength="3" name="age">
 						</td>
 					</tr>
 					<tr>
 						<td>Gender:</td>
-						<td><input type="radio" name="user_gender" value="female">Female<input
-							type="radio" name="user_gender" value="male">Male</td>
+						<td><input type="radio" name="gender" value="female">Female<input
+							type="radio" name="gender" value="male">Male</td>
 					</tr>
 					<tr>
 						<td>Email:</td>
@@ -47,7 +47,7 @@
 					</tr>
 					<tr>
 						<td>Password:</td>
-						<td><input type="password" name="passwd"></td>
+						<td><input type="password" name="password"></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -58,7 +58,5 @@
 		</div>
 	</form>
 	<hr>
-	<c:set var="errSignupMessage" value="" scope="session" />
-	<c:set var="successSignupMessage" value="" scope="session" />
 </body>
 </html>

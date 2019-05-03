@@ -35,7 +35,7 @@ public class DBConnector {
 	private DBConnector() {
 	}
 
-	public static void addUser(User user) throws ExistingUserException {
+	public static void addUser(User user) {
 		String sql = "INSERT INTO users(name, surname, age, gender, email, password, role_id) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
@@ -54,7 +54,7 @@ public class DBConnector {
 		}
 	}
 
-	public static Optional<User> getUser(String email) throws WrongEmailException {
+	public static Optional<User> getUser(String email) {
 		logger.debug("getting user with email: " + email);
 		String sql = "SELECT * FROM users WHERE email=?";
 
@@ -114,7 +114,7 @@ public class DBConnector {
 		}
 	}
 
-	public static Map<String, String> getUserInfo(String email, String passwd) throws WrongEmailException {
+	public static Map<String, String> getUserInfo(String email, String passwd) {
 		Map<String, String> userInfo = new HashMap<>();
 		try {
 			Statement selectSql = connection.createStatement();
@@ -148,7 +148,7 @@ public class DBConnector {
 		return userInfo;
 	}
 
-	public static void connect() throws ConnectionException {
+	public static void connect() {
 		try {
 			connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 		} catch (SQLException e) {

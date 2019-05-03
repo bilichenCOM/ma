@@ -55,7 +55,7 @@ public class DBConnector {
 	}
 
 	public static Optional<User> getUser(String email) throws WrongEmailException {
-		System.out.println("getting user from database....");
+		logger.debug("getting user with email: " + email);
 		String sql = "SELECT * FROM users WHERE email=?";
 
 		try {
@@ -104,13 +104,13 @@ public class DBConnector {
 	}
 
 	public static void deleteUser(String email) {
-		System.out.println("deleting users....");
+		logger.debug("deleting user with email: " + email);
 		 try {
 			Statement deleteSql = connection.createStatement();
 			deleteSql.execute("DELETE FROM public.users "
 							+ "WHERE email='" + email + "';");
 		} catch (SQLException e) {
-			logger.debug("problems by deleting users");
+			logger.debug("problems by deleting users", e);
 		}
 	}
 
@@ -126,7 +126,7 @@ public class DBConnector {
 				throw new WrongEmailException();
 			}
 		} catch (SQLException e) {
-			logger.debug("problems by getting user info");
+			logger.debug("problems by getting user info", e);
 		}
 		return userInfo;
 	}

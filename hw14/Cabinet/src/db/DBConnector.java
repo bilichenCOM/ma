@@ -100,7 +100,7 @@ public class DBConnector {
 		}
 		return books;
 	}
-	public static void addUser(User user) throws ExistingUserException {
+	public static void addUser(User user) {
 		String sql = "INSERT INTO users(name, surname, age, gender, email, password, role_id) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
@@ -119,10 +119,8 @@ public class DBConnector {
 		}
 	}
 
-	public static Optional<User> getUser(String email) throws WrongEmailException {
-		System.out.println("getting user from database....");
+	public static Optional<User> getUser(String email) {
 		String sql = "SELECT * FROM users WHERE email=?";
-
 		try {
 			PreparedStatement getUserQuery = connection.prepareStatement(sql);
 
@@ -169,11 +167,11 @@ public class DBConnector {
 	}
 
 	public static void deleteUser(String email) {
-		System.out.println("deleting users....");
 		 try {
 			Statement deleteSql = connection.createStatement();
 			deleteSql.execute("DELETE FROM public.users "
 							+ "WHERE email='" + email + "';");
+			logger.debug("user with email" + email + " deleted");
 		} catch (SQLException e) {
 			logger.debug("problems by deleting users");
 		}

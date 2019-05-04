@@ -1,35 +1,38 @@
 package model;
 
-import java.util.Map;
-
 public class User {
-	private String email;
-	private String passwd;
-
+	private Long id;
 	private String name;
 	private String surname;
 	private String gender;
 	private int age;
+	private String email;
+	private String password;
+	private int roleId;
 
-	public User(String email, String passwd) {
+	public User(Long id, String name, String surname, String gender, int age, String email, String password,
+			int roleId) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.gender = gender;
+		this.age = age;
 		this.email = email;
-		this.passwd = passwd;
+		this.password = password;
+		this.roleId = roleId;
 	}
 
-	public User(Map<String, String> userInfo) {
-		email = userInfo.get("email");
-		passwd = userInfo.get("passwd");
-		name = userInfo.get("user_name");
-		surname = userInfo.get("user_surname");
-		age = Integer.parseInt(userInfo.get("user_age"));
+	public User(String name, String surname, String gender, int age, String email, String password, int roleId) {
+		this(null, name, surname, gender, age, email, password, roleId);
 	}
 
-	public String getPasswd() {
-		return passwd;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -48,6 +51,14 @@ public class User {
 		this.surname = surname;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public int getAge() {
 		return age;
 	}
@@ -56,15 +67,29 @@ public class User {
 		this.age = age;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
-	public String getGender() {
-		return gender;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", gender=" + gender + ", age=" + age
+				+ ", email=" + email + ", password=" + password + ", roleId=" + roleId + "]";
 	}
 }

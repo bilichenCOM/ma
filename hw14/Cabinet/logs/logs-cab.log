@@ -1,0 +1,85 @@
+2019-05-02 15:53:19 DEBUG CabinetServletLogin:24 - login attempt with credentials: hello kljdfa from 0:0:0:0:0:0:0:1
+2019-05-02 15:53:20 DEBUG CabinetServletLogin:58 - wrong credentials for hello
+com.WrongEmailException
+	at com.DBConnector.getUser(DBConnector.java:74)
+	at com.CabinetServletLogin.doPost(CabinetServletLogin.java:34)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-05-02 15:56:10 DEBUG CabinetServletLogin:24 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-02 15:56:10 DEBUG CabinetServletLogin:52 - logged as 2
+2019-05-02 15:56:46 DEBUG CabinetServletLogin:24 - login attempt with credentials:   from 0:0:0:0:0:0:0:1
+2019-05-02 15:56:49 DEBUG CabinetServletLogin:24 - login attempt with credentials:   from 0:0:0:0:0:0:0:1
+2019-05-02 15:56:49 DEBUG CabinetServletLogin:24 - login attempt with credentials:   from 0:0:0:0:0:0:0:1
+2019-05-02 15:56:50 DEBUG CabinetServletLogin:24 - login attempt with credentials:   from 0:0:0:0:0:0:0:1
+2019-05-02 15:56:50 DEBUG CabinetServletLogin:24 - login attempt with credentials:   from 0:0:0:0:0:0:0:1
+2019-05-02 15:56:50 DEBUG CabinetServletLogin:24 - login attempt with credentials:   from 0:0:0:0:0:0:0:1
+2019-05-02 15:57:46 DEBUG CabinetServletLogin:24 - login attempt with credentials: hurricane@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-02 15:57:46 DEBUG CabinetServletLogin:52 - logged as 1
+2019-05-02 15:58:04 DEBUG CabinetServletLogin:24 - login attempt with credentials: hurricane@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-02 15:58:05 DEBUG CabinetServletLogin:52 - logged as 1
+2019-05-02 16:01:38 DEBUG CabinetServletLogin:24 - login attempt with credentials: hurricane@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-02 16:01:39 DEBUG CabinetServletLogin:52 - logged as 1
+2019-05-03 00:59:12 DEBUG CabinetServletLogin:29 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-03 00:59:13 DEBUG CabinetServletLogin:55 - logged as 1
+2019-05-03 01:00:05 DEBUG CabinetServletLogin:29 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-03 01:00:06 DEBUG CabinetServletLogin:55 - logged as 1
+2019-05-03 01:10:53 DEBUG CabinetServletLogin:29 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-03 01:10:55 DEBUG CabinetServletLogin:55 - logged as 1
+2019-05-03 01:11:04 DEBUG DBConnector:98 - problems by updating user
+org.postgresql.util.PSQLException: Запрос не вернул результатов.
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:274)
+	at db.DBConnector.updateUser(DBConnector.java:96)
+	at db.UserCRUD.update(UserCRUD.java:35)
+	at com.CabinetServletUpdate.doPost(CabinetServletUpdate.java:55)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-05-03 01:11:24 DEBUG CabinetServletLogin:29 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-03 01:11:25 DEBUG CabinetServletLogin:55 - logged as 1
+2019-05-03 01:12:02 DEBUG CabinetServletLogin:29 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-03 01:12:03 DEBUG CabinetServletLogin:55 - logged as 1
+2019-05-03 01:14:19 DEBUG CabinetServletLogin:29 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-03 01:14:20 DEBUG CabinetServletLogin:55 - logged as 1

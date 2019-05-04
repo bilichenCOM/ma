@@ -1,5 +1,5 @@
 package db;
 
 @SuppressWarnings("serial")
-public class WrongEmailException extends RuntimeException{
+public class WrongEmailException extends Exception{
 }

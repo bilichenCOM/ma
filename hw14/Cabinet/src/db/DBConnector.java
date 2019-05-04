@@ -6,12 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
+import model.Book;
 import model.User;
 
 public class DBConnector {
@@ -35,7 +38,69 @@ public class DBConnector {
 	private DBConnector() {
 	}
 
-	public static void addUser(User user) {
+	public static void addBook(Book book) {
+		String sql = "INSERT INTO books(title, author, year, pages, image_url) "
+				+ "VALUES (?, ?, ?, ?, ?)";
+		try {
+			PreparedStatement addingQuery = connection.prepareStatement(sql);
+			addingQuery.setString(1, book.getTitle());
+			addingQuery.setString(2, book.getAuthor());
+			addingQuery.setInt(3, book.getYear());
+			addingQuery.setInt(4, book.getPages());
+			addingQuery.setString(5, book.getImageUrl());
+			addingQuery.execute();
+		} catch (SQLException e) {
+			logger.debug("problems by adding new books", e);
+		}
+	}
+
+	public static Optional<Book> getBook(Long id) {
+		String sql = "SELECT * FROM books WHERE id = " + id;
+		try {
+			Statement selectQuery = connection.createStatement();
+			ResultSet selectBookResultSet = selectQuery.executeQuery(sql);
+			if (selectBookResultSet.next()) {
+				String title = selectBookResultSet.getString("title");
+				String author = selectBookResultSet.getString("author");
+				int year = selectBookResultSet.getInt("year");
+				int pages = selectBookResultSet.getInt("pages");
+				String imageUrl = selectBookResultSet.getString("image_url");
+				int price = selectBookResultSet.getInt("price");
+
+				Book book = new Book(id, title, author, year, pages, imageUrl, price);
+				return Optional.of(book);
+			}
+		} catch (SQLException e) {
+			logger.debug("problems by getting book", e);
+		}
+		return Optional.empty();
+	}
+
+	public static List<Book> getBookList() {
+		List<Book> books = new ArrayList<>();
+		String sql = "SELECT * FROM books";
+		try {
+			Statement selectQuery = connection.createStatement();
+			ResultSet selectBooksResultSet = selectQuery.executeQuery(sql);
+			
+			while(selectBooksResultSet.next()) {
+				Long id = selectBooksResultSet.getLong("id");
+				String title = selectBooksResultSet.getString("title");
+				String author = selectBooksResultSet.getString("author");
+				int year = selectBooksResultSet.getInt("year");
+				int pages = selectBooksResultSet.getInt("pages");
+				String imageUrl = selectBooksResultSet.getString("image_url");
+				int price = selectBooksResultSet.getInt("price");
+				
+				Book book = new Book(id, title, author, year, pages, imageUrl, price);
+				books.add(book);
+			}
+		} catch (SQLException e) {
+			
+		}
+		return books;
+	}
+	public static void addUser(User user) throws ExistingUserException {
 		String sql = "INSERT INTO users(name, surname, age, gender, email, password, role_id) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
@@ -54,8 +119,8 @@ public class DBConnector {
 		}
 	}
 
-	public static Optional<User> getUser(String email) {
-		logger.debug("getting user with email: " + email);
+	public static Optional<User> getUser(String email) throws WrongEmailException {
+		System.out.println("getting user from database....");
 		String sql = "SELECT * FROM users WHERE email=?";
 
 		try {
@@ -104,17 +169,17 @@ public class DBConnector {
 	}
 
 	public static void deleteUser(String email) {
-		logger.debug("deleting user with email: " + email);
+		System.out.println("deleting users....");
 		 try {
 			Statement deleteSql = connection.createStatement();
 			deleteSql.execute("DELETE FROM public.users "
 							+ "WHERE email='" + email + "';");
 		} catch (SQLException e) {
-			logger.debug("problems by deleting users", e);
+			logger.debug("problems by deleting users");
 		}
 	}
 
-	public static Map<String, String> getUserInfo(String email, String passwd) {
+	public static Map<String, String> getUserInfo(String email, String passwd) throws WrongEmailException {
 		Map<String, String> userInfo = new HashMap<>();
 		try {
 			Statement selectSql = connection.createStatement();
@@ -126,7 +191,7 @@ public class DBConnector {
 				throw new WrongEmailException();
 			}
 		} catch (SQLException e) {
-			logger.debug("problems by getting user info", e);
+			logger.debug("problems by getting user info");
 		}
 		return userInfo;
 	}
@@ -148,7 +213,7 @@ public class DBConnector {
 		return userInfo;
 	}
 
-	public static void connect() {
+	public static void connect() throws ConnectionException {
 		try {
 			connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 		} catch (SQLException e) {

@@ -1,5 +1,5 @@
 package db;
 
 @SuppressWarnings("serial")
-public class ConnectionException extends RuntimeException{
+public class ConnectionException extends Exception{
 }

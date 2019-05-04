@@ -16,9 +16,9 @@ public class UserCRUD implements CabinetCRUD<User> {
 
 	@Override
 	public void create(User user) throws ExistingUserException, ConnectionException {
-		DBConnector.connect();
-		DBConnector.addUser(user);
-		DBConnector.disconnect();
+			DBConnector.connect();
+			DBConnector.addUser(user);
+			DBConnector.disconnect();
 	}
 
 	@Override

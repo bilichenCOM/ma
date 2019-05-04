@@ -9,7 +9,6 @@ public class User {
 	private String email;
 	private String password;
 	private int roleId;
-	private int balance;
 
 	public User(Long id, String name, String surname, String gender, int age, String email, String password,
 			int roleId) {
@@ -86,18 +85,6 @@ public class User {
 
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
-	}
-
-	public int getBalance() {
-		return balance;
-	}
-
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
-	
-	public void purchase(Good good) {
-		System.out.println("purchased!");
 	}
 
 	@Override

@@ -7,15 +7,6 @@ import model.Book;
 
 public class BookCRUD implements CabinetCRUD<Book>{
 
-	private static final BookCRUD instance = new BookCRUD();
-
-	private BookCRUD() {
-	}
-
-	public static BookCRUD getInstance() {
-		return instance;
-	}
-
 	@Override
 	public void create(Book book) throws ConnectionException {
 		DBConnector.connect();

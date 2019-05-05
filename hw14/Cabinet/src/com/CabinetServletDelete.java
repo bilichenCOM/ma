@@ -18,7 +18,7 @@ import db.UserCRUD;
 public class CabinetServletDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CabinetServletDelete.class);
-	private static final UserCRUD crud = UserCRUD.getInstance();
+	private static final UserCRUD crud = new UserCRUD();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");

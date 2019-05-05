@@ -2,5 +2,7 @@ package model;
 
 public interface Good {
 
-	int getPrice();
+	Long getId();
+
+	double getPrice();
 }

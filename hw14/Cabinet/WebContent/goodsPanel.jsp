@@ -11,7 +11,9 @@
 <title>Shop</title>
 </head>
 <body>
-	<div align="left">Hello ${shopSession.user.name}</div>
+	<div align="left">Hello ${shopSession.user.name}
+	<a href="logout"><input type="button" value="Logout"></a></div><br>
+	<div align="right">Your balance: <div style="color:green">${shopSession.user.balance}</div></div>
 	<h2>Your shop page</h2>
 	<p style="color:red">${errMessage}</p>
 	<p style="color:green">${successMessage}</p>

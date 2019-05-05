@@ -1,6 +1,7 @@
 package com;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import model.User;
 public class CabinetServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CabinetServletLogin.class);
-	private static final UserCRUD crud = UserCRUD.getInstance();
+	private static final UserCRUD userCrud = new UserCRUD();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -39,7 +40,7 @@ public class CabinetServletLogin extends HttpServlet {
 		}
 
 		try {
-			User user = crud.read(email).get();
+			User user = userCrud.read(email).get();
 
 			if (!user.getPassword().equals(password)) {
 				logger.debug("wrong credentials for " + email);
@@ -54,6 +55,8 @@ public class CabinetServletLogin extends HttpServlet {
 			if (user.getRoleId() == Role.USER.getId()) {
 				request.getRequestDispatcher("userPanel.jsp").forward(request, response);	
 			} else if (user.getRoleId() == Role.ADMIN.getId()) {
+				List<User> userList = userCrud.readAll();
+				request.getSession().setAttribute("userList", userList);
 				request.getRequestDispatcher("adminPanel.jsp").forward(request, response);
 			}
 			logger.debug("logged as " + user.getRoleId());

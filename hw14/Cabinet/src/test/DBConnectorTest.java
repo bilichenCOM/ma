@@ -27,7 +27,7 @@ class DBConnectorTest {
 	
 	@Test
 	void testAddUser() throws ExistingUserException {
-		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1);
+		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1, 0.0);
 		Assertions.assertThrows(ExistingUserException.class, () -> DBConnector.addUser(test));	
 	}
 
@@ -40,7 +40,7 @@ class DBConnectorTest {
 
 	@Test
 	void testUpdateUserInfo() throws WrongEmailException {
-		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1);
+		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1, 0.0);
 		test.setAge(29);
 		test.setName("Johny");
 		DBConnector.updateUser(test);
@@ -50,7 +50,7 @@ class DBConnectorTest {
 	void testDeleteUser() throws ExistingUserException, WrongEmailException {
 		String testEmail = "temporaryCat@mail.com";
 		String testPasswd = "icePass";
-		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1);
+		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1, 0.0);
 		DBConnector.addUser(test);
 		Assertions.assertEquals("Catty", DBConnector.getUserInfo(testEmail, testPasswd).get("user_name"));
 		DBConnector.deleteUser(test.getEmail());

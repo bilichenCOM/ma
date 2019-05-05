@@ -15,6 +15,7 @@ import java.util.Optional;
 import org.apache.log4j.Logger;
 
 import model.Book;
+import model.Purchase;
 import model.User;
 
 public class DBConnector {
@@ -36,6 +37,41 @@ public class DBConnector {
 	}
 
 	private DBConnector() {
+	}
+
+	public static int addPurchase(Purchase purchase) {
+		String sql = "INSERT INTO purchases(book_id, user_id, value) "
+				+ "VALUES (?, ?, ?)";
+		try {
+			PreparedStatement addingQuery = connection.prepareStatement(sql);
+			addingQuery.setLong(1, purchase.getBookId());
+			addingQuery.setLong(2, purchase.getUserId());
+			addingQuery.setDouble(3, purchase.getValue());
+			return addingQuery.executeUpdate();
+		} catch (SQLException e) {
+			logger.debug("problems by adding purchase to db", e);
+		}
+		return 0;
+	}
+
+	public static Optional<Purchase> getPurchase(Long id) {
+		String sql = "SELECT * FROM purchases WHERE id = '" + id + "'";
+		try {
+			Statement selectQuery = connection.createStatement();
+			ResultSet selectQueryResultSet = selectQuery.executeQuery(sql);
+			if (selectQueryResultSet.next()) {
+				Long bookId = selectQueryResultSet.getLong("book_id");
+				Long userId = selectQueryResultSet.getLong("user_id");
+				Double value = selectQueryResultSet.getDouble("value");
+				Purchase purchase = new Purchase(bookId, userId, value);
+				return Optional.of(purchase);
+			} else {
+				return Optional.empty();
+			}
+		} catch (SQLException e) {
+			logger.debug("purchase not found in db", e);
+		}
+		return Optional.empty();
 	}
 
 	public static void addBook(Book book) {
@@ -101,8 +137,8 @@ public class DBConnector {
 		return books;
 	}
 	public static void addUser(User user) {
-		String sql = "INSERT INTO users(name, surname, age, gender, email, password, role_id) "
-				+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO users(name, surname, age, gender, email, password, role_id, balance) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement addingQuery = connection.prepareStatement(sql);
 			addingQuery.setString(1, user.getName());
@@ -112,6 +148,7 @@ public class DBConnector {
 			addingQuery.setString(5, user.getEmail());
 			addingQuery.setString(6, user.getPassword());
 			addingQuery.setInt(7, user.getRoleId());
+			addingQuery.setDouble(8, user.getBalance());
 			addingQuery.execute();
 		} catch (SQLException e) {
 			logger.debug("sql exception", e);
@@ -135,7 +172,8 @@ public class DBConnector {
 				String gender = getUserResultSet.getString("gender");
 				String password = getUserResultSet.getString("password");
 				int roleId = getUserResultSet.getInt("role_id");
-				return Optional.of(new User(id, name, surname, gender, age, email, password, roleId));
+				int balance = getUserResultSet.getInt("balance");
+				return Optional.of(new User(id, name, surname, gender, age, email, password, roleId, balance));
 			} else {
 				throw new WrongEmailException();
 			}
@@ -146,9 +184,34 @@ public class DBConnector {
 		return Optional.empty();
 	}
 
+	public static List<User> getUserList() {
+		List<User> userList = new ArrayList<>();
+		String sql = "SELECT * FROM users";
+		try {
+			Statement selectQuery = connection.createStatement();
+			ResultSet selectQueryResultSet = selectQuery.executeQuery(sql);
+			while (selectQueryResultSet.next()) {
+				Long id = selectQueryResultSet.getLong("id");
+				String name = selectQueryResultSet.getString("name");
+				String surname = selectQueryResultSet.getString("surname");
+				int age = selectQueryResultSet.getInt("age");
+				String gender = selectQueryResultSet.getString("gender");
+				String email = selectQueryResultSet.getString("email");
+				String password = selectQueryResultSet.getString("password");
+				int roleId = selectQueryResultSet.getInt("role_id");
+				int balance = selectQueryResultSet.getInt("balance");
+				
+				User user = new User(id, name, surname, gender, age, email, password, roleId, balance);
+				userList.add(user);
+			}
+		} catch (SQLException e) {
+			logger.debug("problems by fetching user list from db", e);
+		}
+		return userList;
+	}
 	public static void updateUser(User user) {
 		String sql = "UPDATE users "
-				+ "SET name = ?, surname = ?, age = ?, gender = ?, password = ?, role_id = ? "
+				+ "SET name = ?, surname = ?, age = ?, gender = ?, password = ?, role_id = ?, balance = ? "
 				+ "WHERE email ='" + user.getEmail() + "'";
 
 		try {
@@ -160,6 +223,7 @@ public class DBConnector {
 			updateQuery.setString(4, user.getGender());
 			updateQuery.setString(5, user.getPassword());
 			updateQuery.setInt(6, user.getRoleId());
+			updateQuery.setDouble(7, user.getBalance());
 			updateQuery.execute();
 		} catch (SQLException e) {
 			logger.debug("problems by updating user", e);
@@ -177,7 +241,7 @@ public class DBConnector {
 		}
 	}
 
-	public static Map<String, String> getUserInfo(String email, String passwd) throws WrongEmailException {
+	public static Map<String, String> getUserInfo(String email, String passwd) {
 		Map<String, String> userInfo = new HashMap<>();
 		try {
 			Statement selectSql = connection.createStatement();
@@ -211,7 +275,7 @@ public class DBConnector {
 		return userInfo;
 	}
 
-	public static void connect() throws ConnectionException {
+	public static void connect() {
 		try {
 			connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 		} catch (SQLException e) {

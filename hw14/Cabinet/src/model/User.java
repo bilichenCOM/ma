@@ -1,6 +1,10 @@
 package model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
 	private String name;
 	private String surname;
@@ -9,10 +13,10 @@ public class User {
 	private String email;
 	private String password;
 	private int roleId;
-	private int balance;
+	private double balance;
 
-	public User(Long id, String name, String surname, String gender, int age, String email, String password,
-			int roleId) {
+	public User(Long id, String name, String surname, String gender, int age, String email, String password, int roleId,
+			double balance) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -21,10 +25,11 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.roleId = roleId;
+		this.balance = balance;
 	}
 
-	public User(String name, String surname, String gender, int age, String email, String password, int roleId) {
-		this(null, name, surname, gender, age, email, password, roleId);
+	public User(String name, String surname, String gender, int age, String email, String password, int roleId, double balance) {
+		this(null, name, surname, gender, age, email, password, roleId, balance);
 	}
 
 
@@ -88,7 +93,7 @@ public class User {
 		this.roleId = roleId;
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
@@ -97,7 +102,8 @@ public class User {
 	}
 	
 	public void purchase(Good good) {
-		System.out.println("purchased!");
+		balance = balance - good.getPrice();
+		System.out.println("purchased for money!");
 	}
 
 	@Override

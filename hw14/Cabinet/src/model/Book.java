@@ -1,19 +1,19 @@
 package model;
 
-public class Book implements Good{
+public class Book implements Good {
 	private Long id;
 	private String title;
 	private String author;
 	private int year;
 	private int pages;
 	private String imageUrl;
-	private int price;
+	private double price;
 
-	public Book(String title, String author, int year, int pages, String imageUrl, int price) {
+	public Book(String title, String author, int year, int pages, String imageUrl, double price) {
 		this(null, title, author, year, pages, imageUrl, price);
 	}
 
-	public Book(Long id, String title, String author, int year, int pages, String imageUrl, int price) {
+	public Book(Long id, String title, String author, int year, int pages, String imageUrl, double price) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
@@ -71,11 +71,11 @@ public class Book implements Good{
 		this.imageUrl = imageUrl;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -124,7 +124,7 @@ public class Book implements Good{
 
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", year=" + year + ", pages=" + pages + ", imageUrl="
-				+ imageUrl + "]";
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", pages=" + pages
+				+ ", imageUrl=" + imageUrl + ", price=" + price + "]";
 	}
 }

@@ -8,10 +8,6 @@
 <c:if test="${logged != 'true'}">
 	<c:redirect url="login.jsp" />
 </c:if>
-<c:if test="${param.action == 'logout'}">
-	<c:set var="logged" value="false" scope="session" />
-	<c:redirect url="login.jsp" />
-</c:if>
 <meta charset="ISO-8859-1">
 <title>User Panel</title>
 </head>
@@ -27,7 +23,7 @@
 		<a href="shop"><input type="button" value="go to shop!"></a>
 	</div>
 	<div align="right">
-		<a href="userPanel.jsp?action=logout"><input type="button"
+		<a href="logout"><input type="button"
 			value="LogOut"></a>
 	</div>
 </body>

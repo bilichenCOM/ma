@@ -19,7 +19,7 @@ import model.User;
 public class CabinetServletUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CabinetServletUpdate.class);
-	private static final UserCRUD crud = UserCRUD.getInstance();
+	private static final UserCRUD crud = new UserCRUD();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
@@ -48,12 +48,14 @@ public class CabinetServletUpdate extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String roleId = request.getParameter("roleId");
+		String balance = request.getParameter("balance");
 		
-		User user = new User(name, surname, gender, Integer.parseInt(age), email, password, Integer.parseInt(roleId));
+		User user = new User(name, surname, gender, Integer.parseInt(age), email, password,
+				Integer.parseInt(roleId), Double.parseDouble(balance));
 
 		try {
 			crud.update(user);
-
+			request.setAttribute("user", user);
 			request.setAttribute("successMessage", "user successfully updated");
 			request.getRequestDispatcher("update_panel.jsp").forward(request, response);
 		} catch (ConnectionException e) {

@@ -8,10 +8,6 @@
 <c:if test="${logged != 'true' or user.roleId ne 1}">
 	<c:redirect url="login.jsp" />
 </c:if>
-<c:if test="${param.action == 'logout'}">
-	<c:set var="logged" value="false" scope="session" />
-	<c:redirect url="login.jsp" />
-</c:if>
 <meta charset="ISO-8859-1">
 <title>Admin Panel</title>
 </head>
@@ -26,14 +22,6 @@
 	<div align="center" style="color:red">${errMessage}</div>
 	<div align="center" style="color:green">${successMessage}</div>
 
-	<sql:setDataSource var="cabinet_db" driver="org.postgresql.Driver"
-		url="jdbc:postgresql://localhost:5432/cabinet_db" user="postgres"
-		password="admin" />
-
-	<sql:query var="usersResultSet" dataSource="${cabinet_db}">
-SELECT users.*, roles.name AS role_name FROM users LEFT JOIN roles ON role_id = roles.id;
-</sql:query>
-
 	<table border="1">
 		<tr>
 			<th>ID</th>
@@ -47,24 +35,24 @@ SELECT users.*, roles.name AS role_name FROM users LEFT JOIN roles ON role_id = 
 			<th>Action</th>
 		</tr>
 
-		<c:forEach var="row" items="${usersResultSet.rows}">
+		<c:forEach var="usr" items="${sessionScope.userList}">
 			<tr>
-				<td>${row.id}</td>
-				<td>${row.name}</td>
-				<td>${row.surname}</td>
-				<td>${row.age}</td>
-				<td>${row.gender}</td>
-				<td>${row.email}</td>
-				<td>${row.password}</td>
-				<td>${row.role_name}</td>
-				<td><a href="update?email=${row.email}"><input
+				<td>${usr.id}</td>
+				<td>${usr.name}</td>
+				<td>${usr.surname}</td>
+				<td>${usr.age}</td>
+				<td>${usr.gender}</td>
+				<td>${usr.email}</td>
+				<td>${usr.password}</td>
+				<td>${usr.roleId}</td>
+				<td><a href="update?email=${usr.email}"><input
 						type="button" value="update"></a> <a
-					href="delete?email=${row.email}"><input type="button"
+					href="delete?email=${usr.email}"><input type="button"
 						value="delete"></a></td>
 		</c:forEach>
 
 	</table>
-	<a href="adminPanel.jsp?action=logout"><input type="button"
+	<a href="logout"><input type="button"
 		value="LogOut"></a>
 </body>
 </html>

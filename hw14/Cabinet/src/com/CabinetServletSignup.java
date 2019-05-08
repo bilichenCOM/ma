@@ -21,7 +21,7 @@ import utils.ParametersValidator;
 public class CabinetServletSignup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CabinetServletSignup.class);
-	private static final UserCRUD crud = UserCRUD.getInstance();
+	private static final UserCRUD crud = new UserCRUD();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -41,7 +41,7 @@ public class CabinetServletSignup extends HttpServlet {
 			return;
 		}
 		
-		User user = new User(name, surname, gender, Integer.parseInt(age), email, password, Role.USER.getId());
+		User user = new User(name, surname, gender, Integer.parseInt(age), email, password, Role.USER.getId(), 0.00);
 
 		try {
 			crud.create(user);

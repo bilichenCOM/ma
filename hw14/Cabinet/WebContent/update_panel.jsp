@@ -61,11 +61,17 @@
 					</td>
 				</tr>
 				<tr>
+					<td>Balance:</td>
+					<td><input type="text" name="balance" value="${user.balance}">
+					</td>
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="submit" value="Update"></td>
 				</tr>
 			</table>
 		</div>
 	</form>
+	<div align="left"><a href="adminPanel.jsp">Back</a></div>
 </body>
 </html>

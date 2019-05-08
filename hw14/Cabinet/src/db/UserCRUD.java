@@ -1,24 +1,17 @@
 package db;
 
+import java.util.List;
 import java.util.Optional;
 
 import model.User;
 
 public class UserCRUD implements CabinetCRUD<User> {
-	private static final UserCRUD instance = new UserCRUD();
-
-	private UserCRUD() {
-	}
-
-	public static UserCRUD getInstance() {
-		return instance;
-	}
 
 	@Override
 	public void create(User user) throws ExistingUserException, ConnectionException {
-			DBConnector.connect();
-			DBConnector.addUser(user);
-			DBConnector.disconnect();
+		DBConnector.connect();
+		DBConnector.addUser(user);
+		DBConnector.disconnect();
 	}
 
 	@Override
@@ -41,5 +34,12 @@ public class UserCRUD implements CabinetCRUD<User> {
 		DBConnector.connect();
 		DBConnector.deleteUser(email);
 		DBConnector.disconnect();
+	}
+
+	public List<User> readAll() {
+		DBConnector.connect();
+		List<User> userList = DBConnector.getUserList();
+		DBConnector.disconnect();
+		return userList;
 	}
 }

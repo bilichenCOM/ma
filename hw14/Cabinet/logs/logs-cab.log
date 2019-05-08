@@ -1,1 +1,582 @@
-﻿
+﻿2019-05-07 01:34:57 DEBUG CabinetServletLogin:35 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-07 01:35:00 DEBUG DBConnector:185 - sql exception
+org.postgresql.util.PSQLException: Имя колонки salt не найдено в этом ResultSet'е.
+	at org.postgresql.jdbc2.AbstractJdbc2ResultSet.findColumn(AbstractJdbc2ResultSet.java:2542)
+	at org.postgresql.jdbc2.AbstractJdbc2ResultSet.getString(AbstractJdbc2ResultSet.java:2385)
+	at db.DBConnector.getUser(DBConnector.java:177)
+	at db.UserCRUD.read(UserCRUD.java:22)
+	at com.CabinetServletLogin.doPost(CabinetServletLogin.java:44)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-05-07 01:40:33 DEBUG CabinetServletLogin:35 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-07 01:44:10 DEBUG CabinetServletLogin:35 - login attempt with credentials: cat@mail.com  from 0:0:0:0:0:0:0:1
+2019-05-07 01:44:15 DEBUG CabinetServletLogin:35 - login attempt with credentials: dsf jksf from 0:0:0:0:0:0:0:1
+2019-05-07 01:44:15 DEBUG CabinetServletLogin:72 - wrong credentials for dsf
+db.WrongEmailException
+	at db.DBConnector.getUser(DBConnector.java:181)
+	at db.UserCRUD.read(UserCRUD.java:22)
+	at com.CabinetServletLogin.doPost(CabinetServletLogin.java:44)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-05-07 01:44:19 DEBUG CabinetServletLogin:35 - login attempt with credentials: sklfj slkjf from 0:0:0:0:0:0:0:1
+2019-05-07 01:44:19 DEBUG CabinetServletLogin:72 - wrong credentials for sklfj
+db.WrongEmailException
+	at db.DBConnector.getUser(DBConnector.java:181)
+	at db.UserCRUD.read(UserCRUD.java:22)
+	at com.CabinetServletLogin.doPost(CabinetServletLogin.java:44)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-05-07 01:47:45 DEBUG CabinetServletLogin:35 - login attempt with credentials: cat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-07 01:47:46 DEBUG CabinetServletLogin:50 - wrong credentials for cat@mail.com
+2019-05-07 01:50:11 DEBUG CabinetServletLogin:35 - login attempt with credentials: realCat@mail.com kdlsjf from 0:0:0:0:0:0:0:1
+2019-05-07 01:54:56 DEBUG CabinetServletLogin:35 - login attempt with credentials: reallyCat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-07 01:54:57 DEBUG CabinetServletLogin:66 - logged as 2
+2019-05-07 01:55:08 DEBUG VerificationCode:13 - new verification code has been generated: 7095
+2019-05-07 01:55:10 DEBUG MailService:48 - problems by sending email...
+javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials y25sm2689092ljh.31 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:826)
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:761)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:685)
+	at javax.mail.Service.connect(Service.java:317)
+	at javax.mail.Service.connect(Service.java:176)
+	at javax.mail.Service.connect(Service.java:125)
+	at javax.mail.Transport.send0(Transport.java:194)
+	at javax.mail.Transport.send(Transport.java:124)
+	at service.MailService.sendMessage(MailService.java:43)
+	at service.PurchaseVerification.doGet(PurchaseVerification.java:25)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:712)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:459)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:384)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:312)
+	at service.BuyServlet.doGet(BuyServlet.java:33)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.LoginFilter.doFilter(LoginFilter.java:24)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-05-07 01:55:30 DEBUG VerificationCode:13 - new verification code has been generated: 9113
+2019-05-07 01:55:31 DEBUG MailService:48 - problems by sending email...
+javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials k20sm2796273lfm.30 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:826)
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:761)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:685)
+	at javax.mail.Service.connect(Service.java:317)
+	at javax.mail.Service.connect(Service.java:176)
+	at javax.mail.Service.connect(Service.java:125)
+	at javax.mail.Transport.send0(Transport.java:194)
+	at javax.mail.Transport.send(Transport.java:124)
+	at service.MailService.sendMessage(MailService.java:43)
+	at service.PurchaseVerification.doGet(PurchaseVerification.java:25)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:712)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:459)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:384)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:312)
+	at service.BuyServlet.doGet(BuyServlet.java:33)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.LoginFilter.doFilter(LoginFilter.java:24)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:678)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:836)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1747)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-05-07 15:05:27 DEBUG PasswordReader:31 - problems by reading file
+java.nio.file.NoSuchFileException: src\main\resources\10k-most-commons.txt
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.nio.file.Files.newInputStream(Files.java:152)
+	at utils.PasswordReader.<init>(PasswordReader.java:27)
+	at utils.PasswordReader.<init>(PasswordReader.java:21)
+	at screwbreaker.Breaker.main(Breaker.java:27)
+2019-05-07 15:06:03 DEBUG PasswordReader:31 - problems by reading file
+java.nio.file.NoSuchFileException: src\main\resources\10k-most-commons.txt
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.nio.file.Files.newInputStream(Files.java:152)
+	at utils.PasswordReader.<init>(PasswordReader.java:27)
+	at utils.PasswordReader.<init>(PasswordReader.java:21)
+	at screwbreaker.Breaker.main(Breaker.java:27)
+2019-05-07 15:07:31 DEBUG PasswordReader:31 - problems by reading file
+java.nio.file.NoSuchFileException: ..\..\resources\10k-most-commons.txt
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.nio.file.Files.newInputStream(Files.java:152)
+	at utils.PasswordReader.<init>(PasswordReader.java:27)
+	at utils.PasswordReader.<init>(PasswordReader.java:21)
+	at screwbreaker.Breaker.main(Breaker.java:27)
+2019-05-07 22:52:28 DEBUG RequestAddCookies:123 - CookieSpec selected: default
+2019-05-07 22:52:28 DEBUG RequestAuthCache:77 - Auth cache not set in the context
+2019-05-07 22:52:28 DEBUG PoolingHttpClientConnectionManager:265 - Connection request: [route: {s}->https://www.aspwebportal.com:443][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+2019-05-07 22:52:28 DEBUG PoolingHttpClientConnectionManager:309 - Connection leased: [id: 0][route: {s}->https://www.aspwebportal.com:443][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+2019-05-07 22:52:28 DEBUG MainClientExec:235 - Opening connection {s}->https://www.aspwebportal.com:443
+2019-05-07 22:52:28 DEBUG DefaultHttpClientConnectionOperator:139 - Connecting to www.aspwebportal.com/67.208.158.62:443
+2019-05-07 22:52:28 DEBUG SSLConnectionSocketFactory:337 - Connecting socket to www.aspwebportal.com/67.208.158.62:443 with timeout 0
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:390 - Enabled protocols: [TLSv1, TLSv1.1, TLSv1.2]
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:391 - Enabled cipher suites:[TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_DSS_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_DSS_WITH_AES_128_GCM_SHA256]
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:395 - Starting handshake
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:425 - Secure session established
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:426 -  negotiated protocol: TLSv1.2
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:427 -  negotiated cipher suite: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:435 -  peer principal: CN=*.aspwebportal.com, OU=Domain Control Validated
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:444 -  peer alternative names: [*.aspwebportal.com, aspwebportal.com]
+2019-05-07 22:52:29 DEBUG SSLConnectionSocketFactory:448 -  issuer principal: CN=Go Daddy Secure Certificate Authority - G2, OU=http://certs.godaddy.com/repository/, O="GoDaddy.com, Inc.", L=Scottsdale, ST=Arizona, C=US
+2019-05-07 22:52:29 DEBUG DefaultHttpClientConnectionOperator:146 - Connection established 192.168.200.50:62969<->67.208.158.62:443
+2019-05-07 22:52:29 DEBUG MainClientExec:256 - Executing request POST /Login.aspx HTTP/1.1
+2019-05-07 22:52:29 DEBUG MainClientExec:267 - Proxy auth state: UNCHALLENGED
+2019-05-07 22:52:29 DEBUG headers:133 - http-outgoing-0 >> POST /Login.aspx HTTP/1.1
+2019-05-07 22:52:29 DEBUG headers:136 - http-outgoing-0 >> Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2019-05-07 22:52:29 DEBUG headers:136 - http-outgoing-0 >> Content-Length: 0
+2019-05-07 22:52:29 DEBUG headers:136 - http-outgoing-0 >> Host: www.aspwebportal.com
+2019-05-07 22:52:29 DEBUG headers:136 - http-outgoing-0 >> Connection: Keep-Alive
+2019-05-07 22:52:29 DEBUG headers:136 - http-outgoing-0 >> User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_201)
+2019-05-07 22:52:29 DEBUG headers:136 - http-outgoing-0 >> Accept-Encoding: gzip,deflate
+2019-05-07 22:52:29 DEBUG wire:73 - http-outgoing-0 >> "POST /Login.aspx HTTP/1.1[\r][\n]"
+2019-05-07 22:52:29 DEBUG wire:73 - http-outgoing-0 >> "Authorization: Basic YWRtaW46cGFzc3dvcmQ=[\r][\n]"
+2019-05-07 22:52:29 DEBUG wire:73 - http-outgoing-0 >> "Content-Length: 0[\r][\n]"
+2019-05-07 22:52:29 DEBUG wire:73 - http-outgoing-0 >> "Host: www.aspwebportal.com[\r][\n]"
+2019-05-07 22:52:29 DEBUG wire:73 - http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+2019-05-07 22:52:29 DEBUG wire:73 - http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_201)[\r][\n]"
+2019-05-07 22:52:29 DEBUG wire:73 - http-outgoing-0 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+2019-05-07 22:52:29 DEBUG wire:73 - http-outgoing-0 >> "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "Cache-Control: private[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "Content-Type: text/html; charset=utf-8[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "Server: Microsoft-IIS/7.5[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "Set-Cookie: ASP.NET_SessionId=yjjoywgsucii4sihx1efaiur; path=/; HttpOnly[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "X-AspNet-Version: 4.0.30319[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "X-Powered-By: ASP.NET[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "X-XSS-Protection: 1;mode=block[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "X-Content-Type-Options: nosniff[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "Content-Security-Policy: frame-ancestors 'self' *.aspwebportal.com;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "Date: Tue, 07 May 2019 19:52:30 GMT[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "Content-Length: 44242[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<html xmlns="http://www.w3.org/1999/xhtml">[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<head id="Head1"><title>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[0x9]ASP - Login (PROD)[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "</title><link href="resources/menu.css" rel="stylesheet" type="text/css" /> <script src="/resources/jquery-1.4.2.min.js" type="text/javascript"></script><link href="App_Themes/FSSASP/FSSStyle.css" type="text/css" rel="stylesheet" /></head>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<body style:"width: 100%;height: 100%;">[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << " [\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "    <form name="form1" method="post" action="./Login.aspx" id="form1">[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<script src="resources/ASPCommonScripts.js" type="text/javascript"></script>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<script type="text/javascript">[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "//<![CDATA[[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                    function openWindow()[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                    {[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                        var win = window.open('', '_blank', 'width=0,height=0,left=0,top=0,location=0,menubar=0,resizable=0,scrollbars=0,status=0,titlebar=0');[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                        win.focus();[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                    }[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                    function FireSitePick_ucSiteAC_txtSite(source, eventArgs) {var val = eventArgs.get_value();if (val.length > 0) {$get('ucSiteAC_btnPost').click();}}function PopulateACFull_ucSiteAC_ace_txtSite(){var autoComplete = $find('ucSiteAC_ace_txtSite');autoComplete._cache = {};autoComplete._currentPrefix = null;autoComplete._textBoxHasFocus = true;var oldMinimumPrefixLength = autoComplete.get_minimumPrefixLength();autoComplete.set_minimumPrefixLength(0);autoComplete._onTimerTick(null, null);autoComplete.set_minimumPrefixLength(oldMinimumPrefixLength);}//]]>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "</script>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<script src="/WebResource.axd?d=8Japmj_4sf565K6NGtQ7xu_odMe0d-zUqZHQSBWfzhFETIBwt4BLspto0j47A7rl4BtAAu4b3Og3aednAGWl5FbSGAs1&amp;t=636765211280000000" type="text/javascript"></script>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<script src="/ScriptResource.axd?d=zfCklZkhQMGyrjd_plW6KFcXZj6BnH6D4rtfizJf3BNcbVZPSrS1GxNIaJPnTJCXhc83_PyV9XlpiUDhiqSywtDrywXUgOtQl887PA7_ubX3FQC2IIG1z30Pu_NZZD5NQ2SrqG1L5BpstRutHYumE_5AnmUH9w1b3IFSxt3cV3GTL7TH0&amp;t=ffffffff999c3159" type="text/javascript"></script>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<script src="ASPServices/AJAXService.asmx/js" type="text/javascript"></script>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="C2EE9ABB" />[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "    [\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "    <style>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        #wrapper {[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            position: fixed;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            top: 50%;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            left: 50%;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            display: block;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            background-color: Yellow;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        }[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        #updateProgressBox {[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            border-width: 2px;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            border-style: outset;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            background-color: Yellow;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            width: 300px;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            position: relative;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            margin-top: -170px;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            margin-left: -230px;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            border: 5px solid #222;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            display: block;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "    padding:10px;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        }[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        .updateProgressMessage {[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            margin: 3px;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            font-family: Trebuchet MS;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            font-size: medium;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            vertical-align: middle;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        }[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "    </style>[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "    <script language="JavaScript" type="text/javascript">[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        function adjustDivs() {[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            var loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            var loadSeconds = loadTime / 1000;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            //alert('Page load time is ' + loadSeconds);[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            window.document.getElementById('MP__lblPageLoadTimeNonPostback').innerHTML = loadSeconds;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            var df = document.getElementById('UpdateProgress1');[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            dfs = df.style;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            dfs.position = 'absolute';[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            if (window.innerWidth) {[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                dfs.left = (window.innerWidth / 2 + document.body.scrollLeft);[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                dfs.top = (window.innerHeight / 2 + document.body.scrollTop);[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            }[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            else {[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                //dfs.left = (document.documentElement.offsetWidth / 2 + document.body.scrollLeft);[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                //dfs.top = (document.documentElement.offsetHeight / 2 + document.body.scrollTop);[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                //dfs.left = (document.documentElement.offsetWidth / 3);[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                dfs.left = (tableMain.width / 2) - 150;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                dfs.top = dfs.left;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            }[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            df.style.zIndex = "200001";[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            //alert('left=' + dfs.left + ' top=' + dfs.top + ' table width= ' + tableMain.width);[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        }[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        window.onload = adjustDivs;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        //window.onresize=adjustDivs;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        //window.onscroll=adjustDivs;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "        function createBug() {[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            var htmlString = document.getElementsByTagName('html')[0].innerHTML;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            //var htmlString = new String();[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            //htmlString = document.getElementById('divContent').innerHTML;[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "            if (document.getElementById('chkBugScreenShot').checked == false)[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "                htmlString = '';[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 22:52:30 DEBUG wire:87 - http-outgoing-0 << "          "
+2019-05-07 22:52:30 DEBUG headers:122 - http-outgoing-0 << HTTP/1.1 200 OK
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << Cache-Control: private
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << Content-Type: text/html; charset=utf-8
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << Server: Microsoft-IIS/7.5
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << Set-Cookie: ASP.NET_SessionId=yjjoywgsucii4sihx1efaiur; path=/; HttpOnly
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << X-AspNet-Version: 4.0.30319
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << X-Powered-By: ASP.NET
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << X-XSS-Protection: 1;mode=block
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << X-Content-Type-Options: nosniff
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << Content-Security-Policy: frame-ancestors 'self' *.aspwebportal.com;
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << Strict-Transport-Security: max-age=31536000
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << Date: Tue, 07 May 2019 19:52:30 GMT
+2019-05-07 22:52:30 DEBUG headers:125 - http-outgoing-0 << Content-Length: 44242
+2019-05-07 22:52:30 DEBUG MainClientExec:285 - Connection can be kept alive indefinitely
+2019-05-07 22:52:30 DEBUG ResponseProcessCookies:119 - Cookie accepted [ASP.NET_SessionId="yjjoywgsucii4sihx1efaiur", version:0, domain:www.aspwebportal.com, path:/, expiry:null]
+2019-05-07 23:01:21 DEBUG RequestAddCookies:123 - CookieSpec selected: default
+2019-05-07 23:01:21 DEBUG RequestAuthCache:77 - Auth cache not set in the context
+2019-05-07 23:01:21 DEBUG PoolingHttpClientConnectionManager:265 - Connection request: [route: {s}->https://account.genndi.com:443][total kept alive: 0; route allocated: 0 of 2; total allocated: 0 of 20]
+2019-05-07 23:01:21 DEBUG PoolingHttpClientConnectionManager:309 - Connection leased: [id: 0][route: {s}->https://account.genndi.com:443][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+2019-05-07 23:01:21 DEBUG MainClientExec:235 - Opening connection {s}->https://account.genndi.com:443
+2019-05-07 23:01:21 DEBUG DefaultHttpClientConnectionOperator:139 - Connecting to account.genndi.com/104.27.93.45:443
+2019-05-07 23:01:21 DEBUG SSLConnectionSocketFactory:337 - Connecting socket to account.genndi.com/104.27.93.45:443 with timeout 0
+2019-05-07 23:01:21 DEBUG SSLConnectionSocketFactory:390 - Enabled protocols: [TLSv1, TLSv1.1, TLSv1.2]
+2019-05-07 23:01:21 DEBUG SSLConnectionSocketFactory:391 - Enabled cipher suites:[TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_DSS_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_DSS_WITH_AES_128_GCM_SHA256]
+2019-05-07 23:01:21 DEBUG SSLConnectionSocketFactory:395 - Starting handshake
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:425 - Secure session established
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:426 -  negotiated protocol: TLSv1.2
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:427 -  negotiated cipher suite: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:435 -  peer principal: CN=ssl389655.cloudflaressl.com, OU=PositiveSSL Multi-Domain, OU=Domain Control Validated
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:444 -  peer alternative names: [ssl389655.cloudflaressl.com, *.berkeleybuildings.net, *.brickellschool.com, *.cpasbien9.net, *.downinthevalley.com, *.genndi.com, *.glasambulance.nl, *.nodistribute.com, *.parkingkong.com, *.plango.nl, *.ratheg.com, *.riess-ambiente.net, *.seksuelegezondheidoostnederland.nl, *.summacum.works, *.torrent999.com, *.tudointeressante.com.br, *.webinarjam.net, berkeleybuildings.net, brickellschool.com, cpasbien9.net, downinthevalley.com, genndi.com, glasambulance.nl, nodistribute.com, parkingkong.com, plango.nl, ratheg.com, riess-ambiente.net, seksuelegezondheidoostnederland.nl, summacum.works, torrent999.com, tudointeressante.com.br, webinarjam.net]
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:448 -  issuer principal: CN=COMODO ECC Domain Validation Secure Server CA 2, O=COMODO CA Limited, L=Salford, ST=Greater Manchester, C=GB
+2019-05-07 23:01:22 DEBUG DefaultHttpClientConnectionOperator:146 - Connection established 192.168.200.50:63678<->104.27.93.45:443
+2019-05-07 23:01:22 DEBUG MainClientExec:256 - Executing request POST /login HTTP/1.1
+2019-05-07 23:01:22 DEBUG MainClientExec:267 - Proxy auth state: UNCHALLENGED
+2019-05-07 23:01:22 DEBUG headers:133 - http-outgoing-0 >> POST /login HTTP/1.1
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-0 >> Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-0 >> Content-Length: 0
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-0 >> Host: account.genndi.com
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-0 >> Connection: Keep-Alive
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-0 >> User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_201)
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-0 >> Accept-Encoding: gzip,deflate
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 >> "POST /login HTTP/1.1[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 >> "Authorization: Basic YWRtaW46cGFzc3dvcmQ=[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 >> "Content-Length: 0[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 >> "Host: account.genndi.com[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_201)[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 >> "[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "HTTP/1.1 500 Internal Server Error[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Date: Tue, 07 May 2019 20:01:23 GMT[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Content-Type: text/html; charset=UTF-8[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Transfer-Encoding: chunked[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Connection: keep-alive[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Set-Cookie: __cfduid=dcce1845fe166ede3f4384745ffb8e7931557259282; expires=Wed, 06-May-20 20:01:22 GMT; path=/; domain=.genndi.com; HttpOnly[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Cache-Control: no-cache, private[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "pragma: no-cache[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "expires: -1[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Set-Cookie: gdapp=eyJpdiI6Ik5GMmR4c3IwdkIyM0JSc3pscFdsUXc9PSIsInZhbHVlIjoiU2toelVLUWljeFNsVnVBRHJ5VkVjWnR6YjhBVUcyellBbEQ1VmpmTUtmZkJLdGVIbHhwbGE2T09ZYWdoXC9kbTBnekRMN3VnbjJWYkhnYjA0Y2xQTWFBPT0iLCJtYWMiOiI0YzI5NjI2NmRmZGRhNzIyOTRlMzhjOGI5YzVkNDIwMjFjY2Y4NWQyNzI2YmFmNGYxOTAxZmRlNTU3ODIyOGNkIn0%3D; expires=Tue, 07-May-2019 22:01:23 GMT; Max-Age=7200; path=/; domain=.genndi.com; HttpOnly[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "Server: cloudflare[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "CF-RAY: 4d35c915dbed8b3e-KBP[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "e1a[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "<!DOCTYPE html>[\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "<html>[\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "    <head>[\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "        <meta charset="UTF-8" />[\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "        <meta name="robots" content="noindex,nofollow" />[\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "        <style>            body { background-color: #F9F9F9; color: #222; font: 14px/1.4 Helvetica, Arial, sans-serif; margin: 0; padding-bottom: 45px; }[\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "[\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "            a { cursor: pointer; text-decoration: none; }[\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-0 << "            a:hover { text-decoration: underline; }[\n]"
+2019-05-07 23:01:22 DEBUG wire:87 - http-outgoing-0 << "            abbr[title] { border-bottom: none; cursor: help; t"
+2019-05-07 23:01:22 DEBUG headers:122 - http-outgoing-0 << HTTP/1.1 500 Internal Server Error
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Date: Tue, 07 May 2019 20:01:23 GMT
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Content-Type: text/html; charset=UTF-8
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Transfer-Encoding: chunked
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Connection: keep-alive
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Set-Cookie: __cfduid=dcce1845fe166ede3f4384745ffb8e7931557259282; expires=Wed, 06-May-20 20:01:22 GMT; path=/; domain=.genndi.com; HttpOnly
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Cache-Control: no-cache, private
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << pragma: no-cache
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << expires: -1
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Set-Cookie: gdapp=eyJpdiI6Ik5GMmR4c3IwdkIyM0JSc3pscFdsUXc9PSIsInZhbHVlIjoiU2toelVLUWljeFNsVnVBRHJ5VkVjWnR6YjhBVUcyellBbEQ1VmpmTUtmZkJLdGVIbHhwbGE2T09ZYWdoXC9kbTBnekRMN3VnbjJWYkhnYjA0Y2xQTWFBPT0iLCJtYWMiOiI0YzI5NjI2NmRmZGRhNzIyOTRlMzhjOGI5YzVkNDIwMjFjY2Y4NWQyNzI2YmFmNGYxOTAxZmRlNTU3ODIyOGNkIn0%3D; expires=Tue, 07-May-2019 22:01:23 GMT; Max-Age=7200; path=/; domain=.genndi.com; HttpOnly
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << Server: cloudflare
+2019-05-07 23:01:22 DEBUG headers:125 - http-outgoing-0 << CF-RAY: 4d35c915dbed8b3e-KBP
+2019-05-07 23:01:22 DEBUG MainClientExec:285 - Connection can be kept alive indefinitely
+2019-05-07 23:01:22 DEBUG ResponseProcessCookies:119 - Cookie accepted [__cfduid="dcce1845fe166ede3f4384745ffb8e7931557259282", version:0, domain:genndi.com, path:/, expiry:Wed May 06 23:01:22 EEST 2020]
+2019-05-07 23:01:22 DEBUG ResponseProcessCookies:119 - Cookie accepted [gdapp="eyJpdiI6Ik5GMmR4c3IwdkIyM0JSc3pscFdsUXc9PSIsInZhbHVlIjoiU2toelVLUWljeFNsVnVBRHJ5VkVjWnR6YjhBVUcyellB...", version:0, domain:genndi.com, path:/, expiry:Wed May 08 01:01:23 EEST 2019]
+2019-05-07 23:01:22 DEBUG RequestAddCookies:123 - CookieSpec selected: default
+2019-05-07 23:01:22 DEBUG RequestAddCookies:168 - Cookie [version: 0][name: __cfduid][value: dcce1845fe166ede3f4384745ffb8e7931557259282][domain: genndi.com][path: /][expiry: Wed May 06 23:01:22 EEST 2020] match [(secure)account.genndi.com:443/login]
+2019-05-07 23:01:22 DEBUG RequestAddCookies:168 - Cookie [version: 0][name: gdapp][value: eyJpdiI6Ik5GMmR4c3IwdkIyM0JSc3pscFdsUXc9PSIsInZhbHVlIjoiU2toelVLUWljeFNsVnVBRHJ5VkVjWnR6YjhBVUcyellBbEQ1VmpmTUtmZkJLdGVIbHhwbGE2T09ZYWdoXC9kbTBnekRMN3VnbjJWYkhnYjA0Y2xQTWFBPT0iLCJtYWMiOiI0YzI5NjI2NmRmZGRhNzIyOTRlMzhjOGI5YzVkNDIwMjFjY2Y4NWQyNzI2YmFmNGYxOTAxZmRlNTU3ODIyOGNkIn0%3D][domain: genndi.com][path: /][expiry: Wed May 08 01:01:23 EEST 2019] match [(secure)account.genndi.com:443/login]
+2019-05-07 23:01:22 DEBUG RequestAuthCache:77 - Auth cache not set in the context
+2019-05-07 23:01:22 DEBUG PoolingHttpClientConnectionManager:265 - Connection request: [route: {s}->https://account.genndi.com:443][total kept alive: 0; route allocated: 1 of 2; total allocated: 1 of 20]
+2019-05-07 23:01:22 DEBUG PoolingHttpClientConnectionManager:309 - Connection leased: [id: 1][route: {s}->https://account.genndi.com:443][total kept alive: 0; route allocated: 2 of 2; total allocated: 2 of 20]
+2019-05-07 23:01:22 DEBUG MainClientExec:235 - Opening connection {s}->https://account.genndi.com:443
+2019-05-07 23:01:22 DEBUG DefaultHttpClientConnectionOperator:139 - Connecting to account.genndi.com/104.27.93.45:443
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:337 - Connecting socket to account.genndi.com/104.27.93.45:443 with timeout 0
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:390 - Enabled protocols: [TLSv1, TLSv1.1, TLSv1.2]
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:391 - Enabled cipher suites:[TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_DSS_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_DSS_WITH_AES_128_GCM_SHA256]
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:395 - Starting handshake
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:425 - Secure session established
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:426 -  negotiated protocol: TLSv1.2
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:427 -  negotiated cipher suite: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:435 -  peer principal: CN=ssl389655.cloudflaressl.com, OU=PositiveSSL Multi-Domain, OU=Domain Control Validated
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:444 -  peer alternative names: [ssl389655.cloudflaressl.com, *.berkeleybuildings.net, *.brickellschool.com, *.cpasbien9.net, *.downinthevalley.com, *.genndi.com, *.glasambulance.nl, *.nodistribute.com, *.parkingkong.com, *.plango.nl, *.ratheg.com, *.riess-ambiente.net, *.seksuelegezondheidoostnederland.nl, *.summacum.works, *.torrent999.com, *.tudointeressante.com.br, *.webinarjam.net, berkeleybuildings.net, brickellschool.com, cpasbien9.net, downinthevalley.com, genndi.com, glasambulance.nl, nodistribute.com, parkingkong.com, plango.nl, ratheg.com, riess-ambiente.net, seksuelegezondheidoostnederland.nl, summacum.works, torrent999.com, tudointeressante.com.br, webinarjam.net]
+2019-05-07 23:01:22 DEBUG SSLConnectionSocketFactory:448 -  issuer principal: CN=COMODO ECC Domain Validation Secure Server CA 2, O=COMODO CA Limited, L=Salford, ST=Greater Manchester, C=GB
+2019-05-07 23:01:22 DEBUG DefaultHttpClientConnectionOperator:146 - Connection established 192.168.200.50:63680<->104.27.93.45:443
+2019-05-07 23:01:22 DEBUG MainClientExec:256 - Executing request POST /login HTTP/1.1
+2019-05-07 23:01:22 DEBUG MainClientExec:267 - Proxy auth state: UNCHALLENGED
+2019-05-07 23:01:22 DEBUG headers:133 - http-outgoing-1 >> POST /login HTTP/1.1
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-1 >> Authorization: Basic YWRtaW46MTIzNDU2
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-1 >> Content-Length: 0
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-1 >> Host: account.genndi.com
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-1 >> Connection: Keep-Alive
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-1 >> User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_201)
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-1 >> Cookie: __cfduid=dcce1845fe166ede3f4384745ffb8e7931557259282; gdapp=eyJpdiI6Ik5GMmR4c3IwdkIyM0JSc3pscFdsUXc9PSIsInZhbHVlIjoiU2toelVLUWljeFNsVnVBRHJ5VkVjWnR6YjhBVUcyellBbEQ1VmpmTUtmZkJLdGVIbHhwbGE2T09ZYWdoXC9kbTBnekRMN3VnbjJWYkhnYjA0Y2xQTWFBPT0iLCJtYWMiOiI0YzI5NjI2NmRmZGRhNzIyOTRlMzhjOGI5YzVkNDIwMjFjY2Y4NWQyNzI2YmFmNGYxOTAxZmRlNTU3ODIyOGNkIn0%3D
+2019-05-07 23:01:22 DEBUG headers:136 - http-outgoing-1 >> Accept-Encoding: gzip,deflate
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "POST /login HTTP/1.1[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "Authorization: Basic YWRtaW46MTIzNDU2[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "Content-Length: 0[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "Host: account.genndi.com[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "Connection: Keep-Alive[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_201)[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "Cookie: __cfduid=dcce1845fe166ede3f4384745ffb8e7931557259282; gdapp=eyJpdiI6Ik5GMmR4c3IwdkIyM0JSc3pscFdsUXc9PSIsInZhbHVlIjoiU2toelVLUWljeFNsVnVBRHJ5VkVjWnR6YjhBVUcyellBbEQ1VmpmTUtmZkJLdGVIbHhwbGE2T09ZYWdoXC9kbTBnekRMN3VnbjJWYkhnYjA0Y2xQTWFBPT0iLCJtYWMiOiI0YzI5NjI2NmRmZGRhNzIyOTRlMzhjOGI5YzVkNDIwMjFjY2Y4NWQyNzI2YmFmNGYxOTAxZmRlNTU3ODIyOGNkIn0%3D[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+2019-05-07 23:01:22 DEBUG wire:73 - http-outgoing-1 >> "[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "HTTP/1.1 500 Internal Server Error[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "Date: Tue, 07 May 2019 20:01:23 GMT[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "Content-Type: text/html; charset=UTF-8[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "Transfer-Encoding: chunked[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "Connection: keep-alive[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "Cache-Control: no-cache, private[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "pragma: no-cache[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "expires: -1[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "Set-Cookie: gdapp=eyJpdiI6IkdvRzJQUWp2eUNwZ09mVlV0c1E1ZUE9PSIsInZhbHVlIjoiZ1NGbm9tZVpDd3l4dUZ1UkNibFBDU0lSNkdiU0JxMWowUmhtTUhpOFdcL3FEQ05nYWdxcmJYVGplNFhiZ0dvbGVUWFRqVkFMWU9XRzY4d3haa1lDeW1RPT0iLCJtYWMiOiJlZmMwYzNlMjE5ZjUyZGIxYWI5NTkxYzg0MzQ4YjgzZDk0ODljOTUzNThkNjIwNzVkY2NhOWIwYjZmY2E1M2U4In0%3D; expires=Tue, 07-May-2019 22:01:23 GMT; Max-Age=7200; path=/; domain=.genndi.com; HttpOnly[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "Server: cloudflare[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "CF-RAY: 4d35c9187f358b7a-KBP[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "e1a[\r][\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "<!DOCTYPE html>[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "<html>[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "    <head>[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "        <meta charset="UTF-8" />[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "        <meta name="robots" content="noindex,nofollow" />[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "        <style>            body { background-color: #F9F9F9; color: #222; font: 14px/1.4 Helvetica, Arial, sans-serif; margin: 0; padding-bottom: 45px; }[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "            a { cursor: pointer; text-decoration: none; }[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "            a:hover { text-decoration: underline; }[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "            abbr[title] { border-bottom: none; cursor: help; text-decoration: none; }[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "            code, pre { font: 13px/1.5 Consolas, Monaco, Menlo, "Ubuntu Mono", "Liberation Mono", monospace; }[\n]"
+2019-05-07 23:01:23 DEBUG wire:73 - http-outgoing-1 << "[\n]"
+2019-05-07 23:01:23 DEBUG wire:87 - http-outgoing-1 << "    "
+2019-05-07 23:01:23 DEBUG headers:122 - http-outgoing-1 << HTTP/1.1 500 Internal Server Error
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << Date: Tue, 07 May 2019 20:01:23 GMT
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << Content-Type: text/html; charset=UTF-8
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << Transfer-Encoding: chunked
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << Connection: keep-alive
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << Cache-Control: no-cache, private
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << pragma: no-cache
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << expires: -1
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << Set-Cookie: gdapp=eyJpdiI6IkdvRzJQUWp2eUNwZ09mVlV0c1E1ZUE9PSIsInZhbHVlIjoiZ1NGbm9tZVpDd3l4dUZ1UkNibFBDU0lSNkdiU0JxMWowUmhtTUhpOFdcL3FEQ05nYWdxcmJYVGplNFhiZ0dvbGVUWFRqVkFMWU9XRzY4d3haa1lDeW1RPT0iLCJtYWMiOiJlZmMwYzNlMjE5ZjUyZGIxYWI5NTkxYzg0MzQ4YjgzZDk0ODljOTUzNThkNjIwNzVkY2NhOWIwYjZmY2E1M2U4In0%3D; expires=Tue, 07-May-2019 22:01:23 GMT; Max-Age=7200; path=/; domain=.genndi.com; HttpOnly
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << Server: cloudflare
+2019-05-07 23:01:23 DEBUG headers:125 - http-outgoing-1 << CF-RAY: 4d35c9187f358b7a-KBP
+2019-05-07 23:01:23 DEBUG MainClientExec:285 - Connection can be kept alive indefinitely
+2019-05-07 23:01:23 DEBUG ResponseProcessCookies:119 - Cookie accepted [gdapp="eyJpdiI6IkdvRzJQUWp2eUNwZ09mVlV0c1E1ZUE9PSIsInZhbHVlIjoiZ1NGbm9tZVpDd3l4dUZ1UkNibFBDU0lSNkdiU0JxMWow...", version:0, domain:genndi.com, path:/, expiry:Wed May 08 01:01:23 EEST 2019]
+2019-05-07 23:01:23 DEBUG RequestAddCookies:123 - CookieSpec selected: default
+2019-05-07 23:01:23 DEBUG RequestAddCookies:168 - Cookie [version: 0][name: __cfduid][value: dcce1845fe166ede3f4384745ffb8e7931557259282][domain: genndi.com][path: /][expiry: Wed May 06 23:01:22 EEST 2020] match [(secure)account.genndi.com:443/login]
+2019-05-07 23:01:23 DEBUG RequestAddCookies:168 - Cookie [version: 0][name: gdapp][value: eyJpdiI6IkdvRzJQUWp2eUNwZ09mVlV0c1E1ZUE9PSIsInZhbHVlIjoiZ1NGbm9tZVpDd3l4dUZ1UkNibFBDU0lSNkdiU0JxMWowUmhtTUhpOFdcL3FEQ05nYWdxcmJYVGplNFhiZ0dvbGVUWFRqVkFMWU9XRzY4d3haa1lDeW1RPT0iLCJtYWMiOiJlZmMwYzNlMjE5ZjUyZGIxYWI5NTkxYzg0MzQ4YjgzZDk0ODljOTUzNThkNjIwNzVkY2NhOWIwYjZmY2E1M2U4In0%3D][domain: genndi.com][path: /][expiry: Wed May 08 01:01:23 EEST 2019] match [(secure)account.genndi.com:443/login]
+2019-05-07 23:01:23 DEBUG RequestAuthCache:77 - Auth cache not set in the context
+2019-05-07 23:01:23 DEBUG PoolingHttpClientConnectionManager:265 - Connection request: [route: {s}->https://account.genndi.com:443][total kept alive: 0; route allocated: 2 of 2; total allocated: 2 of 20]
+2019-05-08 15:00:44 DEBUG CabinetServletLogin:35 - login attempt with credentials: realCat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-08 15:04:15 DEBUG CabinetServletLogin:35 - login attempt with credentials: realCat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-08 15:04:16 DEBUG CabinetServletLogin:66 - logged as 1
+2019-05-08 15:17:02 DEBUG CabinetServletLogin:35 - login attempt with credentials: realCat@mail.com 0000 from 0:0:0:0:0:0:0:1
+2019-05-08 15:17:03 DEBUG CabinetServletLogin:66 - logged as 1

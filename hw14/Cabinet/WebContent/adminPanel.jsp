@@ -19,8 +19,8 @@
 			!
 		</h1>
 	</div>
-	<div align="center" style="color:red">${errMessage}</div>
-	<div align="center" style="color:green">${successMessage}</div>
+	<div align="center" style="color: red">${errMessage}</div>
+	<div align="center" style="color: green">${successMessage}</div>
 
 	<table border="1">
 		<tr>
@@ -52,7 +52,7 @@
 		</c:forEach>
 
 	</table>
-	<a href="logout"><input type="button"
-		value="LogOut"></a>
+	<a href="adminGoods"><input type="button" value="Modify books"></a>
+	<a href="logout"><input type="button" value="LogOut"></a>
 </body>
 </html>

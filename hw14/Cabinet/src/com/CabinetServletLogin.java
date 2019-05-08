@@ -16,6 +16,7 @@ import db.UserCRUD;
 import db.WrongEmailException;
 import model.Role;
 import model.User;
+import utils.ShaPasswordGenerator;
 
 @WebServlet("/login")
 public class CabinetServletLogin extends HttpServlet {
@@ -24,16 +25,16 @@ public class CabinetServletLogin extends HttpServlet {
 	private static final UserCRUD userCrud = new UserCRUD();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		req.getRequestDispatcher("login.jsp").forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		String passwordFromForm = request.getParameter("password");
 
-		logger.debug("login attempt with credentials: " + email + " " + password + " from " + request.getLocalAddr());
+		logger.debug("login attempt with credentials: " + email + " " + passwordFromForm + " from " + request.getLocalAddr());
 
-		if (email.isEmpty() || password.isEmpty()) {
+		if (email.isEmpty() || passwordFromForm.isEmpty()) {
 			request.setAttribute("errMessage", "enter your email and password");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return;
@@ -41,6 +42,9 @@ public class CabinetServletLogin extends HttpServlet {
 
 		try {
 			User user = userCrud.read(email).get();
+			
+			String salt = user.getSalt();
+			String password = ShaPasswordGenerator.getShaPassword(passwordFromForm, salt);
 
 			if (!user.getPassword().equals(password)) {
 				logger.debug("wrong credentials for " + email);

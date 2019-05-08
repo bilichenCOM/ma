@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import model.User;
+import utils.ShaPasswordGenerator;
 
 public class UserCRUD implements CabinetCRUD<User> {
 
 	@Override
 	public void create(User user) throws ExistingUserException, ConnectionException {
+		hashUserPassword(user);
 		DBConnector.connect();
 		DBConnector.addUser(user);
 		DBConnector.disconnect();
@@ -41,5 +43,12 @@ public class UserCRUD implements CabinetCRUD<User> {
 		List<User> userList = DBConnector.getUserList();
 		DBConnector.disconnect();
 		return userList;
+	}
+	
+	private static void hashUserPassword(User user) {
+		String salt = ShaPasswordGenerator.generateSalt();
+		String password = ShaPasswordGenerator.getShaPassword(user.getPassword(), salt);
+		user.setPassword(password);
+		user.setSalt(salt);
 	}
 }

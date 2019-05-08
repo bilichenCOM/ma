@@ -1,22 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<c:if test="${logged != 'true'}">
-	<c:redirect url="login.jsp" />
-</c:if>
 <meta charset="ISO-8859-1">
 <title>Shop</title>
 </head>
 <body>
 	<div align="left">Hello ${shopSession.user.name}
-	<a href="logout"><input type="button" value="Logout"></a></div><br>
+	<a href="/Cabinet/logout"><input type="button" value="Logout"></a></div><br>
 	<div align="right">Your balance: <div style="color:green">${shopSession.user.balance}</div></div>
 	<h2>Your shop page</h2>
-	<p style="color:red">${errMessage}</p>
-	<p style="color:green">${successMessage}</p>
+	<p style="color:red">${errMessage}</p><c:set var="errMessage" value="" scope="session"/>
+	<p style="color:green">${successMessage}</p><c:set var="successMessage" value="" scope="session"/>
 	<div align="center">
 		<table>
 			<tr>
@@ -33,7 +29,7 @@
 						Year: ${book.year} <br> Pages: ${book.pages} <br> ID:
 						${book.id}
 					</td>
-					<td><a href="buy?bookId=${book.id}"><input type="button"
+					<td><a href="shop/buy?bookId=${book.id}"><input type="button"
 							value="Buy!"></a></td>
 			</c:forEach>
 		</table>

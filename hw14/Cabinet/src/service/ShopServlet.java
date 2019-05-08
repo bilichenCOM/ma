@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import db.BookCRUD;
+import db.BookCrud;
 import db.ConnectionException;
 import model.Book;
 import model.ShopSession;
@@ -20,26 +20,25 @@ import model.User;
 @WebServlet("/shop")
 public class ShopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(ShopServlet.class);
-	private static final BookCRUD crud = new BookCRUD();
+	private static final Logger LOGGER = Logger.getLogger(ShopServlet.class);
+	private static final BookCrud BOOK_CRUD = new BookCrud();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<Book> books = crud.readAll();
+			List<Book> books = BOOK_CRUD.readAll();
 			User user = (User) request.getSession().getAttribute("user");
 			ShopSession shopSession = new ShopSession();
 			shopSession.setBooks(books);
 			shopSession.setUser(user);
 			request.getSession().setAttribute("shopSession", shopSession);
-			request.getRequestDispatcher("goodsPanel.jsp").forward(request, response);
+			request.getRequestDispatcher("shop/shop.jsp").forward(request, response);
 		} catch (ConnectionException e) {
-			logger.debug("connection failed", e);
-			request.getRequestDispatcher("userPanel.jsp").forward(request, response);
+			LOGGER.debug("connection failed", e);
+			request.getRequestDispatcher("user").forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 }

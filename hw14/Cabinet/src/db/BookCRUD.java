@@ -5,41 +5,41 @@ import java.util.Optional;
 
 import model.Book;
 
-public class BookCRUD implements CabinetCRUD<Book>{
+public class BookCrud implements CabinetCrud<Book>{
 
 	@Override
 	public void create(Book book) {
-		DBConnector.connect();
-		DBConnector.addBook(book);
-		DBConnector.disconnect();
+		DbConnector.connect();
+		DbConnector.addBook(book);
+		DbConnector.disconnect();
 	}
 
 	@Override
 	public Optional<Book> read(String id) {
-		DBConnector.connect();
-		Optional<Book> book = DBConnector.getBook(Long.parseLong(id));
-		DBConnector.disconnect();
+		DbConnector.connect();
+		Optional<Book> book = DbConnector.getBook(Long.parseLong(id));
+		DbConnector.disconnect();
 		return book;
 	}
 	
 	public List<Book> readAll() {
-		DBConnector.connect();
-		List<Book> books = DBConnector.getBookList();
-		DBConnector.disconnect();
+		DbConnector.connect();
+		List<Book> books = DbConnector.getBookList();
+		DbConnector.disconnect();
 		return books;
 	}
 
 	@Override
 	public void update(Book book) {
-		DBConnector.connect();
-		DBConnector.updateBook(book);
-		DBConnector.disconnect();
+		DbConnector.connect();
+		DbConnector.updateBook(book);
+		DbConnector.disconnect();
 	}
 
 	@Override
 	public void delete(String id) {
-		DBConnector.connect();
-		DBConnector.deleteBook(Long.parseLong(id));
-		DBConnector.disconnect();
+		DbConnector.connect();
+		DbConnector.deleteBook(Long.parseLong(id));
+		DbConnector.disconnect();
 	}
 }

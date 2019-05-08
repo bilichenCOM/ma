@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.BookCRUD;
+import db.BookCrud;
 import model.Book;
 
-@WebServlet("/signupBook")
+@WebServlet("/admin/signupBook")
 public class CabinetServletSignupBook extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	private static final BookCRUD bookCrud = new BookCRUD();
+	private static final BookCrud bookCrud = new BookCrud();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("signupBook.jsp").forward(request, response);

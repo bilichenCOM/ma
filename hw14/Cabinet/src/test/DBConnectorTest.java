@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import db.ConnectionException;
-import db.DBConnector;
+import db.DbConnector;
 import db.ExistingUserException;
 import db.WrongEmailException;
 import model.User;
@@ -17,25 +17,25 @@ class DBConnectorTest {
 
 	@BeforeAll
 	static void openConnection() throws ConnectionException {
-		DBConnector.connect();
+		DbConnector.connect();
 	}
 	
 	@AfterAll
 	static void closeConnection() {
-		DBConnector.disconnect();
+		DbConnector.disconnect();
 	}
 	
 	@Test
 	void testAddUser() throws ExistingUserException {
 		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1, 0.0);
-		Assertions.assertThrows(ExistingUserException.class, () -> DBConnector.addUser(test));	
+		Assertions.assertThrows(ExistingUserException.class, () -> DbConnector.addUser(test));	
 	}
 
 	@Test
 	void testGetUserInfo() throws WrongEmailException, ExistingUserException {
-		Map<String, String> userInfo = DBConnector.getUserInfo("realCat@mail.com", "iLoveMouses1234");
+		Map<String, String> userInfo = DbConnector.getUserInfo("realCat@mail.com", "iLoveMouses1234");
 		Assertions.assertEquals("Cat", userInfo.get("user_name"));
-		Assertions.assertThrows(WrongEmailException.class, () -> DBConnector.getUserInfo("realCat@mail.com", "0000"));
+		Assertions.assertThrows(WrongEmailException.class, () -> DbConnector.getUserInfo("realCat@mail.com", "0000"));
 	}
 
 	@Test
@@ -43,7 +43,7 @@ class DBConnectorTest {
 		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1, 0.0);
 		test.setAge(29);
 		test.setName("Johny");
-		DBConnector.updateUser(test);
+		DbConnector.updateUser(test);
 	}
 
 	@Test
@@ -51,9 +51,9 @@ class DBConnectorTest {
 		String testEmail = "temporaryCat@mail.com";
 		String testPasswd = "icePass";
 		User test = new User("Pipka", "Pitek", "male", 19, "pp@mail.com", "0000", 1, 0.0);
-		DBConnector.addUser(test);
-		Assertions.assertEquals("Catty", DBConnector.getUserInfo(testEmail, testPasswd).get("user_name"));
-		DBConnector.deleteUser(test.getEmail());
-		Assertions.assertThrows(WrongEmailException.class, () -> DBConnector.getUserInfo(testEmail, testPasswd));
+		DbConnector.addUser(test);
+		Assertions.assertEquals("Catty", DbConnector.getUserInfo(testEmail, testPasswd).get("user_name"));
+		DbConnector.deleteUser(test.getEmail());
+		Assertions.assertThrows(WrongEmailException.class, () -> DbConnector.getUserInfo(testEmail, testPasswd));
 	}
 }

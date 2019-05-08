@@ -18,13 +18,13 @@ import model.Book;
 import model.Purchase;
 import model.User;
 
-public class DBConnector {
+public class DbConnector {
 	private static final String DRIVER_NAME = "org.postgresql.Driver";
 	private static final String DB_URL = "jdbc:postgresql://localhost:5432/cabinet_db";
 	private static final String DB_USER = "postgres";
 	private static final String DB_PASSWORD = "admin";
 	
-	private static final Logger logger = Logger.getLogger(DBConnector.class);
+	private static final Logger logger = Logger.getLogger(DbConnector.class);
 
 	private static Connection connection;
 
@@ -36,7 +36,7 @@ public class DBConnector {
 		}
 	}
 
-	private DBConnector() {
+	private DbConnector() {
 	}
 
 	public static int addPurchase(Purchase purchase) {
@@ -275,7 +275,7 @@ public class DBConnector {
 							+ "WHERE email='" + email + "';");
 			logger.debug("user with email" + email + " deleted");
 		} catch (SQLException e) {
-			logger.debug("problems by deleting users");
+			logger.debug("problems by deleting users", e);
 		}
 	}
 

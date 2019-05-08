@@ -11,29 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import db.ConnectionException;
-import db.UserCRUD;
+import db.UserCrud;
 
 
-@WebServlet("/delete")
-public class CabinetServletDelete extends HttpServlet {
+@WebServlet("/admin/deleteUser")
+public class CabinetServletDeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(CabinetServletDelete.class);
-	private static final UserCRUD crud = new UserCRUD();
+	private static final Logger LOGGER = Logger.getLogger(CabinetServletDeleteUser.class);
+	private static final UserCrud USER_CRUD = new UserCrud();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
-		
-		if (!request.getSession().getAttribute("logged").equals("true")) {
-			response.sendRedirect("login.jsp");
-		}
+
 			try {
-				crud.delete(email);
+				USER_CRUD.delete(email);
 				request.setAttribute("successMessage", "user successfully deleted!");
-				request.getRequestDispatcher("adminPanel.jsp").forward(request, response);
+				request.getRequestDispatcher("admin").forward(request, response);
 			} catch (ConnectionException e) {
-				logger.debug("connection to db failed!");
+				LOGGER.debug("connection to db failed!");
 				request.setAttribute("errMessage", "connection failed, please try again...");
-				request.getRequestDispatcher("adminPanel.jsp").forward(request, response);
+				request.getRequestDispatcher("admin").forward(request, response);
 			}
 	}
 }

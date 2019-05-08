@@ -4,20 +4,20 @@ import java.util.Optional;
 
 import model.Purchase;
 
-public class PurchaseCRUD implements CabinetCRUD<Purchase> {
+public class PurchaseCrud implements CabinetCrud<Purchase> {
 
 	@Override
 	public void create(Purchase purchase) {
-		DBConnector.connect();
-		DBConnector.addPurchase(purchase);
-		DBConnector.disconnect();
+		DbConnector.connect();
+		DbConnector.addPurchase(purchase);
+		DbConnector.disconnect();
 	}
 
 	@Override
 	public Optional<Purchase> read(String s) {
-		DBConnector.connect();
-		Optional<Purchase> purchase = DBConnector.getPurchase(Long.parseLong(s));
-		DBConnector.disconnect();
+		DbConnector.connect();
+		Optional<Purchase> purchase = DbConnector.getPurchase(Long.parseLong(s));
+		DbConnector.disconnect();
 		return purchase;
 	}
 

@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.BookCRUD;
+import db.BookCrud;
 import model.Book;
 
-@WebServlet("/updateBook")
+@WebServlet("/admin/updateBook")
 public class CabinetServletUpdateGoods extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private static final BookCRUD bookCrud = new BookCRUD();
+	private static final BookCrud bookCrud = new BookCrud();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");

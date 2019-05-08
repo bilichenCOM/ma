@@ -2,7 +2,7 @@ package db;
 
 import java.util.Optional;
 
-public interface CabinetCRUD<T> {
+public interface CabinetCrud<T> {
 
 	void create(T t) throws Exception;
 

@@ -4,42 +4,51 @@ import java.util.List;
 import java.util.Optional;
 
 import model.User;
+import utils.ShaPasswordGenerator;
 
-public class UserCRUD implements CabinetCRUD<User> {
+public class UserCrud implements CabinetCrud<User> {
 
 	@Override
 	public void create(User user) throws ExistingUserException, ConnectionException {
-		DBConnector.connect();
-		DBConnector.addUser(user);
-		DBConnector.disconnect();
+		hashUserPassword(user);
+		DbConnector.connect();
+		DbConnector.addUser(user);
+		DbConnector.disconnect();
 	}
 
 	@Override
 	public Optional<User> read(String email) throws WrongEmailException, ConnectionException {
-		DBConnector.connect();
-		Optional<User> optional = DBConnector.getUser(email);
-		DBConnector.disconnect();
+		DbConnector.connect();
+		Optional<User> optional = DbConnector.getUser(email);
+		DbConnector.disconnect();
 		return optional;
 	}
 
 	@Override
 	public void update(User user) throws ConnectionException {
-		DBConnector.connect();
-		DBConnector.updateUser(user);
-		DBConnector.disconnect();
+		DbConnector.connect();
+		DbConnector.updateUser(user);
+		DbConnector.disconnect();
 	}
 
 	@Override
 	public void delete(String email) throws ConnectionException {
-		DBConnector.connect();
-		DBConnector.deleteUser(email);
-		DBConnector.disconnect();
+		DbConnector.connect();
+		DbConnector.deleteUser(email);
+		DbConnector.disconnect();
 	}
 
 	public List<User> readAll() {
-		DBConnector.connect();
-		List<User> userList = DBConnector.getUserList();
-		DBConnector.disconnect();
+		DbConnector.connect();
+		List<User> userList = DbConnector.getUserList();
+		DbConnector.disconnect();
 		return userList;
+	}
+	
+	private static void hashUserPassword(User user) {
+		String salt = ShaPasswordGenerator.generateSalt();
+		String password = ShaPasswordGenerator.getShaPassword(user.getPassword(), salt);
+		user.setPassword(password);
+		user.setSalt(salt);
 	}
 }

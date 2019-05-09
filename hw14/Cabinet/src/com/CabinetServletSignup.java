@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import db.ConnectionException;
 import db.ExistingUserException;
-import db.UserCRUD;
+import db.UserCrud;
 import model.Role;
 import model.User;
 import utils.ParametersValidator;
@@ -21,7 +21,7 @@ import utils.ParametersValidator;
 public class CabinetServletSignup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CabinetServletSignup.class);
-	private static final UserCRUD crud = new UserCRUD();
+	private static final UserCrud crud = new UserCrud();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -61,6 +61,6 @@ public class CabinetServletSignup extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
+		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
 }

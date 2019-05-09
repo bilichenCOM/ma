@@ -3,8 +3,8 @@ package model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String name;
 	private String surname;
@@ -14,9 +14,9 @@ public class User implements Serializable {
 	private String password;
 	private int roleId;
 	private double balance;
+	private String salt;
 
-	public User(Long id, String name, String surname, String gender, int age, String email, String password, int roleId,
-			double balance) {
+	public User(Long id, String name, String surname, String gender, int age, String email, String password, int roleId, double balance, String salt) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -26,12 +26,16 @@ public class User implements Serializable {
 		this.password = password;
 		this.roleId = roleId;
 		this.balance = balance;
+		this.salt = salt;
+	}
+
+	public User(String name, String surname, String gender, int age, String email, String password, int roleId, double balance, String salt) {
+		this(null, name, surname, gender, age, email, password, roleId, balance, salt);
 	}
 
 	public User(String name, String surname, String gender, int age, String email, String password, int roleId, double balance) {
-		this(null, name, surname, gender, age, email, password, roleId, balance);
+		this(null, name, surname, gender, age, email, password, roleId, balance, null);
 	}
-
 
 	public Long getId() {
 		return id;
@@ -100,15 +104,23 @@ public class User implements Serializable {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-	
+
 	public void purchase(Good good) {
 		balance = balance - good.getPrice();
 		System.out.println("purchased for money!");
 	}
 
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", gender=" + gender + ", age=" + age
-				+ ", email=" + email + ", password=" + password + ", roleId=" + roleId + "]";
+		        + ", email=" + email + ", password=" + password + ", roleId=" + roleId + "]";
 	}
 }

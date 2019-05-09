@@ -9,23 +9,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import db.BookCRUD;
+import db.BookCrud;
 import db.ConnectionException;
-import db.PurchaseCRUD;
-import db.UserCRUD;
+import db.PurchaseCrud;
+import db.UserCrud;
 import model.Good;
 import model.Purchase;
 import model.ShopSession;
 import model.User;
 
-@WebServlet("/buy")
+@WebServlet("/shop/buy")
 public class BuyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final BookCRUD bookCrud = new BookCRUD();
-	private static final PurchaseCRUD purchaseCrud = new PurchaseCRUD();
-	private static final UserCRUD userCrud = new UserCRUD();
+	private static final BookCrud BOOK_CRUD = new BookCrud();
+	private static final PurchaseCrud PURCHASE_CRUD = new PurchaseCrud();
+	private static final UserCrud USER_CRUD = new UserCrud();
 
-	private static final Logger logger = Logger.getLogger(BuyServlet.class);
+	private static final Logger LOGGER = Logger.getLogger(BuyServlet.class);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String bookId = request.getParameter("bookId");
@@ -38,28 +38,28 @@ public class BuyServlet extends HttpServlet {
 		User user = shopSession.getUser();
 		String bookIdString = (String) request.getAttribute("bookId");
 		try {
-			Good book = bookCrud.read(bookIdString).get();
+			Good book = BOOK_CRUD.read(bookIdString).get();
 			Double bookPrice = book.getPrice();
 			Long userId = user.getId();
 			Long bookId = book.getId();
 
 			if (bookPrice > user.getBalance()) {
-				request.setAttribute("errMessage", "not enough money!");
-				request.getRequestDispatcher("goodsPanel.jsp").forward(request, response);
+				request.getSession().setAttribute("errMessage", "not enough money!");
+				response.sendRedirect("/Cabinet/shop");
 				return;
 			}
 
 			Purchase purchase = new Purchase(bookId, userId, bookPrice);
-			purchaseCrud.create(purchase);
+			PURCHASE_CRUD.create(purchase);
 			user.purchase(book);
-			userCrud.update(user);
-			logger.debug("Book: " + book + " - has been purchased");
-			request.setAttribute("successMessage", "purchase has been done");
-			request.getRequestDispatcher("goodsPanel.jsp").forward(request, response);
+			USER_CRUD.update(user);
+			LOGGER.debug("Book: " + book + " - has been purchased");
+			request.getSession().setAttribute("successMessage", "purchase has been done");
+			response.sendRedirect("/Cabinet/shop");
 		} catch (ConnectionException e) {
-			logger.debug("connection failed");
-			request.setAttribute("errMessage", "connection failed");
-			request.getRequestDispatcher("goodsPanel.jsp").forward(request, response);
+			LOGGER.debug("connection failed");
+			request.getSession().setAttribute("errMessage", "connection failed");
+			response.sendRedirect("/Cabinet/shop");
 		}
 	}
 }

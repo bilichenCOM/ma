@@ -11,8 +11,8 @@ import model.ShopSession;
 import model.User;
 import utils.VerificationCode;
 
-@WebServlet("/purchaseVerification")
-public class PurchaseVerification extends HttpServlet {
+@WebServlet("/shop/purchaseVerification")
+public class PurchaseVerificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,8 +37,8 @@ public class PurchaseVerification extends HttpServlet {
 			request.setAttribute("bookId", bookId);
 			request.getRequestDispatcher("buy").forward(request, response);
 		} else {
-			request.setAttribute("errMessage", "failed verification, please try again...");
-			request.getRequestDispatcher("goodsPanel.jsp").forward(request, response);
+			request.getSession().setAttribute("errMessage", "failed verification, please try again...");
+			response.sendRedirect("/Cabinet/shop");
 		}
 	}
 }

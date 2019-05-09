@@ -18,13 +18,13 @@ import model.Book;
 import model.Purchase;
 import model.User;
 
-public class DBConnector {
+public class DbConnector {
 	private static final String DRIVER_NAME = "org.postgresql.Driver";
 	private static final String DB_URL = "jdbc:postgresql://localhost:5432/cabinet_db";
 	private static final String DB_USER = "postgres";
 	private static final String DB_PASSWORD = "admin";
 	
-	private static final Logger logger = Logger.getLogger(DBConnector.class);
+	private static final Logger logger = Logger.getLogger(DbConnector.class);
 
 	private static Connection connection;
 
@@ -36,7 +36,7 @@ public class DBConnector {
 		}
 	}
 
-	private DBConnector() {
+	private DbConnector() {
 	}
 
 	public static int addPurchase(Purchase purchase) {
@@ -136,9 +136,43 @@ public class DBConnector {
 		}
 		return books;
 	}
+
+	public static void updateBook(Book book) {
+		Long id = book.getId();
+		String title = book.getTitle();
+		String author = book.getAuthor();
+		int year = book.getYear();
+		int pages = book.getPages();
+		String imageUrl = book.getImageUrl();
+
+		String sql = "UPDATE books SET title = ?, author = ?, year = ?, pages = ?, image_url = ?, price = ? WHERE id = ?";
+		try {
+			PreparedStatement updateQuery = connection.prepareStatement(sql);
+			updateQuery.setString(1, title);
+			updateQuery.setString(2, author);
+			updateQuery.setInt(3, year);
+			updateQuery.setInt(4, pages);
+			updateQuery.setString(5, imageUrl);
+			updateQuery.setLong(6, id);
+			updateQuery.execute();
+		} catch (SQLException e) {
+			logger.debug("problems by updating book", e);
+		}
+	}
+	
+	public static void deleteBook(Long id) {
+		String sql = "DELETE FROM books WHERE id = ?";
+		try {
+			PreparedStatement deleteQuery = connection.prepareStatement(sql);
+			deleteQuery.setLong(1, id);
+			deleteQuery.execute();
+		} catch (SQLException e) {
+			logger.debug("problems by deleting book ", e);
+		}
+	}
 	public static void addUser(User user) {
-		String sql = "INSERT INTO users(name, surname, age, gender, email, password, role_id, balance) "
-				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO users(name, surname, age, gender, email, password, role_id, balance, salt) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement addingQuery = connection.prepareStatement(sql);
 			addingQuery.setString(1, user.getName());
@@ -149,6 +183,7 @@ public class DBConnector {
 			addingQuery.setString(6, user.getPassword());
 			addingQuery.setInt(7, user.getRoleId());
 			addingQuery.setDouble(8, user.getBalance());
+			addingQuery.setString(9, user.getSalt());
 			addingQuery.execute();
 		} catch (SQLException e) {
 			logger.debug("sql exception", e);
@@ -173,7 +208,9 @@ public class DBConnector {
 				String password = getUserResultSet.getString("password");
 				int roleId = getUserResultSet.getInt("role_id");
 				int balance = getUserResultSet.getInt("balance");
-				return Optional.of(new User(id, name, surname, gender, age, email, password, roleId, balance));
+				String salt = getUserResultSet.getString("salt");
+
+				return Optional.of(new User(id, name, surname, gender, age, email, password, roleId, balance, salt));
 			} else {
 				throw new WrongEmailException();
 			}
@@ -200,8 +237,9 @@ public class DBConnector {
 				String password = selectQueryResultSet.getString("password");
 				int roleId = selectQueryResultSet.getInt("role_id");
 				int balance = selectQueryResultSet.getInt("balance");
-				
-				User user = new User(id, name, surname, gender, age, email, password, roleId, balance);
+				String salt = selectQueryResultSet.getString("salt");
+
+				User user = new User(id, name, surname, gender, age, email, password, roleId, balance, salt);
 				userList.add(user);
 			}
 		} catch (SQLException e) {
@@ -237,7 +275,7 @@ public class DBConnector {
 							+ "WHERE email='" + email + "';");
 			logger.debug("user with email" + email + " deleted");
 		} catch (SQLException e) {
-			logger.debug("problems by deleting users");
+			logger.debug("problems by deleting users", e);
 		}
 	}
 

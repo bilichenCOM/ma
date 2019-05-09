@@ -5,39 +5,41 @@ import java.util.Optional;
 
 import model.Book;
 
-public class BookCRUD implements CabinetCRUD<Book>{
+public class BookCrud implements CabinetCrud<Book>{
 
 	@Override
-	public void create(Book book) throws ConnectionException {
-		DBConnector.connect();
-		DBConnector.addBook(book);
-		DBConnector.disconnect();
+	public void create(Book book) {
+		DbConnector.connect();
+		DbConnector.addBook(book);
+		DbConnector.disconnect();
 	}
 
 	@Override
-	public Optional<Book> read(String id) throws ConnectionException {
-		DBConnector.connect();
-		Optional<Book> book = DBConnector.getBook(Long.parseLong(id));
-		DBConnector.disconnect();
+	public Optional<Book> read(String id) {
+		DbConnector.connect();
+		Optional<Book> book = DbConnector.getBook(Long.parseLong(id));
+		DbConnector.disconnect();
 		return book;
 	}
 	
-	public List<Book> readAll() throws ConnectionException {
-		DBConnector.connect();
-		List<Book> books = DBConnector.getBookList();
-		DBConnector.disconnect();
+	public List<Book> readAll() {
+		DbConnector.connect();
+		List<Book> books = DbConnector.getBookList();
+		DbConnector.disconnect();
 		return books;
 	}
 
 	@Override
-	public void update(Book t) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void update(Book book) {
+		DbConnector.connect();
+		DbConnector.updateBook(book);
+		DbConnector.disconnect();
 	}
 
 	@Override
-	public void delete(String s) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void delete(String id) {
+		DbConnector.connect();
+		DbConnector.deleteBook(Long.parseLong(id));
+		DbConnector.disconnect();
 	}
 }

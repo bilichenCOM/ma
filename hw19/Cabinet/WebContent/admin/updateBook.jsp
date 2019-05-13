@@ -55,6 +55,6 @@
 			</table>
 		</div>
 	</form>
-	<div align="left"><a href="/Cabinet/admin">Back</a></div>
+	<div align="left"><a href="adminPanel.jsp">Back</a></div>
 </body>
 </html>

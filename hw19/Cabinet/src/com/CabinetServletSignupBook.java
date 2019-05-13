@@ -7,18 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
-import db.BookDao;
-import db.CabinetCrud;
+import db.BookCrud;
 import model.Book;
 
 @WebServlet("/admin/signupBook")
 public class CabinetServletSignupBook extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(CabinetServletSignupBook.class);
-	private static final CabinetCrud<Book> bookCrud = new BookDao();
+	
+	private static final BookCrud bookCrud = new BookCrud();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("signupBook.jsp").forward(request, response);
@@ -33,14 +30,8 @@ public class CabinetServletSignupBook extends HttpServlet {
 		String price = request.getParameter("price");
 
 		Book book = new Book(title, author, Integer.parseInt(year), Integer.parseInt(pages), imageUrl, Double.parseDouble(price));
-		try {
-			bookCrud.add(book);
-			request.setAttribute("successMessage", "book successfully added");
-			request.getRequestDispatcher("signupBook.jsp").forward(request, response);
-		} catch (Exception e) {
-			LOGGER.debug("problems by adding new book to db", e);
-			request.setAttribute("errMessage", "book update failed");
-			request.getRequestDispatcher("signupBook.jsp").forward(request, response);
-		}
+		bookCrud.create(book);
+		request.setAttribute("successMessage", "book successfully added");
+		request.getRequestDispatcher("signupBook.jsp").forward(request, response);
 	}
 }

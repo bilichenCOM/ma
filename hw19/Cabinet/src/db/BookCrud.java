@@ -8,16 +8,16 @@ import model.Book;
 public class BookCrud implements CabinetCrud<Book>{
 
 	@Override
-	public void add(Book book) {
+	public void create(Book book) {
 		DbConnector.connect();
 		DbConnector.addBook(book);
 		DbConnector.disconnect();
 	}
 
 	@Override
-	public Optional<Book> read(Long id) {
+	public Optional<Book> read(String id) {
 		DbConnector.connect();
-		Optional<Book> book = DbConnector.getBook(id);
+		Optional<Book> book = DbConnector.getBook(Long.parseLong(id));
 		DbConnector.disconnect();
 		return book;
 	}
@@ -37,9 +37,9 @@ public class BookCrud implements CabinetCrud<Book>{
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(String id) {
 		DbConnector.connect();
-		DbConnector.deleteBook(id);
+		DbConnector.deleteBook(Long.parseLong(id));
 		DbConnector.disconnect();
 	}
 }

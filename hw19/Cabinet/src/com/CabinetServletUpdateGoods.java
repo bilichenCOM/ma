@@ -7,27 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
-import db.BookDao;
-import db.CabinetCrud;
+import db.BookCrud;
 import model.Book;
 
 @WebServlet("/admin/updateBook")
 public class CabinetServletUpdateGoods extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(CabinetServletUpdateGoods.class);
-	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
+	
+	private static final BookCrud bookCrud = new BookCrud();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		try {
-			Book book = BOOK_CRUD.read(Long.parseLong(id)).get();
-			request.setAttribute("book", book);
-			request.getRequestDispatcher("updateBook.jsp").forward(request, response);
-		} catch (Exception e) {
-			LOGGER.debug("book getting failed", e);
-		}
+		Book book = bookCrud.read(id).get();
+		request.setAttribute("book", book);
+		request.getRequestDispatcher("updateBookPanel.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,12 +34,8 @@ public class CabinetServletUpdateGoods extends HttpServlet {
 		
 		Book book = new Book(Long.parseLong(id), title, author, Integer.parseInt(year),
 				Integer.parseInt(pages), imageUrl, Double.parseDouble(price));
-		try {
-			BOOK_CRUD.update(book);
-			request.setAttribute("successMessage", "successfully updated info");
-			request.getRequestDispatcher("updateBook.jsp").forward(request, response);
-		} catch (Exception e) {
-			LOGGER.debug("failed update of book", e);
-		}
+		bookCrud.update(book);
+		request.setAttribute("successMessage", "successfully updated info");
+		request.getRequestDispatcher("updateBookPanel.jsp").forward(request, response);
 	}
 }

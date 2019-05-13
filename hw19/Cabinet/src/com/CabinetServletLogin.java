@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import db.ConnectionException;
-import db.UserDao;
+import db.UserCrud;
 import db.WrongEmailException;
 import model.Role;
 import model.User;
@@ -21,8 +21,8 @@ import utils.ShaPasswordGenerator;
 public class CabinetServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(CabinetServletLogin.class);
-	private static final UserDao USER_CRUD = new UserDao();
-
+	private static final UserCrud USER_CRUD = new UserCrud();
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("login.jsp").forward(req, resp);
 	}
@@ -59,8 +59,6 @@ public class CabinetServletLogin extends HttpServlet {
 				response.sendRedirect("user");
 			} else if (user.getRoleId() == Role.ADMIN.getId()) {
 				response.sendRedirect("admin");
-			} else {
-				response.sendRedirect("user");
 			}
 			LOGGER.debug("logged as " + user.getRoleId());
 		} catch (ConnectionException e) {

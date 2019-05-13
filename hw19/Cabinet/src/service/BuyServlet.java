@@ -36,12 +36,11 @@ public class BuyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ShopSession shopSession = (ShopSession) request.getSession().getAttribute("shopSession");
 		User user = shopSession.getUser();
-		String bookIdString = (String) request.getAttribute("bookId");
+		Long bookId = (Long) request.getAttribute("bookId");
 		try {
-			Good book = BOOK_CRUD.read(bookIdString).get();
+			Good book = BOOK_CRUD.read(bookId).get();
 			Double bookPrice = book.getPrice();
 			Long userId = user.getId();
-			Long bookId = book.getId();
 
 			if (bookPrice > user.getBalance()) {
 				request.getSession().setAttribute("errMessage", "not enough money!");
@@ -50,7 +49,7 @@ public class BuyServlet extends HttpServlet {
 			}
 
 			Purchase purchase = new Purchase(bookId, userId, bookPrice);
-			PURCHASE_CRUD.create(purchase);
+			PURCHASE_CRUD.add(purchase);
 			user.purchase(book);
 			USER_CRUD.update(user);
 			LOGGER.debug("Book: " + book + " - has been purchased");

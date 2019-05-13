@@ -1,8 +1,14 @@
 package model;
 
-public interface Good {
+public abstract class Good {
 
-	Long getId();
+	public abstract Long getId();
 
-	double getPrice();
+	public abstract String getType();
+
+	public abstract double getPrice();
+
+	public abstract String getDescription();
+
+	public abstract String getImageUrl();
 }

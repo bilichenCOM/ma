@@ -16,10 +16,10 @@ import org.apache.log4j.Logger;
 
 public class MailService {
 
-	private static final String userAddress = "bilichenko.mykhailo@gmail.com";
-	private static final String password = "112358fibo";
+	private static final String LOGIN = "bilichenko.mykhailo@gmail.com";
+	private static final String PASSWORD = "112358fibo";
 
-	private static final Logger logger = Logger.getLogger(MailService.class);
+	private static final Logger LOGGER = Logger.getLogger(MailService.class);
 
 	public static void sendMessage(String email, String text) {
 		Properties props = new Properties();
@@ -31,7 +31,7 @@ public class MailService {
 
 		Session session = Session.getDefaultInstance(props, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(userAddress, password);
+				return new PasswordAuthentication(LOGIN, PASSWORD);
 			}
 		});
 
@@ -41,11 +41,11 @@ public class MailService {
 			message.setSubject("Cabinet purchase verification code");
 			message.setText(text);
 			Transport.send(message);
-			logger.debug("verification email successfully sent! text: " + text);
+			LOGGER.debug("verification email successfully sent! text: " + text);
 		} catch (AddressException e) {
-			logger.debug("wrong email address, sending failed...", e);
+			LOGGER.debug("wrong email address, sending failed...", e);
 		} catch (MessagingException e) {
-			logger.debug("problems by sending email...", e);
+			LOGGER.debug("problems by sending email..." + e.getMessage());
 		}
 	}
 }

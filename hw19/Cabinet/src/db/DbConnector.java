@@ -75,7 +75,7 @@ public class DbConnector {
 	}
 
 	public static void addBook(Book book) {
-		String sql = "INSERT INTO books(title, author, year, pages, image_url) "
+		String sql = "INSERT INTO books(title, author, year, pages, imageurl) "
 				+ "VALUES (?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement addingQuery = connection.prepareStatement(sql);
@@ -125,14 +125,14 @@ public class DbConnector {
 				String author = selectBooksResultSet.getString("author");
 				int year = selectBooksResultSet.getInt("year");
 				int pages = selectBooksResultSet.getInt("pages");
-				String imageUrl = selectBooksResultSet.getString("image_url");
+				String imageUrl = selectBooksResultSet.getString("imageurl");
 				int price = selectBooksResultSet.getInt("price");
 				
 				Book book = new Book(id, title, author, year, pages, imageUrl, price);
 				books.add(book);
 			}
 		} catch (SQLException e) {
-			
+			logger.debug("problems by getting book list");
 		}
 		return books;
 	}
@@ -189,6 +189,34 @@ public class DbConnector {
 			logger.debug("sql exception", e);
 			throw new ExistingUserException();
 		}
+	}
+	
+	public static Optional<User> getUser(Long id) {
+		String sql = "SELECT * FROM users WHERE id = ?";
+		try {
+			PreparedStatement getUserQuery = connection.prepareStatement(sql);
+			getUserQuery.setLong(1, id);
+			
+			ResultSet getUserResultSet = getUserQuery.executeQuery();
+			if (getUserResultSet.next()) {
+				String name = getUserResultSet.getString("name");
+				String surname = getUserResultSet.getString("surname");
+				int age = getUserResultSet.getInt("age");
+				String gender = getUserResultSet.getString("gender");
+				String email = getUserResultSet.getString("email");
+				String password = getUserResultSet.getString("password");
+				int roleId = getUserResultSet.getInt("role_id");
+				int balance = getUserResultSet.getInt("balance");
+				String salt = getUserResultSet.getString("salt");
+				
+				return Optional.of(new User(id, name, surname, gender, age, email, password, roleId, balance, salt));
+			} else {
+				throw new WrongEmailException();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Optional.empty();
 	}
 
 	public static Optional<User> getUser(String email) {
@@ -250,7 +278,7 @@ public class DbConnector {
 	public static void updateUser(User user) {
 		String sql = "UPDATE users "
 				+ "SET name = ?, surname = ?, age = ?, gender = ?, password = ?, role_id = ?, balance = ? "
-				+ "WHERE email ='" + user.getEmail() + "'";
+				+ "WHERE id ='" + user.getId() + "'";
 
 		try {
 			PreparedStatement updateQuery = connection.prepareStatement(sql);
@@ -268,12 +296,23 @@ public class DbConnector {
 		}
 	}
 
+	public static void deleteUser(Long id) {
+		String sql = "DELETE FROM users WHERE id = '" + id + "'";
+		try {
+			Statement deleteQuery = connection.createStatement();
+			deleteQuery.execute(sql);
+			logger.debug("user with id " + id + " deleted");
+		} catch (SQLException e) {
+			logger.debug("problems by deleting users", e);
+		}
+	}
+	
 	public static void deleteUser(String email) {
 		 try {
 			Statement deleteSql = connection.createStatement();
 			deleteSql.execute("DELETE FROM public.users "
 							+ "WHERE email='" + email + "';");
-			logger.debug("user with email" + email + " deleted");
+			logger.debug("user with email " + email + " deleted");
 		} catch (SQLException e) {
 			logger.debug("problems by deleting users", e);
 		}

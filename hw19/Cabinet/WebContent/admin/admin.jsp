@@ -41,9 +41,9 @@
 				<td>${usr.email}</td>
 				<td>${usr.password}</td>
 				<td>${usr.roleId}</td>
-				<td><a href="admin/updateUser?email=${usr.email}"><input
+				<td><a href="admin/updateUser?id=${usr.id}"><input
 						type="button" value="update"></a> <a
-					href="admin/deleteUser?email=${usr.email}"><input type="button"
+					href="admin/deleteUser?id=${usr.id}"><input type="button"
 						value="delete"></a></td>
 		</c:forEach>
 	</table>

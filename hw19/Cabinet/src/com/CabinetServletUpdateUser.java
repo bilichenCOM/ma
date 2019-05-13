@@ -22,15 +22,15 @@ public class CabinetServletUpdateUser extends HttpServlet {
 	private static final UserCrud USER_CRUD = new UserCrud();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
+		String id = request.getParameter("id");
 
 		try {
-			User user = USER_CRUD.read(email).get();
+			User user = USER_CRUD.read(Long.parseLong(id)).get();
 
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("updateUser.jsp").forward(request, response);
 		} catch (WrongEmailException e) {
-			LOGGER.debug("wrong email " + email + " - user not updated!");
+			LOGGER.debug("wrong id " + id + " - user not updated!");
 			request.setAttribute("errMessage", "user cannot be updated");
 			request.getRequestDispatcher("admin").forward(request, response);
 		} catch (ConnectionException e) {

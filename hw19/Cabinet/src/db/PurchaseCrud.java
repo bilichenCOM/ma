@@ -1,5 +1,6 @@
 package db;
 
+import java.util.List;
 import java.util.Optional;
 
 import model.Purchase;
@@ -7,16 +8,16 @@ import model.Purchase;
 public class PurchaseCrud implements CabinetCrud<Purchase> {
 
 	@Override
-	public void create(Purchase purchase) {
+	public void add(Purchase purchase) {
 		DbConnector.connect();
 		DbConnector.addPurchase(purchase);
 		DbConnector.disconnect();
 	}
 
 	@Override
-	public Optional<Purchase> read(String s) {
+	public Optional<Purchase> read(Long id) {
 		DbConnector.connect();
-		Optional<Purchase> purchase = DbConnector.getPurchase(Long.parseLong(s));
+		Optional<Purchase> purchase = DbConnector.getPurchase(id);
 		DbConnector.disconnect();
 		return purchase;
 	}
@@ -27,7 +28,12 @@ public class PurchaseCrud implements CabinetCrud<Purchase> {
 	}
 
 	@Override
-	public void delete(String s) throws Exception {
+	public void delete(Long id) throws Exception {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public List<Purchase> readAll() {
+		return null;
 	}
 }

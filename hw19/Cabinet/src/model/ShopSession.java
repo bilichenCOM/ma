@@ -5,7 +5,7 @@ import java.util.List;
 public class ShopSession {
 
 	private User user;
-	private List<Book> books;
+	private List<? extends Good> goods;
 
 	public User getUser() {
 		return user;
@@ -15,11 +15,11 @@ public class ShopSession {
 		this.user = user;
 	}
 
-	public List<Book> getBooks() {
-		return books;
+	public List<? extends Good> getGoods() {
+		return goods;
 	}
 
-	public void setBooks(List<Book> books) {
-		this.books = books;
+	public void setGoods(List<? extends Good> goods) {
+		this.goods = goods;
 	}	
 }

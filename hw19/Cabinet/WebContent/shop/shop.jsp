@@ -21,15 +21,12 @@
 				<th>Description</th>
 				<th>Action</th>
 			</tr>
-			<c:forEach var="book" items="${shopSession.books}">
+			<c:forEach var="good" items="${shopSession.goods}">
 				<tr>
-					<td><img alt="photo" src="${book.imageUrl}" height="252" width="200"></td>
-					<td>${book.title}</td>
-					<td>Price: ${book.price} <br> Author: ${book.author} <br>
-						Year: ${book.year} <br> Pages: ${book.pages} <br> ID:
-						${book.id}
-					</td>
-					<td><a href="shop/buy?bookId=${book.id}"><input type="button"
+					<td><img alt="photo" src="${good.imageUrl}" height="252" width="200"></td>
+					<td>${good.type}</td>
+					<td>${good.description}</td>
+					<td><a href="shop/buy?bookId=${good.id}"><input type="button"
 							value="Buy!"></a></td>
 			</c:forEach>
 		</table>

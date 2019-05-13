@@ -1,6 +1,19 @@
 package model;
 
-public class Book implements Good {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "books")
+public class Book extends Good {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 	private String title;
 	private String author;
@@ -8,7 +21,8 @@ public class Book implements Good {
 	private int pages;
 	private String imageUrl;
 	private double price;
-
+	
+	public Book() {}
 	public Book(String title, String author, int year, int pages, String imageUrl, double price) {
 		this(null, title, author, year, pages, imageUrl, price);
 	}
@@ -80,6 +94,17 @@ public class Book implements Good {
 	}
 
 	@Override
+	public String getDescription() {
+		return String.format("title: %s\r\nauthor: %s\r\nyear: %s\r\npages: %s\r\nprice: %s\r\n"
+				, title, author, year, pages, price);
+	}
+
+	@Override
+	public String getType() {
+		return "Book";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -125,6 +150,6 @@ public class Book implements Good {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", pages=" + pages
-				+ ", imageUrl=" + imageUrl + ", price=" + price + "]";
+		        + ", imageUrl=" + imageUrl + ", price=" + price + "]";
 	}
 }

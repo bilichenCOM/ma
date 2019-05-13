@@ -1,0 +1,68 @@
+package db;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import model.Book;
+
+public class BookDao implements CabinetCrud<Book>{
+	private SessionFactory factory;
+
+	public BookDao() {
+		factory = new Configuration().configure().buildSessionFactory();
+	}
+
+	@Override
+	public void add(Book book) {
+		Session session = factory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.save(book);
+		tx.commit();
+		session.close();
+	}
+
+	@Override
+	public Optional<Book> read(Long id) {
+		Session session = factory.openSession();
+		Book book = session.get(Book.class, id);
+		session.close();
+		return Optional.of(book);
+	}
+
+	@Override
+	public void update(Book book) {
+		Session session = factory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.update(book);
+		tx.commit();
+		session.close();
+	}
+
+	@Override
+	public void delete(Long id) {
+		Session session = factory.openSession();
+		Transaction tx = session.beginTransaction();
+		Book book = session.get(Book.class, id);
+		session.delete(book);
+		tx.commit();
+		session.close();
+	}
+
+	@Override
+	public List<Book> readAll() {
+		Session session = factory.openSession();
+		Transaction tx = session.beginTransaction();
+		String queryString = "SELECT * FROM books";
+		@SuppressWarnings("unchecked")
+		List<Book> bookList = (List<Book>) session.createSQLQuery(queryString);
+		tx.commit();
+		session.close();
+		return bookList;
+	}
+	
+}

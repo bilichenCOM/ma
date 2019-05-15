@@ -22,11 +22,13 @@ public class User implements Serializable {
 	private String name;
 	private String surname;
 	private String gender;
-	private int age;
+	private Integer age;
 	private String email;
 	private String password;
-	private int roleId;
-	private double balance;
+
+	@Column(name = "role_id")
+	private Integer roleId;
+	private Double balance;
 	private String salt;
 
 	public User() {}
@@ -119,7 +121,7 @@ public class User implements Serializable {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 

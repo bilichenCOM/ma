@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import db.BookCrud;
+import db.BookDao;
+import db.CabinetCrud;
 import db.ConnectionException;
-import db.PurchaseCrud;
-import db.UserCrud;
+import db.PurchaseDao;
+import db.UserDao;
+import model.Book;
 import model.Good;
 import model.Purchase;
 import model.ShopSession;
@@ -21,9 +23,10 @@ import model.User;
 @WebServlet("/shop/buy")
 public class BuyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final BookCrud BOOK_CRUD = new BookCrud();
-	private static final PurchaseCrud PURCHASE_CRUD = new PurchaseCrud();
-	private static final UserCrud USER_CRUD = new UserCrud();
+
+	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
+	private static final CabinetCrud<Purchase> PURCHASE_CRUD = new PurchaseDao();
+	private static final CabinetCrud<User> USER_CRUD = new UserDao();
 
 	private static final Logger LOGGER = Logger.getLogger(BuyServlet.class);
 
@@ -36,7 +39,7 @@ public class BuyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ShopSession shopSession = (ShopSession) request.getSession().getAttribute("shopSession");
 		User user = shopSession.getUser();
-		Long bookId = (Long) request.getAttribute("bookId");
+		Long bookId = Long.parseLong(request.getAttribute("bookId").toString());
 		try {
 			Good book = BOOK_CRUD.read(bookId).get();
 			Double bookPrice = book.getPrice();
@@ -58,6 +61,10 @@ public class BuyServlet extends HttpServlet {
 		} catch (ConnectionException e) {
 			LOGGER.debug("connection failed");
 			request.getSession().setAttribute("errMessage", "connection failed");
+			response.sendRedirect("/Cabinet/shop");
+		} catch (Exception e) {
+			LOGGER.debug("problems by getting book from db");
+			request.getSession().setAttribute("errMessage", "something went wrong, please try again...");
 			response.sendRedirect("/Cabinet/shop");
 		}
 	}

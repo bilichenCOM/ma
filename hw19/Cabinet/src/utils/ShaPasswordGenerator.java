@@ -1,5 +1,6 @@
 package utils;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -19,7 +20,8 @@ public class ShaPasswordGenerator {
 		try {
 			MessageDigest md = MessageDigest.getInstance(ALGORITHM);
 			md.update(salt.getBytes());
-			return Base64.getEncoder().encodeToString(md.digest());
+			hashedPass = Base64.getEncoder()
+					.encodeToString(md.digest(hashedPass.getBytes(StandardCharsets.UTF_8)));
 		} catch (NoSuchAlgorithmException e) {
 			logger.debug("no such algorithm", e);
 		}

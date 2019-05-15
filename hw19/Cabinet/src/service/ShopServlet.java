@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import db.BookCrud;
+import db.BookDao;
 import db.CabinetCrud;
 import db.ConnectionException;
 import model.Book;
@@ -22,7 +22,7 @@ import model.User;
 public class ShopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(ShopServlet.class);
-	private static final CabinetCrud<Book> BOOK_CRUD = new BookCrud();
+	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {

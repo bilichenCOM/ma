@@ -6,15 +6,13 @@ import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import model.Book;
 
 public class BookDao implements CabinetCrud<Book>{
-	private SessionFactory factory;
+	private SessionFactory factory = HibernateUtil.getSessionFactory();
 
 	public BookDao() {
-		factory = new Configuration().configure().buildSessionFactory();
 	}
 
 	@Override
@@ -57,9 +55,9 @@ public class BookDao implements CabinetCrud<Book>{
 	public List<Book> readAll() {
 		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
-		String queryString = "SELECT * FROM books";
+		String queryString = "SELECT b FROM Book b";
 		@SuppressWarnings("unchecked")
-		List<Book> bookList = (List<Book>) session.createSQLQuery(queryString);
+		List<Book> bookList = session.createQuery(queryString).list();
 		tx.commit();
 		session.close();
 		return bookList;

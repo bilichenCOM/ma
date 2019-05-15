@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.BookCrud;
+import db.BookDao;
+import db.CabinetCrud;
 import model.Book;
 
 @WebServlet("/admin/adminGoods")
 public class CabinetServletAdminGoods extends HttpServlet {
 
-	private static final BookCrud BOOK_CRUD = new BookCrud();
+	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
 	
 	private static final long serialVersionUID = 1L;
 

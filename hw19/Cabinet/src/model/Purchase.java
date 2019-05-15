@@ -1,8 +1,23 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name = "Purchase")
+@Table(name = "purchases")
 public class Purchase {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
+	@Column(name = "book_id")
 	private Long bookId;
+	@Column(name = "user_id")
 	private Long userId;
 	private double value;
 

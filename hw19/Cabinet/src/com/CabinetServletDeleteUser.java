@@ -28,15 +28,15 @@ public class CabinetServletDeleteUser extends HttpServlet {
 			try {
 				USER_CRUD.delete(Long.parseLong(id));
 				request.setAttribute("successMessage", "user successfully deleted!");
-				request.getRequestDispatcher("/Cabinet/admin").forward(request, response);
+				request.getRequestDispatcher("/admin").forward(request, response);
 			} catch (ConnectionException e) {
 				LOGGER.debug("connection to db failed!");
 				request.setAttribute("errMessage", "connection failed, please try again...");
-				request.getRequestDispatcher("/Cabinet/admin").forward(request, response);
+				request.getRequestDispatcher("/admin").forward(request, response);
 			} catch (Exception e) {
 				LOGGER.debug("problems by deleting users", e);
 				request.setAttribute("errMessage", "user not deleted, please try again...");
-				request.getRequestDispatcher("/Cabinet/admin").forward(request, response);
+				request.getRequestDispatcher("/admin").forward(request, response);
 			}
 	}
 }

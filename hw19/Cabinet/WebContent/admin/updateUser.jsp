@@ -10,7 +10,7 @@
 	<div align="center">
 		<h2>
 			Update user
-			<c:out value="${param.email}" />
+			<c:out value="${userToUpdate.email}" />
 			data
 		</h2>
 		<br>
@@ -22,42 +22,36 @@
 		<c:out value="${successMessage}" />
 	</div>
 	<form action="updateUser" method="POST">
-		<input type="hidden" name="email" value="${param.email}" />
 		<div align="center">
 			<table>
 				<tr>
 					<td>Name:</td>
-					<td><input type="text" maxlength="20" name="name" value="${user.name}">
+					<td><input type="text" maxlength="20" name="name" value="${userToUpdate.name}">
 					</td>
 				</tr>
 				<tr>
 					<td>Surname:</td>
-					<td><input type="text" name="surname" maxlength="20" value="${user.surname}">
+					<td><input type="text" name="surname" maxlength="20" value="${userToUpdate.surname}">
 					</td>
 				</tr>
 				<tr>
 					<td>Age:</td>
-					<td><input type="text" maxlength="3" name="age" value="${user.age}">
+					<td><input type="text" maxlength="3" name="age" value="${userToUpdate.age}">
 					</td>
 				</tr>
 				<tr>
 					<td>Gender:</td>
-					<td><input type="text" name="gender" value="${user.gender}">
-					</td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type="password" name="password" value="${user.password}">
+					<td><input type="text" name="gender" value="${userToUpdate.gender}">
 					</td>
 				</tr>
 				<tr>
 					<td>RoleId:</td>
-					<td><input type="text" name="roleId" value="${user.roleId}">
+					<td><input type="text" name="roleId" value="${userToUpdate.roleId}">
 					</td>
 				</tr>
 				<tr>
 					<td>Balance:</td>
-					<td><input type="text" name="balance" value="${user.balance}">
+					<td><input type="text" name="balance" value="${userToUpdate.balance}">
 					</td>
 				</tr>
 				<tr>

@@ -32,7 +32,8 @@ public class PurchaseVerificationServlet extends HttpServlet {
 		String verCode = request.getParameter("verCode");
 		String code = request.getParameter("code");
 		String bookId = request.getParameter("bookId");
-		
+		System.out.println("Book id received: " + bookId);
+
 		if (verCode.equals(code)) {
 			request.setAttribute("bookId", bookId);
 			request.getRequestDispatcher("buy").forward(request, response);

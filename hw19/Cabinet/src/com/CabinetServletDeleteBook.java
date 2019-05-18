@@ -17,12 +17,12 @@ import model.Book;
 public class CabinetServletDeleteBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(CabinetServletDeleteBook.class);
-	private static final CabinetCrud<Book> bookCrud = new BookDao();
+	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		try {
-			bookCrud.delete(Long.parseLong(id));
+			BOOK_CRUD.delete(Long.parseLong(id));
 			request.setAttribute("successMessage", "book has been deleted");
 			request.getRequestDispatcher("adminGoods").forward(request, response);
 		} catch (Exception e) {

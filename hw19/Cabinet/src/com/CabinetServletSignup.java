@@ -27,6 +27,16 @@ public class CabinetServletSignup extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		if (
+				!ParametersValidator.checkEmailValidity(request.getParameter("email"))
+				|| !ParametersValidator.checkTextValidity(request.getParameter("password"))
+				) {
+				request.setAttribute("errMessage", "please check validity of login and password...");
+				request.getRequestDispatcher("signup.jsp").forward(request, response);
+				return;
+			}
+
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		String age = request.getParameter("age");
@@ -34,16 +44,6 @@ public class CabinetServletSignup extends HttpServlet {
 		String email = request.getParameter("email");
 
 		String passwordFromForm = request.getParameter("password");
-
-		if (
-			!ParametersValidator.checkEmailValidity(email)
-			|| !ParametersValidator.checkTextValidity(passwordFromForm)
-			) {
-			request.setAttribute("errMessage", "please check validity of login and password...");
-			request.getRequestDispatcher("signup.jsp").forward(request, response);
-			return;
-		}
-		
 		String salt = ShaPasswordGenerator.generateSalt();
 		String password = ShaPasswordGenerator.getShaPassword(passwordFromForm, salt);
 

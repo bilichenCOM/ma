@@ -10,14 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", updatable = false, nullable = false)
+	@Column(name = "ID", updatable = false, nullable = false)
 	private Long id;
 	private String name;
 	private String surname;
@@ -26,7 +26,7 @@ public class User implements Serializable {
 	private String email;
 	private String password;
 
-	@Column(name = "role_id")
+	@Column(name = "ROLE_ID")
 	private Integer roleId;
 	private Double balance;
 	private String salt;

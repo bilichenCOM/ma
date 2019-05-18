@@ -23,8 +23,8 @@ public class DbConnector {
 	private static final String DB_URL = "jdbc:postgresql://localhost:5432/cabinet_db";
 	private static final String DB_USER = "postgres";
 	private static final String DB_PASSWORD = "admin";
-	
-	private static final Logger logger = Logger.getLogger(DbConnector.class);
+
+	private static final Logger LOGGER = Logger.getLogger(DbConnector.class);
 
 	private static Connection connection;
 
@@ -32,7 +32,7 @@ public class DbConnector {
 		try {
 			Class.forName(DRIVER_NAME);
 		} catch (ClassNotFoundException e) {
-			logger.error("driver to db not found");
+			LOGGER.error("driver to db not found");
 		}
 	}
 
@@ -49,16 +49,17 @@ public class DbConnector {
 			addingQuery.setDouble(3, purchase.getValue());
 			return addingQuery.executeUpdate();
 		} catch (SQLException e) {
-			logger.debug("problems by adding purchase to db", e);
+			LOGGER.debug("problems by adding purchase to db", e);
 		}
 		return 0;
 	}
 
 	public static Optional<Purchase> getPurchase(Long id) {
-		String sql = "SELECT * FROM purchases WHERE id = '" + id + "'";
+		String sql = "SELECT * FROM purchases WHERE id = ?";
 		try {
-			Statement selectQuery = connection.createStatement();
-			ResultSet selectQueryResultSet = selectQuery.executeQuery(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			ResultSet selectQueryResultSet = preparedStatement.executeQuery();
 			if (selectQueryResultSet.next()) {
 				Long bookId = selectQueryResultSet.getLong("book_id");
 				Long userId = selectQueryResultSet.getLong("user_id");
@@ -69,7 +70,7 @@ public class DbConnector {
 				return Optional.empty();
 			}
 		} catch (SQLException e) {
-			logger.debug("purchase not found in db", e);
+			LOGGER.debug("purchase not found in db", e);
 		}
 		return Optional.empty();
 	}
@@ -86,15 +87,16 @@ public class DbConnector {
 			addingQuery.setString(5, book.getImageUrl());
 			addingQuery.execute();
 		} catch (SQLException e) {
-			logger.debug("problems by adding new books", e);
+			LOGGER.debug("problems by adding new books", e);
 		}
 	}
 
 	public static Optional<Book> getBook(Long id) {
-		String sql = "SELECT * FROM books WHERE id = " + id;
+		String sql = "SELECT * FROM books WHERE id = ?";
 		try {
-			Statement selectQuery = connection.createStatement();
-			ResultSet selectBookResultSet = selectQuery.executeQuery(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			ResultSet selectBookResultSet = preparedStatement.executeQuery();
 			if (selectBookResultSet.next()) {
 				String title = selectBookResultSet.getString("title");
 				String author = selectBookResultSet.getString("author");
@@ -107,7 +109,7 @@ public class DbConnector {
 				return Optional.of(book);
 			}
 		} catch (SQLException e) {
-			logger.debug("problems by getting book", e);
+			LOGGER.debug("problems by getting book", e);
 		}
 		return Optional.empty();
 	}
@@ -132,7 +134,7 @@ public class DbConnector {
 				books.add(book);
 			}
 		} catch (SQLException e) {
-			logger.debug("problems by getting book list");
+			LOGGER.debug("problems by getting book list");
 		}
 		return books;
 	}
@@ -156,7 +158,7 @@ public class DbConnector {
 			updateQuery.setLong(6, id);
 			updateQuery.execute();
 		} catch (SQLException e) {
-			logger.debug("problems by updating book", e);
+			LOGGER.debug("problems by updating book", e);
 		}
 	}
 	
@@ -167,7 +169,7 @@ public class DbConnector {
 			deleteQuery.setLong(1, id);
 			deleteQuery.execute();
 		} catch (SQLException e) {
-			logger.debug("problems by deleting book ", e);
+			LOGGER.debug("problems by deleting book ", e);
 		}
 	}
 	public static void addUser(User user) {
@@ -186,7 +188,7 @@ public class DbConnector {
 			addingQuery.setString(9, user.getSalt());
 			addingQuery.execute();
 		} catch (SQLException e) {
-			logger.debug("sql exception", e);
+			LOGGER.debug("sql exception", e);
 			throw new ExistingUserException();
 		}
 	}
@@ -244,7 +246,7 @@ public class DbConnector {
 			}
 
 		} catch (SQLException e) {
-			logger.debug("sql exception", e);
+			LOGGER.debug("sql exception", e);
 		}
 		return Optional.empty();
 	}
@@ -271,7 +273,7 @@ public class DbConnector {
 				userList.add(user);
 			}
 		} catch (SQLException e) {
-			logger.debug("problems by fetching user list from db", e);
+			LOGGER.debug("problems by fetching user list from db", e);
 		}
 		return userList;
 	}
@@ -292,45 +294,49 @@ public class DbConnector {
 			updateQuery.setDouble(7, user.getBalance());
 			updateQuery.execute();
 		} catch (SQLException e) {
-			logger.debug("problems by updating user", e);
+			LOGGER.debug("problems by updating user", e);
 		}
 	}
 
 	public static void deleteUser(Long id) {
-		String sql = "DELETE FROM users WHERE id = '" + id + "'";
+		String sql = "DELETE FROM users WHERE id = ?";
 		try {
-			Statement deleteQuery = connection.createStatement();
-			deleteQuery.execute(sql);
-			logger.debug("user with id " + id + " deleted");
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+			LOGGER.debug("user with id " + id + " deleted");
 		} catch (SQLException e) {
-			logger.debug("problems by deleting users", e);
+			LOGGER.debug("problems by deleting users", e);
 		}
 	}
 	
 	public static void deleteUser(String email) {
+		String sql = "DELETE FROM users WHERE email = ?";
 		 try {
-			Statement deleteSql = connection.createStatement();
-			deleteSql.execute("DELETE FROM public.users "
-							+ "WHERE email='" + email + "';");
-			logger.debug("user with email " + email + " deleted");
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, email);
+			preparedStatement.execute();
+			LOGGER.debug("user with email " + email + " deleted");
 		} catch (SQLException e) {
-			logger.debug("problems by deleting users", e);
+			LOGGER.debug("problems by deleting users", e);
 		}
 	}
 
 	public static Map<String, String> getUserInfo(String email, String passwd) {
+		String sql = "SELECT * FROM users WHERE email = ? AND passwd = ?";
 		Map<String, String> userInfo = new HashMap<>();
 		try {
-			Statement selectSql = connection.createStatement();
-			ResultSet rs = selectSql.executeQuery("SELECT * FROM public.users "
-					+ "WHERE email='" + email + "' AND passwd='" + passwd + "';");
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, passwd);
+			ResultSet rs = preparedStatement.executeQuery();
 			userInfo = makeUserInfoMap(rs);
 			if (userInfo.get("email") == null) {
-				logger.debug("wrong credentials! " + email + " " + passwd);
+				LOGGER.debug("wrong credentials! " + email + " " + passwd);
 				throw new WrongEmailException();
 			}
 		} catch (SQLException e) {
-			logger.debug("problems by getting user info");
+			LOGGER.debug("problems by getting user info");
 		}
 		return userInfo;
 	}
@@ -347,7 +353,7 @@ public class DbConnector {
 				userInfo.put("user_gender", rs.getString("user_gender"));
 			}
 		} catch (SQLException e) {
-			logger.debug("crashed by parsing user data");
+			LOGGER.debug("crashed by parsing user data");
 		}
 		return userInfo;
 	}
@@ -356,7 +362,7 @@ public class DbConnector {
 		try {
 			connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 		} catch (SQLException e) {
-			logger.error("connection to database failed");
+			LOGGER.error("connection to database failed");
 			throw new ConnectionException();
 		}
 	}
@@ -365,7 +371,7 @@ public class DbConnector {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-			logger.debug("connection closing failed");
+			LOGGER.debug("connection closing failed");
 		}
 	}
 }

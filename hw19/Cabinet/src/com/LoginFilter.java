@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = { "/admin/*", "/user/*", "/shop/buy", "/shop/purchaseVerification" })
+@WebFilter(urlPatterns = { "/admin/*", "/user/*", "/shop/*" })
 public class LoginFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

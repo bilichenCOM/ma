@@ -10,17 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import db.CabinetCrud;
-import db.ConnectionException;
 import db.UserDao;
-import db.WrongEmailException;
+import db.impl.UserDaoImpl;
 import model.User;
 
 @WebServlet("/admin/updateUser")
 public class CabinetServletUpdateUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(CabinetServletUpdateUser.class);
-	private static final CabinetCrud<User> USER_CRUD = new UserDao();
+	private static final UserDao USER_CRUD = new UserDaoImpl();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
@@ -30,14 +28,6 @@ public class CabinetServletUpdateUser extends HttpServlet {
 
 			request.getSession().setAttribute("userToUpdate", user);
 			request.getRequestDispatcher("updateUser.jsp").forward(request, response);
-		} catch (WrongEmailException e) {
-			LOGGER.debug("wrong id " + id + " - user not updated!");
-			request.setAttribute("errMessage", "user cannot be updated");
-			request.getRequestDispatcher("/admin").forward(request, response);
-		} catch (ConnectionException e) {
-			LOGGER.error("connection to db failed");
-			request.setAttribute("errMessage", "connection failed, please try again...");
-			request.getRequestDispatcher("/admin").forward(request, response);
 		} catch (Exception e) {
 			LOGGER.error("problems updating user", e);
 			request.setAttribute("errMessage", "something went wrong, please try again...");
@@ -66,10 +56,6 @@ public class CabinetServletUpdateUser extends HttpServlet {
 			request.setAttribute("user", user);
 			request.setAttribute("successMessage", "user successfully updated");
 			request.getSession().setAttribute("userToUpdate", null);
-			request.getRequestDispatcher("updateUser.jsp").forward(request, response);
-		} catch (ConnectionException e) {
-			LOGGER.error("connection to db failed");
-			request.setAttribute("errMessage", "connection to db failed, please try again...");
 			request.getRequestDispatcher("updateUser.jsp").forward(request, response);
 		} catch (Exception e) {
 			LOGGER.error("problems updating user", e);

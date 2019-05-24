@@ -16,7 +16,9 @@
 		</h1>
 	</div>
 	<div align="center" style="color: red">${errMessage}</div>
+	<c:set var="errMessage" value="" scope="session"/>
 	<div align="center" style="color: green">${successMessage}</div>
+	<c:set var="successMessage" value="" scope="session"/>
 
 	<table border="1">
 		<tr>

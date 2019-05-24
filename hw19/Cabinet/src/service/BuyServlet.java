@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import db.BookDao;
-import db.CabinetCrud;
-import db.ConnectionException;
+import db.GoodDao;
 import db.PurchaseDao;
 import db.UserDao;
-import model.Book;
+import db.impl.GoodDaoImpl;
+import db.impl.PurchaseDaoImpl;
+import db.impl.UserDaoImpl;
 import model.Good;
 import model.Purchase;
+import model.PurchaseStatus;
 import model.ShopSession;
 import model.User;
 
@@ -24,9 +25,9 @@ import model.User;
 public class BuyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
-	private static final CabinetCrud<Purchase> PURCHASE_CRUD = new PurchaseDao();
-	private static final CabinetCrud<User> USER_CRUD = new UserDao();
+	private static final GoodDao goodDao = new GoodDaoImpl();
+	private static final PurchaseDao PURCHASE_CRUD = new PurchaseDaoImpl();
+	private static final UserDao USER_CRUD = new UserDaoImpl();
 
 	private static final Logger LOGGER = Logger.getLogger(BuyServlet.class);
 
@@ -41,7 +42,7 @@ public class BuyServlet extends HttpServlet {
 		User user = shopSession.getUser();
 		Long bookId = Long.parseLong(request.getAttribute("bookId").toString());
 		try {
-			Good book = BOOK_CRUD.read(bookId).get();
+			Good book = goodDao.read(bookId).get();
 			Double bookPrice = book.getPrice();
 			Long userId = user.getId();
 
@@ -51,16 +52,12 @@ public class BuyServlet extends HttpServlet {
 				return;
 			}
 
-			Purchase purchase = new Purchase(bookId, userId, bookPrice);
+			Purchase purchase = new Purchase(bookId, userId, bookPrice, PurchaseStatus.FINISHED);
 			PURCHASE_CRUD.add(purchase);
 			user.purchase(book);
 			USER_CRUD.update(user);
 			LOGGER.debug("Book: " + book + " - has been purchased");
 			request.getSession().setAttribute("successMessage", "purchase has been done");
-			response.sendRedirect("/Cabinet/shop");
-		} catch (ConnectionException e) {
-			LOGGER.debug("connection failed");
-			request.getSession().setAttribute("errMessage", "connection failed");
 			response.sendRedirect("/Cabinet/shop");
 		} catch (Exception e) {
 			LOGGER.debug("problems by getting book from db");

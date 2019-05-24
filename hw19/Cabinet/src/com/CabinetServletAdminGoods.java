@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.BookDao;
-import db.CabinetCrud;
-import model.Book;
+import db.GoodDao;
+import db.impl.GoodDaoImpl;
+import model.Good;
 
 @WebServlet("/admin/adminGoods")
 public class CabinetServletAdminGoods extends HttpServlet {
 
-	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
+	private static final GoodDao goodDao = new GoodDaoImpl();
 	
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Book> books = BOOK_CRUD.readAll();
+		List<Good> books = goodDao.readAll();
 		request.setAttribute("books", books);
 		request.getRequestDispatcher("adminGoods.jsp").forward(request, response);
 	}

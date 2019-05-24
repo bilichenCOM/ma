@@ -7,6 +7,14 @@ public class ShopSession {
 	private User user;
 	private List<? extends Good> goods;
 
+	public ShopSession() {
+	}
+
+	public ShopSession(User user, List<? extends Good> goods, List<Purchase> basketPurchases) {
+		this.user = user;
+		this.goods = goods;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -21,5 +29,5 @@ public class ShopSession {
 
 	public void setGoods(List<? extends Good> goods) {
 		this.goods = goods;
-	}	
+	}
 }

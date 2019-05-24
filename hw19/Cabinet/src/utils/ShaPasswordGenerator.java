@@ -15,7 +15,7 @@ public class ShaPasswordGenerator {
 
 	private static final Logger logger = Logger.getLogger(ShaPasswordGenerator.class);
 
-	public static String getShaPassword(String password, String salt) {
+	public static String getSha256Password(String password, String salt) {
 		String hashedPass = password;
 		try {
 			MessageDigest md = MessageDigest.getInstance(ALGORITHM);

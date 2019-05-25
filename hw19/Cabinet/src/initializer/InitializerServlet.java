@@ -9,6 +9,7 @@ import db.UserDao;
 import db.impl.GoodDaoImpl;
 import db.impl.UserDaoImpl;
 import model.Book;
+import model.Protein;
 import model.User;
 import utils.ShaPasswordGenerator;
 
@@ -73,11 +74,25 @@ public class InitializerServlet extends HttpServlet {
 		String author2 = "Dr. Cook";
 		Integer pages2 = 200;
 		Integer year2 = 2019;
-		String imageUrl2 = "http://spacex.com/favicon.ico";
+		String imgUrl2 = "http://spacex.com/favicon.ico";
 		Double price2 = 322.0;
 
-		Book book2 = new Book(title2, author2, year2, pages2, imageUrl2, price2);
+		Book book2 = new Book(title2, author2, year2, pages2, imgUrl2, price2);
 		goodDao.add(book2);
+
+		String imageUrl1 = "https://images-na.ssl-images-amazon.com/images/I/71TVOmJQ2QL._SX466_.jpg";
+		String imageUrl2 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo_pdKdlWmPIfRu9H_y8Atmk_Ko_B_7YLy5OHz9PMgcwzHJWI1";
+		String imageUrl3 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaQN8ZnLEEA1bPIAKYo8EnmNF9mjMBKx6wqXCXdTPhpAPzaTJb";
+		String imageUrl4 = "https://i1.rozetka.ua/goods/371695/sn_100_whey_protein_prof_920_g_banana_images_371695382.jpg";
+		String imageUrl5 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfq2ZAM57r-hBQzi_FuxC6ZL0sDFq85cM1OtTiMlAaANpSl7uR";
+		String imageUrl6 = "https://i0.wp.com/www.healthline.com/hlcmsresource/images/AN_images/whey-protein-1296x728-feature.jpg?w=1155&h=1528";
+
+		goodDao.add(new Protein("Good Muscle", "Whey Company", 2019, imageUrl1, 500D));
+		goodDao.add(new Protein("Good Biceps", "Whey Company", 2019, imageUrl2, 500D));
+		goodDao.add(new Protein("Good Triceps", "Whey Company", 2019, imageUrl3, 500D));
+		goodDao.add(new Protein("Good Legs", "Whey Company", 2019, imageUrl4, 500D));
+		goodDao.add(new Protein("Good Wings", "Whey Company", 2019, imageUrl5, 500D));
+		goodDao.add(new Protein("Good All in", "Whey Company", 2019, imageUrl6, 1000D));
 
 	}
 }

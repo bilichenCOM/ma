@@ -3,6 +3,7 @@ package db.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -13,7 +14,8 @@ import utils.HibernateUtil;
 
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
-	private static SessionFactory factory = HibernateUtil.getSessionFactory();
+	private static final SessionFactory factory = HibernateUtil.getSessionFactory();
+	private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
 
 	public UserDaoImpl() {
 	}
@@ -26,13 +28,10 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 		Session session = factory.openSession();
 		Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "'"
 				, User.class);
-		if (query.list().size() == 0) {
-			session.close();
-			return Optional.empty();
-		}
+		logger.debug(String.format("reading user with email %s from database...", email));
 		User user = query.getSingleResult();
 		session.close();
-		return Optional.of(user);
+		return Optional.ofNullable(user);
 	}
 
 	public void delete(Long id) {

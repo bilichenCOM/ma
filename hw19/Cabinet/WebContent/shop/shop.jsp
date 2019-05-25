@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Shop</title>
 </head>
-<body>
+<body style="background-color: #993399">
 	<div align="left">
 		Hello ${shopSession.user.name} <a href="/Cabinet/logout"><input
 			type="button" value="Logout"></a>

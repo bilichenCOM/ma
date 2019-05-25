@@ -1,7 +1,7 @@
 package com;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,14 +40,24 @@ public class CabinetServletLogin extends HttpServlet {
 			return;
 		}
 
-		if (!USER_CRUD.readByEmail(email).isPresent()) {
+		Optional<User> optionalUser = Optional.empty();
+
+		try {
+			optionalUser = USER_CRUD.readByEmail(email);			
+		} catch (Exception e) {
+			request.getSession().setAttribute("errMessage", "something went wrong... please try again");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			return;
+		}
+
+		if (!optionalUser.isPresent()) {
 			LOGGER.debug("wrong credentials for " + email);
 			request.setAttribute("errMessage", "wrong email or password!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return;
 		}
 
-		User user = USER_CRUD.readByEmail(email).get();
+		User user = optionalUser.get();
 
 		String salt = user.getSalt();
 		String password = ShaPasswordGenerator.getSha256Password(passwordFromForm, salt);
@@ -67,10 +77,9 @@ public class CabinetServletLogin extends HttpServlet {
 		} else if (user.getRoleId() == Role.ADMIN.getId()) {
 			response.sendRedirect("admin");
 		} else {
-			PrintWriter printWriter = response.getWriter();
-			printWriter.println("<h1>Oops</h1>");
-			printWriter.println("Sorry your role is not defined. Please ask your amdinistrator...");
 			LOGGER.debug("not defined role for user " + user);
+			request.getSession().setAttribute("errMessage", "your role is not defined... please ask administrator...");
+			response.sendRedirect(".");
 		}
 
 		LOGGER.debug("logged as " + user.getRoleId());

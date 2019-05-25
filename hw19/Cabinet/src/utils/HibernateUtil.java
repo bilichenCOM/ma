@@ -8,6 +8,7 @@ import org.hibernate.service.ServiceRegistry;
 import model.Book;
 import model.Card;
 import model.Good;
+import model.Protein;
 import model.Purchase;
 import model.User;
 
@@ -23,6 +24,7 @@ public class HibernateUtil {
 			configuration.addAnnotatedClass(Purchase.class);
 			configuration.addAnnotatedClass(Good.class);
 			configuration.addAnnotatedClass(Card.class);
+			configuration.addAnnotatedClass(Protein.class);
 
 			ServiceRegistry registry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties())

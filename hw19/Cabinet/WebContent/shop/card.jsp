@@ -26,7 +26,9 @@
 		</tr>
 		<c:if test="${shopSession.user.card.size eq 0}">
 			<tr> 
-			<td>No goods on your card... please go to shop and add something </td>
+				<td>No goods on your card... please go to shop and add something<br>
+				<img alt="gif" src="https://66.media.tumblr.com/3c77794cb009098212f000b47c6bbb29/tumblr_n10og0upY41sflq2ao1_400.gif">
+			 </td>
 			</tr>
 		</c:if>
 		<c:forEach var="good" items="${shopSession.user.card.goods}">

@@ -26,7 +26,10 @@ public class User implements Serializable {
 	private String surname;
 	private String gender;
 	private Integer age;
+
+	@Column(unique = true)
 	private String email;
+
 	private String password;
 
 	@Column(name = "ROLE_ID")

@@ -1,10 +1,13 @@
 package db.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import db.PurchaseDao;
@@ -15,7 +18,8 @@ import utils.HibernateUtil;
 public class PurchaseDaoImpl extends GenericDaoImpl<Purchase> implements PurchaseDao {
 
 	private static final SessionFactory factory = HibernateUtil.getSessionFactory();
-	
+	private static final Logger logger = Logger.getLogger(PurchaseDaoImpl.class);
+
 	@Override
 	public Optional<Purchase> read(Long id) {
 		return read(Purchase.class, id);
@@ -33,13 +37,25 @@ public class PurchaseDaoImpl extends GenericDaoImpl<Purchase> implements Purchas
 
 	@Override
 	public List<Purchase> getBasketPurchases(Long userId) {
-		Session session = factory.openSession();
-		session.beginTransaction();
-		Query<Purchase> query = session.createQuery("FROM Purchase p "
-				+ "WHERE p.userId = :userId AND p.statusId = :statusId", Purchase.class);
-		query.setParameter("userId", userId);
-		query.setParameter("statusId", PurchaseStatus.UNFINISHED.getId());
-		List<Purchase> purchases = query.list();
+		Transaction tx = null;
+		List<Purchase> purchases = new ArrayList<>();
+
+		try (Session session = factory.openSession()) {
+			tx = session.beginTransaction();
+			Query<Purchase> query = session.createQuery("FROM Purchase p "
+					+ "WHERE p.userId = :userId AND p.statusId = :statusId", Purchase.class);
+			query.setParameter("userId", userId);
+			query.setParameter("statusId", PurchaseStatus.UNFINISHED.getId());
+			logger.debug(String.format("getting unfinished purchases for user with id %d", userId));
+			purchases = query.list();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			logger.debug(String.format("problems by getting unfinished purchases "
+					+ "for user with id %s from database...", userId));
+		}
 		return purchases;
 	}
 }

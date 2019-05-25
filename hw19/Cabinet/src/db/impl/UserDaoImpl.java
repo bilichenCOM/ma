@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import db.UserDao;
@@ -25,12 +26,22 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	}
 
 	public Optional<User> readByEmail(String email) {
-		Session session = factory.openSession();
-		Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "'"
-				, User.class);
-		logger.debug(String.format("reading user with email %s from database...", email));
-		User user = query.getSingleResult();
-		session.close();
+		Transaction tx = null;
+		User user = null;
+
+		try (Session session = factory.openSession()) {
+			tx = session.getTransaction();
+			Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "'"
+					, User.class);
+			logger.debug(String.format("reading user with email %s from database...", email));
+			user = query.getSingleResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			logger.debug(String.format("problems by reading user with email %s from database...", email));
+		}
 		return Optional.ofNullable(user);
 	}
 

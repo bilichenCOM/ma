@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import db.BookDao;
-import db.CabinetCrud;
+import db.GoodDao;
+import db.impl.GoodDaoImpl;
 import model.Book;
 
 @WebServlet("/admin/updateBook")
 public class CabinetServletUpdateGoods extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(CabinetServletUpdateGoods.class);
-	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
+	private static final GoodDao goodDao = new GoodDaoImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		try {
-			Book book = BOOK_CRUD.read(Long.parseLong(id)).get();
-			request.setAttribute("book", book);
+			request.setAttribute("book", goodDao.read(Long.parseLong(id)).get());
 			request.getRequestDispatcher("updateBook.jsp").forward(request, response);
 		} catch (Exception e) {
 			LOGGER.debug("book getting failed", e);
@@ -42,7 +41,7 @@ public class CabinetServletUpdateGoods extends HttpServlet {
 		Book book = new Book(Long.parseLong(id), title, author, Integer.parseInt(year),
 				Integer.parseInt(pages), imageUrl, Double.parseDouble(price));
 		try {
-			BOOK_CRUD.update(book);
+			goodDao.update(book);
 			request.setAttribute("successMessage", "successfully updated info");
 			request.getRequestDispatcher("updateBook.jsp").forward(request, response);
 		} catch (Exception e) {

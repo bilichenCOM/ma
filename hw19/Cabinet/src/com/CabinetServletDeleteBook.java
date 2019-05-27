@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import db.BookDao;
-import db.CabinetCrud;
-import model.Book;
+import db.GoodDao;
+import db.impl.GoodDaoImpl;
 
 @WebServlet("/admin/deleteBook")
 public class CabinetServletDeleteBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(CabinetServletDeleteBook.class);
-	private static final CabinetCrud<Book> BOOK_CRUD = new BookDao();
+	private static final GoodDao goodDao = new GoodDaoImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		try {
-			BOOK_CRUD.delete(Long.parseLong(id));
+			goodDao.delete(Long.parseLong(id));
 			request.setAttribute("successMessage", "book has been deleted");
 			request.getRequestDispatcher("adminGoods").forward(request, response);
 		} catch (Exception e) {

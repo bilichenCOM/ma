@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.CabinetCrud;
 import db.UserDao;
+import db.impl.UserDaoImpl;
 import model.User;
 
 @WebServlet("/admin")
 public class AdminServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final CabinetCrud<User> USER_CRUD = new UserDao();
+	private static final UserDao USER_CRUD = new UserDaoImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<User> userList = USER_CRUD.readAll();

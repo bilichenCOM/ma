@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 public class MailService {
 
 	private static final String LOGIN = "bilichenko.mykhailo@gmail.com";
-	private static final String PASSWORD = "112358fibo";
+	private static final String PASSWORD = "Kolesnikova1979";
 
 	private static final Logger LOGGER = Logger.getLogger(MailService.class);
 

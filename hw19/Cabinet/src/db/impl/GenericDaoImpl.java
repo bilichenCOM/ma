@@ -19,16 +19,16 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T>{
 
 	@Override
 	public void add(T t) {
-		Transaction tx = null;
+		Transaction transaction = null;
 
 		try (Session session = factory.openSession()) {
-			tx = session.beginTransaction();
+			transaction = session.beginTransaction();
 			logger.debug(String.format("saving %s instance to database...", t.getClass().getTypeName()));
 			session.save(t);
-			tx.commit();
+			transaction.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
+			if (transaction != null) {
+				transaction.rollback();
 			}
 			logger.debug(String.format("problems by adding new %s instances to database...", t.getClass().getTypeName()));
 		}
@@ -36,17 +36,17 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T>{
 
 	@Override
 	public  Optional<T> read(Class<T> clazz, Long id) {
-		Transaction tx = null;
+		Transaction transaction = null;
 		T t = null;
 
 		try (Session session = factory.openSession()) {
-			tx = session.beginTransaction();
+			transaction = session.beginTransaction();
 			logger.debug(String.format("reading %s with id %d from database", clazz.getTypeName(), id));
 			t = session.get(clazz, id);
-			tx.commit();
+			transaction.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
+			if (transaction != null) {
+				transaction.rollback();
 			}
 			logger.debug(String.format("problems by reading %s instance with id %d from database...", clazz.getTypeName(), id));
 		}
@@ -55,16 +55,16 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T>{
 
 	@Override
 	public void update(T t) {
-		Transaction tx = null;
+		Transaction transaction = null;
 
 		try (Session session = factory.openSession()) {
-			tx = session.beginTransaction();
+			transaction = session.beginTransaction();
 			logger.debug(String.format("updating %s instance...", t.getClass().getTypeName()));
 			session.update(t);
-			tx.commit();
+			transaction.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
+			if (transaction != null) {
+				transaction.rollback();
 			}
 			logger.debug(String.format("problems by updating %s instance of ", t.getClass().getTypeName()));
 		}
@@ -72,17 +72,17 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T>{
 
 	@Override
 	public void delete(Class<T> clazz, Long id) {
-		Transaction tx = null;
+		Transaction transaction = null;
 
 		try (Session session = factory.openSession()) {
-			tx = session.beginTransaction();
+			transaction = session.beginTransaction();
 			T t = session.get(clazz, id);
 			logger.debug(String.format("deleting %s instance with id %d from database...", clazz.getTypeName(), id));
 			session.delete(t);
-			tx.commit();
+			transaction.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
+			if (transaction != null) {
+				transaction.rollback();
 			}
 			logger.debug(String.format("problems by deleting %s with id %d from database...", clazz.getTypeName(), id));
 		}
@@ -91,17 +91,17 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> readAll(Class<T> clazz) {
-		Transaction tx = null;
+		Transaction transaction = null;
 		List<T> list = new ArrayList<>();
 
 		try (Session session = factory.openSession()) {
-			tx = session.beginTransaction();
+			transaction = session.beginTransaction();
 			logger.debug(String.format("getting all %s from database...", clazz.getTypeName()));
 			list = session.createQuery("FROM " + clazz.getTypeName()).list();	
-			tx.commit();
+			transaction.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
+			if (transaction != null) {
+				transaction.rollback();
 			}
 			logger.debug(String.format("problems by reading all %s from database...", clazz.getTypeName()));
 		}

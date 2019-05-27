@@ -26,19 +26,19 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 	}
 
 	public Optional<User> readByEmail(String email) {
-		Transaction tx = null;
+		Transaction transaction = null;
 		User user = null;
 
 		try (Session session = factory.openSession()) {
-			tx = session.getTransaction();
+			transaction = session.getTransaction();
 			Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "'"
 					, User.class);
 			logger.debug(String.format("reading user with email %s from database...", email));
 			user = query.getSingleResult();
-			tx.commit();
+			transaction.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
+			if (transaction != null) {
+				transaction.rollback();
 			}
 			logger.debug(String.format("problems by reading user with email %s from database...", email));
 		}

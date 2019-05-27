@@ -37,21 +37,21 @@ public class PurchaseDaoImpl extends GenericDaoImpl<Purchase> implements Purchas
 
 	@Override
 	public List<Purchase> getBasketPurchases(Long userId) {
-		Transaction tx = null;
+		Transaction transaction = null;
 		List<Purchase> purchases = new ArrayList<>();
 
 		try (Session session = factory.openSession()) {
-			tx = session.beginTransaction();
+			transaction = session.beginTransaction();
 			Query<Purchase> query = session.createQuery("FROM Purchase p "
 					+ "WHERE p.userId = :userId AND p.statusId = :statusId", Purchase.class);
 			query.setParameter("userId", userId);
 			query.setParameter("statusId", PurchaseStatus.UNFINISHED.getId());
 			logger.debug(String.format("getting unfinished purchases for user with id %d", userId));
 			purchases = query.list();
-			tx.commit();
+			transaction.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
+			if (transaction != null) {
+				transaction.rollback();
 			}
 			logger.debug(String.format("problems by getting unfinished purchases "
 					+ "for user with id %s from database...", userId));
